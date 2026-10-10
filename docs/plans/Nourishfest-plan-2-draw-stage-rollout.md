@@ -32,7 +32,7 @@ Every task's requirements implicitly include this section. The first block is Pl
 - **Scanner:** ignores the same code for 2 seconds.
 - **Design:** dark only. Fonts: Bungee (display, numbers), Anton (headings, buttons, names), Oswald (labels), Archivo regular 400/600 (body; **Archivo Black is not used**). Colours: `#0D0D0D` black, `#D4AF37` gold, `#FF1B6B` pink, `#39FF14` green; neutrals `#F5F5F0`, `#BDBDB6`, `#9A9A94`, `#141414`, `#1B1B1B`, `#2A2A28`, `#3A3A36`, `#FFFFFF` (QR tiles only). Text on gold, pink or green fills is always black; **white on pink is forbidden**.
 - **Layout:** minimum design width 360 px, 20 px side gutter, touch targets at least 48 px (56 px or more on staff screens), staff primary button 64 px, captions never below 12 px.
-- **Language:** bilingual ID/EN toggle, **Indonesian default**, one translation file, choice saved in the browser with a fallback if storage fails.
+- **Language:** bilingual ID/EN toggle, **English default**, one translation file, choice saved in the browser with a fallback if storage fails.
 - **Time:** timestamps are `timestamptz`, displayed in WITA (`Asia/Makassar`).
 - **Migrations:** numbered SQL files applied by the CLI. Every migration that adds a table or function ends with `select public.lock_down_public();`.
 

@@ -13,7 +13,7 @@
 | :---- | :---- |
 | Stack | Next.js on Vercel. Supabase (Postgres, Realtime, Auth) in a **new dedicated project**, Pro plan, Singapore region |
 | Where the rules live | **Postgres functions** called only from Next.js route handlers with the service key (approach A). Constraints and transactions enforce the rules, not application code |
-| Auth | Guests: token link. Station staff: 6-digit role PIN, signed session cookie. Admins (2–3): Supabase Auth with Google, `admins` allowlist. Stage: display key then cookie |
+| Auth | Guests: token link. Station staff: 6-digit role PIN, signed session cookie. Admin: a 6-digit PIN (role `admin`) on the same login screen; no Google sign-in. Stage: display key then cookie |
 | Draw stage flow | Projector shows **prize and number only** until the MC confirms. Confirming reveals the winner's name, outlet and department (no congratulations wording, by HR's decision on 10 Oct) |
 | Who confirms a draw | The **MC** (draw role). The Prize Verification screen is a backup. First action wins; repeats are harmless |
 | Single event per deployment | `EVENT_ID` environment variable. The schema carries `event_id` everywhere so it can be reused |
@@ -25,7 +25,7 @@
 ```
 Guest browser ──(token in URL)──┐
 Station browser ─(PIN session)──┼─► Next.js route handlers (/api/*) ──(service key)──► Supabase Postgres
-Admin browser ──(Google login)──┘        │                                              (functions, constraints, RLS)
+Admin browser ──(admin PIN)──────┘        │                                              (functions, constraints, RLS)
                                          │
 Stage display ──(display key cookie)─────┴──(anon key, read one table)──► Supabase Realtime (stage_state)
 ```
@@ -43,7 +43,7 @@ Stage display ──(display key cookie)─────┴──(anon key, read 
 | :---- | :---- | :---- |
 | Guest | 128-bit token in the URL path | Looked up server-side. The guest sees only their own row. Invalid lookups are rate-limited (20 per minute per IP). Valid lookups are not counted |
 | Station staff | Signed cookie `nf_station` (HS256: role, station label, `session_version`; httpOnly, Secure, 14 hours) | Verified on every request, plus a database check of `session_version`. Rotating or disabling a PIN logs that role out immediately |
-| Admin | Supabase Auth (Google) | `getUser()` server-side, then email must be in `admins` |
+| Admin | 6-digit PIN, role `admin` | Same signed `nf_station` cookie as the stations; every `/admin` page and `/api/admin` route accepts only role `admin`. Audited as actor `admin` |
 | Stage | `/stage?key=…` compared with a hash, then httpOnly cookie `nf_stage` and redirect without the key | Cookie checked by `/api/stage/*` |
 
 **Environment variables:** `SUPABASE_URL`, `SUPABASE_ANON_KEY` (public), `SUPABASE_SERVICE_ROLE_KEY` (server only), `STATION_SESSION_SECRET`, `EVENT_ID`.
@@ -57,7 +57,6 @@ Stage display ──(display key cookie)─────┴──(anon key, read 
 | Table | Key columns | Notes |
 | :---- | :---- | :---- |
 | `events` | `id`, `name`, `event_date`, `starts_at`, `venue`, `next_prize_number`, `display_key_hash`, `mode` (`rehearsal` / `live`), `config` | One row per event |
-| `admins` | `event_id`, `email` | Primary key `(event_id, email)` |
 | `station_pins` | `event_id`, `role`, `pin_hash`, `active`, `session_version` | Roles: `checkin`, `merchandise`, `draw`, `prizes`. bcrypt via pgcrypto. PINs unique across roles, 6 digits |
 | `auth_attempts` | `scope`, `key`, `at`, `success` | PIN and token lockouts |
 | `import_batches` | `id`, `filename`, `uploaded_by`, `inserted`, `updated`, `flagged_missing` | One per CSV import |
@@ -65,7 +64,7 @@ Stage display ──(display key cookie)─────┴──(anon key, read 
 | `check_ins` | `guest_id` (unique), `checked_in_at`, `method`, `station_label`, `actor`, `prize_number` (NOT NULL) | The Door Prize number lives here. Unique `(event_id, prize_number)` |
 | `merchandise_redemptions` | `guest_id`, `status` (`redeemed` / `voided`), `redeemed_at`, `station_label`, `actor`, `void_reason` | Foreign key `guest_id` → `check_ins.guest_id` |
 | `prizes` | `name`, `tier`, `sort_order`, `quantity`, `draw_as_batch` | Remaining slots are calculated from `draws` |
-| `draws` | `prize_id`, `slot`, `sequence` (identity), `winner_guest_id`, `status`, `request_id` (unique), `redraw_of`, `drawn_at`, `resolved_at`, `resolved_by` | `status`: `drawn`, `confirmed`, `void_no_show`, `void_admin` |
+| `draws` | `prize_id`, `slot`, `sequence` (identity), `round_id`, `request_group`, `winner_guest_id`, `status`, `request_id` (unique), `redraw_of`, `drawn_at`, `drawn_by`, `resolved_at`, `resolved_by`, `void_reason` | `status`: `drawn`, `confirmed`, `void_no_show`, `void_admin`. `round_id` groups a batch and keeps a redraw in the round it replaces |
 | `stage_state` | `event_id`, `rev`, `phase`, `payload`, `options`, `updated_at` | One row. Public read, server write only. Realtime enabled |
 | `stage_heartbeat` | `event_id`, `seen_at` | Display liveness. Not published to Realtime |
 | `attempt_log` | `kind`, `token_prefix` (first 6 characters), `result`, `actor`, `at` | Rejected scans |
@@ -119,11 +118,15 @@ The draw pool is checked-in, active guests with no `drawn` or `confirmed` win. T
 | `check_in(event, token or guest_id, method, station_label, actor)` | Check-in station | `CHECKED_IN`, `ALREADY_CHECKED_IN`, `INVALID`, `NOT_ELIGIBLE` |
 | `redeem_lookup(token or guest_id)` | Merchandise scan | `READY`, `ALREADY_REDEEMED`, `NOT_CHECKED_IN`, `NOT_ELIGIBLE`, `INVALID` |
 | `redeem_merchandise(token or guest_id, station_label, actor)` | "Hand over" tap | `REDEEMED`, plus the blocked states above |
-| `draw_prize(event, prize_id, request_id, role)` | MC | `DRAWN`, `DRAW_IN_PROGRESS`, `PRIZE_COMPLETE`, `NO_ELIGIBLE_GUESTS` |
-| `resolve_draw(draw_id, outcome, role, actor)` | MC (draw) or Prize Verification | `CONFIRMED`, `VOIDED`, `ALREADY_CONFIRMED`, `DRAW_VOID` |
-| `set_stage(event, phase, payload)` | MC | `OK` |
+| `draw_prize(event, prize_id, request_id, actor)` | MC | `DRAWN` (a batch also returns `short_by`), `DRAW_IN_PROGRESS` (any draw is unresolved), `PRIZE_COMPLETE`, `NO_ELIGIBLE_GUESTS`, `PRIZE_NOT_FOUND`, `INVALID` |
+| `resolve_draw(event, draw_id, outcome, actor)` | MC (draw) or Prize Verification | `CONFIRMED`, `VOIDED`, `ALREADY_CONFIRMED`, `DRAW_VOID`, `NOT_FOUND`, `INVALID`. `actor` is the role, or the admin's e-mail |
+| `resolve_round(event, round, actor)` | MC or Prize Verification ("confirm all" on a batch) | `CONFIRMED` (with the count), `NOTHING_TO_CONFIRM` |
+| `set_stage(event, phase, prize_id, actor)` | MC | `OK`, `DRAW_IN_PROGRESS`, `PRIZE_NOT_FOUND`, `INVALID_PHASE`. Phases `idle` and `intro` only; the payload is built in the database |
+| `draw_current(event)`, `lookup_prize_number(event, number)` | MC, Prize Verification | `draw_current`: `OK`. `lookup_prize_number`: `WINNER`, `PENDING`, `NOT_A_WINNER`, `NO_SUCH_NUMBER` |
+| `prize_list(event)`, `admin_save_prize(event, id, data, actor)`, `admin_delete_prize(event, id, actor)` | Station screens, Admin | `OK`, `INVALID`, `NAME_IN_USE`, `NOT_FOUND`, `QUANTITY_TOO_LOW`, `LOCKED_BY_DRAWS`, `HAS_DRAWS` |
+```
 | `import_preview(rows)`, `import_guests(rows, filename, actor)` | Admin | `OK`, `HAS_ERRORS` |
-| `add_walk_in`, `void_redemption`, `admin_void_draw`, `set_station_pin` | Admin | `OK` (a reason is required where records change) |
+| `add_walk_in`, `void_redemption`, `admin_void_draw`, `set_station_pin`, `set_stage_key`, `set_stage_options` | Admin | `OK` (a reason is required where records change; `REASON_REQUIRED`, `NOT_VOIDABLE`, `NOT_FOUND` otherwise) |
 | `go_live`, `reset_rehearsal_data` | Admin | `OK`, `NOT_REHEARSAL` |
 
 The route handler reads the `NF:CI:` / `NF:MR:` prefix and answers `WRONG_CODE_TYPE` before calling the database.
@@ -142,7 +145,7 @@ The route handler reads the `NF:CI:` / `NF:MR:` prefix and answers `WRONG_CODE_T
 ### 4.5 `draw_prize`
 
 1. If `request_id` already exists, return that draw.
-2. Lock the prize row. If any **other** prize has an unresolved winner, return `DRAW_IN_PROGRESS`.
+2. Take the event's draw lock, then lock the prize row. If **any** draw is unresolved (this prize or another), return `DRAW_IN_PROGRESS`.
 3. Draw one winner, or all remaining slots if `draw_as_batch`. A redraw takes the lowest free slot and sets `redraw_of`.
 4. Pool as in 3.3. If the pool is smaller than the batch, draw everyone available and return `short_by`.
 5. Write `stage_state` with the prize and the **numbers only**. Never the name or outlet.
@@ -152,6 +155,7 @@ The route handler reads the `NF:CI:` / `NF:MR:` prefix and answers `WRONG_CODE_T
 
 - **confirm:** `drawn` → `confirmed`, and in the same transaction set that slot in `stage_state` to `revealed` with `name`, `outlet` and `department`. A repeat returns the same result.
 - **no_show:** `drawn` → `void_no_show`, and set the slot to `void` in `stage_state`. The guest is back in the pool.
+- **confirm all (batch):** `resolve_round` confirms every `drawn` slot of one round in a single transaction.
 - A `confirmed` draw can be reversed only by an admin through `admin_void_draw` (status `void_admin`, reason required). If that draw is currently on the projector, the stage returns to idle.
 
 ### 4.7 Import
@@ -178,7 +182,7 @@ The route handler parses the CSV, trims text and normalises phones to `+62…`. 
 
 **Guest:** `GET /api/pass/[token]`, `POST /api/pass/[token]/rsvp`.
 
-**Stage:** `GET /api/stage/state`, `POST /api/stage/heartbeat` (cookie `nf_stage`).
+**Stage:** `GET /api/stage/enter?key=` (verifies the display key, sets the cookie `nf_stage`, redirects to `/stage`); `GET /api/stage/state`, `POST /api/stage/heartbeat` (cookie `nf_stage`). The `/stage` page forwards `?key=` to the enter route because a server component cannot set a cookie.
 
 **Station** (the listed role or admin):
 
@@ -193,7 +197,7 @@ The route handler parses the CSV, trims text and normalises phones to `+62…`. 
 | `POST /api/station/draw/resolve` | draw, prizes |
 | `POST /api/station/prizes/lookup-number` | draw, prizes |
 
-**Admin:** `POST /api/admin/import/preview` and `/commit`; `GET/PATCH /api/admin/guests`, `POST …/walk-in`; `GET /api/admin/invitations.csv?outlet=`; `GET/POST/PATCH /api/admin/prizes`; `GET /api/admin/draws`, `POST …/[id]/void`; `GET /api/admin/redemptions`, `POST …/[id]/void`; `GET /api/admin/dashboard` (polled every 5 seconds); `GET /api/admin/reports/[name].csv`; `POST /api/admin/settings/pin`, `/stage-key`, `/station-labels`, `/stage-options`; `POST /api/admin/go-live` and `/reset` (typed confirmation `GO LIVE` / `RESET`); `GET /api/admin/audit`.
+**Admin:** `POST /api/admin/import/preview` and `/commit`; `GET/PATCH /api/admin/guests`, `POST …/walk-in`; `GET /api/admin/invitations.csv?outlet=`; `GET/POST /api/admin/prizes` (a body with `id` updates) and `POST …/prizes/[id]/delete`; `GET /api/admin/draws`, `POST …/[id]/void`; `GET /api/admin/redemptions`, `POST …/[id]/void`; `GET /api/admin/dashboard` (polled every 5 seconds); `GET /api/admin/reports/[name]` (returns `text/csv`; names `guests`, `check-ins`, `merchandise`, `draws`, `audit`, `rsvp-pending`); `POST /api/admin/settings/pin`, `/stage-key`, `/station-labels`, `/stage-options`; `POST /api/admin/go-live` and `/reset` (typed confirmation `GO LIVE` / `RESET`); `GET /api/admin/stage` (display key set, heartbeat age); `GET /api/admin/audit`.
 
 ### 5.4 Client behaviour
 
