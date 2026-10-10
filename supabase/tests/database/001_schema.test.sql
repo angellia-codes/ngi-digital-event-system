@@ -9,10 +9,11 @@ from unnest(array['events','admins','station_pins','auth_attempts','import_batch
 -- lockdown
 select is((select count(*)::int from pg_tables where schemaname = 'public' and not rowsecurity),
           0, 'RLS is enabled on every public table');
-select is((select count(*)::int from pg_tables
-           where schemaname = 'public' and tablename <> 'stage_state'
-             and (has_table_privilege('anon', format('public.%I', tablename), 'select')
-               or has_table_privilege('authenticated', format('public.%I', tablename), 'select'))),
+-- offset 0 keeps the schema filter ahead of the privilege checks (otherwise the planner may probe catalog tables)
+select is((select count(*)::int
+             from (select tablename from pg_tables where schemaname = 'public' and tablename <> 'stage_state' offset 0) t
+            where has_table_privilege('anon', format('public.%I', t.tablename), 'select')
+               or has_table_privilege('authenticated', format('public.%I', t.tablename), 'select')),
           0, 'anon and authenticated cannot select any public table (stage_state excepted in Plan 2)');
 select is((select count(*)::int from pg_proc p join pg_namespace n on n.oid = p.pronamespace
            where n.nspname = 'public'
