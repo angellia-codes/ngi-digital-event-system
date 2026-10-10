@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => ({
     env: loadEnv(mode === 'test' ? 'test' : mode, process.cwd(), ''),
     globalSetup: ['tests/api/global.ts'],
     fileParallelism: false, // API tests share one local database
-    testTimeout: 30_000,
+    testTimeout: 120_000, // API tests hit the remote dev project, not a local database
     include: ['tests/unit/**/*.test.ts', 'tests/api/**/*.test.ts'],
   },
 }));
