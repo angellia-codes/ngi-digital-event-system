@@ -1,0 +1,85 @@
+/* Stage display: a 1280 × 720 artboard, scaled by JavaScript (fitScale). Nothing here scrolls. */
+html:has(.stage), body:has(.stage) { overflow: hidden; background: #000; }
+.stage { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #000; cursor: none; }
+.stage--active { cursor: default; }
+.stage__fit { flex: none; width: 1280px; height: 720px; transform-origin: center center; }
+.stage__boot { width: 100%; height: 100%; background: #000; }
+
+.board { position: relative; width: 1280px; height: 720px; display: flex; flex-direction: column; overflow: hidden; color: var(--nf-text);
+  background: radial-gradient(circle at 0% 0%, rgba(255,27,107,.30), transparent 45%), radial-gradient(circle at 100% 100%, rgba(212,175,55,.16), transparent 45%), var(--nf-black); }
+.board::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(rgba(212,175,55,.18) 1.5px, transparent 2px); background-size: 18px 18px; }
+.board__head { position: relative; height: 72px; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; }
+.board__title { font-family: var(--nf-font-label); font-weight: 600; font-size: 24px; letter-spacing: .28em; color: var(--nf-gold); }
+.board__main { position: relative; flex: 1; min-height: 0; padding: 0 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; }
+.board__foot { position: relative; height: 64px; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; font-family: var(--nf-font-label); font-weight: 600; font-size: 22px; letter-spacing: .2em; }
+.board__foot b { color: var(--nf-gold); font-weight: 600; }
+
+.live { display: inline-flex; align-items: center; gap: 10px; padding: 4px 18px; border-radius: 999px; background: var(--nf-green); color: #000; font-family: var(--nf-font-label); font-weight: 600; font-size: 20px; letter-spacing: .2em; }
+.live i { width: 12px; height: 12px; border-radius: 50%; background: #000; animation: nf-pulse 1.4s ease-in-out infinite; }
+
+.banner { display: inline-block; padding: 6px 28px; background: var(--nf-pink); color: #000; font-family: var(--nf-font-heading); font-size: 40px; letter-spacing: .06em; text-transform: uppercase; transform: rotate(-2deg); }
+.banner--xl { font-size: 76px; padding: 14px 48px; }
+
+.label { font-family: var(--nf-font-label); font-weight: 600; font-size: 28px; letter-spacing: .4em; color: var(--nf-gold); }
+.num { margin: 0; font-family: var(--nf-font-display); line-height: 1; color: var(--nf-gold); text-shadow: 8px 8px 0 var(--nf-pink); }
+.num--big { font-size: 300px; }
+.num--small { font-size: 180px; }
+.name { margin: 0; max-width: 1160px; font-family: var(--nf-font-heading); font-weight: 400; font-size: 100px; line-height: 1.02; text-transform: uppercase; color: #fff; overflow-wrap: anywhere; }
+.where { font-family: var(--nf-font-label); font-weight: 600; font-size: 34px; letter-spacing: .12em; text-transform: uppercase; color: var(--nf-gold); }
+.waiting { font-family: var(--nf-font-label); font-weight: 600; font-size: 30px; letter-spacing: .3em; color: var(--nf-text-soft); animation: nf-blink 1.6s ease-in-out infinite; }
+.reveal { display: flex; flex-direction: column; align-items: center; gap: 10px; animation: nf-in .45s ease-out both; }
+
+.void { padding: 18px 44px; border: 6px solid var(--nf-pink); color: var(--nf-pink); font-family: var(--nf-font-heading); font-size: 64px; letter-spacing: .04em; text-transform: uppercase; animation: nf-in .3s ease-out both; }
+
+.idle__mark { margin: 0; display: flex; flex-direction: column; font-family: var(--nf-font-display); font-weight: 400; font-size: 120px; line-height: .95; color: var(--nf-gold); text-shadow: 6px 6px 0 var(--nf-pink); }
+.idle__tag { padding: 4px 22px; background: var(--nf-pink); color: #000; font-family: var(--nf-font-heading); font-size: 34px; letter-spacing: .06em; transform: rotate(-2deg); }
+.idle__text { margin-top: 12px; font-family: var(--nf-font-label); font-weight: 600; font-size: 32px; letter-spacing: .3em; color: var(--nf-text); }
+
+.eq { display: flex; align-items: flex-end; gap: 8px; height: 60px; }
+.eq i { width: 12px; height: 12px; background: var(--nf-pink); animation: nf-eq 1s ease-in-out infinite; animation-delay: calc(var(--i) * .12s); }
+
+.grid { width: 100%; max-height: 440px; flex: 1; display: grid; gap: 16px; align-content: center; grid-auto-rows: minmax(0, 1fr); }
+.tile { position: relative; min-height: 0; border: 4px solid var(--nf-gold); border-radius: 18px; background: var(--nf-card); overflow: hidden; }
+.tile__front, .tile__back { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px 10px; }
+.tile__num { font-family: var(--nf-font-display); font-size: 64px; line-height: 1; color: var(--nf-gold); text-shadow: 4px 4px 0 var(--nf-pink); }
+.tile__name { font-family: var(--nf-font-heading); font-size: 40px; line-height: 1.02; text-transform: uppercase; color: #fff; overflow-wrap: anywhere; }
+.tile__where { font-family: var(--nf-font-label); font-weight: 600; font-size: 20px; letter-spacing: .08em; text-transform: uppercase; color: var(--nf-gold); }
+.tile__void { font-family: var(--nf-font-heading); font-size: 26px; color: var(--nf-pink); text-transform: uppercase; }
+.tile--revealed { border-color: var(--nf-green); }
+.tile--revealed .tile__front { animation: nf-out .25s ease-in both; animation-delay: var(--d, 0ms); }
+.tile--revealed .tile__back { animation: nf-in .4s ease-out both; animation-delay: var(--d, 0ms); }
+.tile--void { border-color: var(--nf-pink); }
+.tile--void .tile__num { opacity: .35; text-decoration: line-through; }
+
+/* Projector-safe: no glows or halftone, 2 px black outline, pure white names, thicker gold. */
+.stage--safe .board { background: #000; }
+.stage--safe .board::before { display: none; }
+.stage--safe .num, .stage--safe .tile__num { text-shadow: none; -webkit-text-stroke: 2px #000; paint-order: stroke fill; }
+.stage--safe .name, .stage--safe .tile__name { color: #fff; -webkit-text-stroke: 2px #000; paint-order: stroke fill; }
+.stage--safe .banner, .stage--safe .idle__tag { transform: none; -webkit-text-stroke: 0; }
+.stage--safe .idle__mark { text-shadow: none; -webkit-text-stroke: 2px #000; paint-order: stroke fill; }
+.stage--safe .tile { border-width: 6px; }
+.stage--safe .live i, .stage--safe .eq i { animation: none; }
+
+/* Reduced effects: no roll (handled in code), no flashing or bouncing; fades only. */
+.stage--reduce .live i, .stage--reduce .eq i, .stage--reduce .waiting { animation: none; }
+.stage--reduce .banner, .stage--reduce .idle__tag { transform: none; }
+.stage--reduce .tile--revealed .tile__front { animation: none; opacity: 0; }
+.stage--reduce .tile--revealed .tile__back, .stage--reduce .reveal, .stage--reduce .void { animation: nf-fade .25s linear both; animation-delay: 0ms; }
+
+.stage__controls { position: absolute; left: 16px; bottom: 16px; display: flex; gap: 10px; opacity: 0; transition: opacity .2s; }
+.stage--active .stage__controls { opacity: 1; }
+.stage__btn { min-height: 44px; padding: 0 16px; border-radius: 10px; border: 2px solid var(--nf-gold); background: rgba(0,0,0,.75); color: var(--nf-gold); font-family: var(--nf-font-label); font-weight: 600; letter-spacing: .1em; }
+.stage__notice { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 40px; text-align: center; background: rgba(0,0,0,.92); color: var(--nf-pink); font-family: var(--nf-font-heading); font-size: 40px; }
+
+.stage-gate { min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 24px; text-align: center; background: #000; color: var(--nf-text); }
+.stage-gate h1 { margin: 0; font-family: var(--nf-font-display); font-weight: 400; color: var(--nf-gold); }
+.stage-gate p { margin: 0; color: var(--nf-pink); font-size: 18px; }
+
+@keyframes nf-pulse { 50% { opacity: .35; } }
+@keyframes nf-blink { 50% { opacity: .4; } }
+@keyframes nf-eq { 0%, 100% { height: 12px; } 50% { height: 60px; } }
+@keyframes nf-in { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes nf-out { to { opacity: 0; } }
+@keyframes nf-fade { from { opacity: 0; } to { opacity: 1; } }
+

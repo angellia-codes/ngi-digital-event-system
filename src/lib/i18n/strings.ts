@@ -1,3 +1,5 @@
+import { DRAW_EN, DRAW_ID } from './draw-strings';
+
 export type Lang = 'id' | 'en';
 
 const id = {
@@ -67,6 +69,7 @@ const id = {
   'login.pick_station': 'Pilih meja / booth',
   'login.continue': 'LANJUT',
   'login.coming_soon': 'Layar ini belum tersedia.',
+  ...DRAW_ID,
 } as const;
 
 export type StringKey = keyof typeof id;
@@ -138,6 +141,7 @@ const en: Record<StringKey, string> = {
   'login.pick_station': 'Choose your desk / booth',
   'login.continue': 'CONTINUE',
   'login.coming_soon': "This screen isn't available yet.",
+  ...DRAW_EN,
 };
 
 export const STRINGS: Record<Lang, Record<StringKey, string>> = { id, en };
