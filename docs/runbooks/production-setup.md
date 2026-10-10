@@ -5,7 +5,6 @@ Do this for **staging first**, then production. Staging is a second Supabase pro
 ## Before you start
 
 - Open decision 14 is closed: a named person owns the Supabase organisation and its billing (needed by 17 October).
-- A Google account with access to Google Cloud Console (for the admin sign-in client).
 - The repository is connected to a Vercel team.
 
 ## 1. Supabase project
@@ -17,25 +16,19 @@ Do this for **staging first**, then production. Staging is a second Supabase pro
    npx supabase link --project-ref <project-ref>
    npx supabase db push
    ```
-   Expected: seven migrations applied, no errors (the seventh fixes `reset_rehearsal_data` for the REST layer).
-3. Create the event and the admin allow-list (SQL editor or `psql`). Note the returned id: it becomes `EVENT_ID`.
+   Expected: all migrations applied (Plan 1 has seven, Plan 2 adds seven more), no errors (the seventh fixes `reset_rehearsal_data` for the REST layer).
+3. Create the event (SQL editor or `psql`). Note the returned id: it becomes `EVENT_ID`.
    ```sql
    insert into public.events (name, event_date, venue, config)
    values ('NourishFest 2026', '2026-12-10', null,
            '{"station_labels": ["Meja 1", "Meja 2", "Meja 3", "Booth 1", "Booth 2"]}')
    returning id;
-
-   insert into public.admins (event_id, email, name) values
-     ('<event id>', 'angelliaokta@gmail.com', 'Angel'),
-     ('<event id>', '<second admin email in lower case>', '<name>');
    ```
-   Use at least two admins. Emails must be lower case.
-4. Authentication: turn **Email** provider off (not used). Turn **Google** on with the client id and secret from step 2 below. Set **Site URL** to the app URL and add `https://<app-domain>/auth/callback` to the redirect allow-list.
-
-## 2. Google sign-in client
-
-Google Cloud Console, APIs and Services, Credentials, **OAuth client ID**, type **Web application**.
-Authorised redirect URI: `https://<project-ref>.supabase.co/auth/v1/callback`. Copy the client id and secret into Supabase (step 1.4). Any Google account can create a Supabase user, but only addresses in `admins` get any access.
+4. Authentication: there is no Google or e-mail sign-in. The admin console uses an **admin PIN** (a six-digit PIN like the station PINs, role `admin`). Set the first one from your laptop; the PIN stays in your environment and is never typed into chat:
+   ```powershell
+   $env:ADMIN_PIN = '<6 digits>'; node --env-file=.env.local scripts/set-admin-pin.mjs
+   ```
+   After that the admin PIN can be changed in Settings. Whoever holds it can go live, reset, void draws and download every report: share it with two people at most, and keep it different from every desk PIN.
 
 ## 3. Vercel project
 
@@ -60,8 +53,8 @@ Authorised redirect URI: `https://<project-ref>.supabase.co/auth/v1/callback`. C
 
 ## 4. First-run smoke test (production, still in rehearsal mode)
 
-1. Open `/admin`, sign in with Google, see the dashboard with the `rehearsal` badge.
-2. Settings: generate and set all four PINs; write them in the password manager. Check the station names.
+1. Open `/station`, enter the admin PIN (it opens `/admin`), see the dashboard with the `rehearsal` badge.
+2. Settings: generate and set the four desk PINs; write them in the password manager. Check the station names.
 3. Guests: import the real CSV (or the fake one on staging). Confirm the preview counts, import, spot-check rows.
 4. Download the invitations CSV and open your own pass link on your phone. RSVP.
 5. At a station phone, log in with the Check-in PIN, scan your pass, then hand over merchandise with the Merchandise PIN.

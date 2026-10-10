@@ -1,9 +1,10 @@
 import { z } from 'zod';
 import { ok } from '@/lib/api';
 import { adminPost } from '@/lib/routes';
-import { supabaseServer } from '@/lib/supabase-server';
+import { stationCookie } from '@/lib/session';
 
 export const POST = adminPost(z.object({}).strict(), async () => {
-  await (await supabaseServer()).auth.signOut();
-  return ok('OK');
+  const res = ok('OK');
+  res.cookies.set(stationCookie('', 0));
+  return res;
 });

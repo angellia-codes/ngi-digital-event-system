@@ -18,7 +18,7 @@ export function AdminNav({ email }: { email: string }) {
   const path = usePathname();
   async function signOut() {
     await api('/api/admin/logout', {});
-    window.location.href = '/admin/login';
+    window.location.href = '/station';
   }
   return (
     <nav className="adm-nav" aria-label="Admin">

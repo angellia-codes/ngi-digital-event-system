@@ -6,7 +6,7 @@ import { EVENT, resetEvent, seedGuests, svc } from './helpers';
 const mk = () => createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_ANON_KEY!, { auth: { persistSession: false } });
 // `stage_state` is not in this list: it is the one table a browser may read (see the last two blocks).
 const TABLES = [
-  'events', 'admins', 'station_pins', 'auth_attempts', 'import_batches', 'guests', 'check_ins', 'merchandise_redemptions',
+  'events', 'station_pins', 'auth_attempts', 'import_batches', 'guests', 'check_ins', 'merchandise_redemptions',
   'attempt_log', 'audit_log', 'prizes', 'draws', 'stage_heartbeat',
 ];
 const NIL = '00000000-0000-4000-8000-000000000000';
@@ -18,7 +18,6 @@ const FUNCTIONS: [string, Record<string, unknown>][] = [
   ['void_redemption', { p_event: EVENT, p_redemption_id: NIL, p_reason: 'none', p_actor: 'x' }],
   ['import_guests', { p_event: EVENT, p_rows: [], p_filename: 'x', p_actor: 'x' }],
   ['set_station_pin', { p_event: EVENT, p_role: 'checkin', p_pin: '123456', p_actor: 'x' }],
-  ['is_admin', { p_event: EVENT, p_email: 'dev-admin@example.com' }],
   ['go_live', { p_event: EVENT, p_actor: 'x' }],
   ['reset_rehearsal_data', { p_event: EVENT, p_actor: 'x' }],
   ['event_counts', { p_event: EVENT }],

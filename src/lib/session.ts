@@ -5,7 +5,7 @@ import { parseCookies } from './api';
 
 export const STATION_COOKIE = 'nf_station';
 export const DEVICE_COOKIE = 'nf_device';
-export const ROLES = ['checkin', 'merchandise', 'draw', 'prizes'] as const;
+export const ROLES = ['checkin', 'merchandise', 'draw', 'prizes', 'admin'] as const;
 export type Role = (typeof ROLES)[number];
 export type StationSession = { role: Role; label: string; v: number };
 
@@ -21,7 +21,11 @@ export async function signStation(s: StationSession): Promise<string> {
 }
 
 export async function readStation(req: Request): Promise<StationSession | null> {
-  const token = parseCookies(req.headers.get('cookie'))[STATION_COOKIE];
+  return verifyStationToken(parseCookies(req.headers.get('cookie'))[STATION_COOKIE]);
+}
+
+/** Same check for a cookie value read elsewhere (server components use next/headers, not a Request). */
+export async function verifyStationToken(token: string | undefined): Promise<StationSession | null> {
   if (!token) return null;
   let session: StationSession;
   try {

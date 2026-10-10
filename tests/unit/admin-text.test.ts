@@ -27,7 +27,7 @@ describe('randomPin', () => {
 });
 
 describe('ROLE_NAME', () => {
-  it('names all four station roles', () => {
-    expect(Object.keys(ROLE_NAME).sort()).toEqual(['checkin', 'draw', 'merchandise', 'prizes']);
+  it('names every role', () => {
+    expect(Object.keys(ROLE_NAME).sort()).toEqual(['admin', 'checkin', 'draw', 'merchandise', 'prizes']);
   });
 });

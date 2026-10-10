@@ -6,6 +6,7 @@ import { readStation, type Role } from './session';
 export type Actor =
   | { type: 'station'; role: Role; label: string; v: number }
   | { type: 'admin'; email: string };
+export const ADMIN_ID = 'admin';
 export const actorId = (a: Actor): string => (a.type === 'station' ? a.role : a.email);
 export const actorLabel = (a: Actor): string => (a.type === 'station' ? a.label : 'admin');
 
@@ -15,6 +16,7 @@ type Args<B> = { req: Request; actor: Actor; body: B; params: Params };
 
 async function authStation(req: Request, roles: readonly Role[]): Promise<{ actor: Actor } | { res: Response }> {
   const s = await readStation(req);
+  if (s?.role === 'admin') return { actor: { type: 'admin', email: ADMIN_ID } };
   if (s) {
     return roles.includes(s.role)
       ? { actor: { type: 'station', role: s.role, label: s.label, v: s.v } }

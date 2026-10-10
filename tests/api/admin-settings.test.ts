@@ -30,7 +30,7 @@ beforeEach(async () => {
 afterAll(async () => {
   await setupPins();
   await svc().rpc('set_station_labels', { p_event: EVENT, p_labels: DEFAULT_LABELS, p_actor: 'test' });
-  for (const role of ['checkin', 'merchandise', 'draw', 'prizes']) {
+  for (const role of ['checkin', 'merchandise', 'draw', 'prizes', 'admin']) {
     await svc().rpc('set_station_active', { p_event: EVENT, p_role: role, p_active: true, p_actor: 'test' });
   }
 });
@@ -56,7 +56,7 @@ describe('settings', () => {
     const j = await json(await getSettings(getReq('/api/admin/settings')));
     expect(j.data.mode).toBe('rehearsal');
     expect(j.data.station_labels).toEqual(DEFAULT_LABELS);
-    expect(j.data.pins.map((p: { role: string }) => p.role)).toEqual(['checkin', 'merchandise', 'draw', 'prizes']);
+    expect(j.data.pins.map((p: { role: string }) => p.role)).toEqual(['checkin', 'merchandise', 'draw', 'prizes', 'admin']);
     expect(j.data.pins.every((p: { is_set: boolean; active: boolean }) => p.is_set && p.active)).toBe(true);
     expect(JSON.stringify(j)).not.toContain('pin_hash');
   });

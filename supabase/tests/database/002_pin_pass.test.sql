@@ -9,7 +9,6 @@ insert into guests (id, event_id, employee_id, full_name, outlet, phone) values
 insert into station_pins (event_id, role, pin_hash) values
  ('00000000-0000-4000-8000-0000000000aa', 'checkin', extensions.crypt('123456', extensions.gen_salt('bf'))),
  ('00000000-0000-4000-8000-0000000000aa', 'draw', extensions.crypt('654321', extensions.gen_salt('bf')));
-insert into admins (event_id, email) values ('00000000-0000-4000-8000-0000000000aa', 'boss@example.com');
 
 -- verify_pin
 select is(verify_pin('00000000-0000-4000-8000-0000000000aa', '123456', 'dev1', 'ip1')->>'status', 'OK', 'correct PIN');
@@ -43,14 +42,11 @@ select is(verify_pin('00000000-0000-4000-8000-0000000000aa', '123456', 'devFresh
 update station_pins set active = false where role = 'draw';
 select is(verify_pin('00000000-0000-4000-8000-0000000000aa', '654321', 'devX', 'ipX')->>'status', 'INVALID', 'inactive PIN is refused');
 
--- station_session_valid and is_admin
+-- station_session_valid
 select is(station_session_valid('00000000-0000-4000-8000-0000000000aa', 'checkin', 1), true, 'session version matches');
 select is(station_session_valid('00000000-0000-4000-8000-0000000000aa', 'checkin', 2), false, 'old/new version is refused');
 update station_pins set active = false where role = 'checkin';
 select is(station_session_valid('00000000-0000-4000-8000-0000000000aa', 'checkin', 1), false, 'disabled role is logged out');
-select is(is_admin('00000000-0000-4000-8000-0000000000aa', 'boss@example.com'), true, 'admin allowlist hit');
-select is(is_admin('00000000-0000-4000-8000-0000000000aa', 'BOSS@example.com'), true, 'admin check is case-insensitive');
-select is(is_admin('00000000-0000-4000-8000-0000000000aa', 'x@example.com'), false, 'not an admin');
 
 -- get_pass
 select is(get_pass('does-not-exist')->>'status', 'INVALID', 'unknown token is INVALID');

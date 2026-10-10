@@ -15,7 +15,6 @@
     "db:push": "supabase db push --db-url \"$DATABASE_URL\""
   },
   "dependencies": {
-    "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.117.3",
     "html5-qrcode": "^2.3.8",
     "jose": "^6.2.12",

@@ -4,7 +4,7 @@ import { createClient } from '@supabase/supabase-js';
 import { expect, type Page } from '@playwright/test';
 
 export const EVENT = process.env.EVENT_ID!;
-export const PINS = { checkin: '111111', merchandise: '222222', draw: '333333', prizes: '444444' };
+export const PINS = { checkin: '111111', merchandise: '222222', draw: '333333', prizes: '444444', admin: '555555' };
 export const svc = () =>
   createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, { auth: { persistSession: false } });
 

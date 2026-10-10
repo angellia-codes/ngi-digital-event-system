@@ -23,7 +23,7 @@ Record the commit hash tested and the date next to each automated line.
 - [ ] `curl -sI https://<production-domain>/pass/AAAAAAAAAAAAAAAAAAAAAA` shows `referrer-policy: no-referrer`, `x-robots-tag: noindex, nofollow` and a `cache-control` that contains `no-store` (Next adds `must-revalidate`).
 - [ ] `NEXT_PUBLIC_E2E` is **not** set in the Vercel production environment.
 - [ ] `SUPABASE_SERVICE_ROLE_KEY` exists only in Vercel (marked sensitive) and in nobody's chat history.
-- [ ] Two admins can sign in with Google; a third, unlisted Google account is turned away.
+- [ ] The admin PIN opens `/admin`; a wrong PIN and a desk PIN do not; Sign out ends the session.
 
 ## 3. Data
 

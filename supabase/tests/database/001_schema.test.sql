@@ -3,7 +3,7 @@ select * from no_plan();
 
 -- tables exist
 select has_table('public', t, t || ' exists')
-from unnest(array['events','admins','station_pins','auth_attempts','import_batches','guests',
+from unnest(array['events','station_pins','auth_attempts','import_batches','guests',
                   'check_ins','merchandise_redemptions','attempt_log','audit_log']) as t;
 
 -- lockdown

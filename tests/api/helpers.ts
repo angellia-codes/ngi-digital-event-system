@@ -7,7 +7,7 @@ import type { Role } from '@/lib/session';
 export const EVENT = process.env.EVENT_ID!;
 export const svc = () =>
   createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, { auth: { persistSession: false } });
-export const PINS: Record<Role, string> = { checkin: '111111', merchandise: '222222', draw: '333333', prizes: '444444' };
+export const PINS: Record<Role, string> = { checkin: '111111', merchandise: '222222', draw: '333333', prizes: '444444', admin: '555555' };
 
 export async function setupPins() {
   for (const [role, pin] of Object.entries(PINS)) {

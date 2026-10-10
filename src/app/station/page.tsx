@@ -11,6 +11,7 @@ const HOME: Record<string, string | undefined> = {
   merchandise: '/station/merchandise',
   draw: '/station/draw',
   prizes: '/station/prizes',
+  admin: '/admin',
 };
 
 export default function StationLogin() {
@@ -34,6 +35,7 @@ export default function StationLogin() {
     if (r.status === 'INVALID') { setPin(''); return setMessage(t('login.invalid')); }
     if (!r.ok || !r.data) return setMessage(t('common.retry_hint'));
     if (!HOME[r.data.role]) return setMessage(t('login.coming_soon'));
+    if (r.data.role === 'admin') return router.replace('/admin'); // the admin has no desk to pick
     setRole(r.data.role);
     setLabels(r.data.labels);
     setStep('label');

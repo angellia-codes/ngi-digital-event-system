@@ -16,7 +16,7 @@ export function AuditTable() {
     setBusy(true);
     const r = await api<{ rows: AuditRow[] }>(`/api/admin/audit?limit=${PAGE}${before ? `&before=${before}` : ''}`);
     setBusy(false);
-    if (r.http === 401) { window.location.href = '/admin/login'; return; }
+    if (r.http === 401) { window.location.href = '/station'; return; }
     if (!r.ok || !r.data) { setMsg('Could not load the audit log.'); return; }
     setMsg('');
     const got = r.data.rows;

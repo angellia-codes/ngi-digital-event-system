@@ -1,16 +1,10 @@
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { rpc } from './db';
-import { env } from './env';
-import { supabaseServer } from './supabase-server';
+import { STATION_COOKIE, verifyStationToken } from './session';
 
-/** For admin server components: returns the signed-in allow-listed admin or redirects to the login page. */
+/** For admin server components: returns the signed-in admin or sends the browser to the PIN screen. */
 export async function requireAdminPage(): Promise<{ email: string }> {
-  const supabase = await supabaseServer();
-  const { data } = await supabase.auth.getUser();
-  const email = data.user?.email?.toLowerCase();
-  if (!email) redirect('/admin/login');
-  const allowed = await rpc<boolean>('is_admin', { p_event: env().EVENT_ID, p_email: email }).catch(() => null);
-  if (allowed === null) redirect('/admin/login?error=failed');
-  if (!allowed) redirect('/admin/login?error=forbidden');
-  return { email };
+  const s = await verifyStationToken((await cookies()).get(STATION_COOKIE)?.value).catch(() => null);
+  if (s?.role !== 'admin') redirect('/station');
+  return { email: 'admin' };
 }
