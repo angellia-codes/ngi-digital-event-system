@@ -16,6 +16,8 @@ export async function clean() {
 export async function purge() {
   await clean();
   await q(`delete from guests where event_id = $1 and employee_id ~ '^(CA|CB|MA|MB)-'`, [EVENT]);
+  await q('delete from audit_log where event_id = $1', [EVENT]);
+  await q('delete from attempt_log where event_id = $1', [EVENT]);
 }
 
 export async function makeGuests(n, prefix = 'CC') {
