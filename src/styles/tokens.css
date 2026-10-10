@@ -1,0 +1,32 @@
+:root {
+  --nf-black: #0D0D0D;
+  --nf-gold:  #D4AF37;
+  --nf-pink:  #FF1B6B;
+  --nf-green: #39FF14;
+
+  --nf-text:       #F5F5F0;
+  --nf-text-soft:  #BDBDB6;
+  --nf-text-muted: #9A9A94;
+  --nf-card:       #141414;
+  --nf-surface:    #1B1B1B;
+  --nf-line:       #2A2A28;
+  --nf-line-dash:  #3A3A36;
+  --nf-white:      #FFFFFF; /* QR tiles only */
+
+  --nf-font-display: var(--font-bungee), Impact, sans-serif;
+  --nf-font-heading: var(--font-anton), Impact, 'Arial Narrow', sans-serif;
+  --nf-font-label:   var(--font-oswald), 'Arial Narrow', sans-serif;
+  --nf-font-body:    var(--font-archivo), system-ui, sans-serif;
+
+  --nf-radius-btn: 12px;
+  --nf-radius-card: 18px;
+  --nf-radius-pill: 999px;
+  --nf-gutter: 20px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--nf-black); color: var(--nf-text); }
+body { font-family: var(--nf-font-body); font-size: 14px; line-height: 1.45; min-width: 360px; -webkit-text-size-adjust: 100%; }
+button { font: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--nf-gold); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
