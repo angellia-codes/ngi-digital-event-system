@@ -9,7 +9,8 @@ import '@/styles/station.css';
 const HOME: Record<string, string | undefined> = {
   checkin: '/station/check-in',
   merchandise: '/station/merchandise',
-  // draw and prizes screens are added in Plan 2
+  draw: '/station/draw',
+  prizes: '/station/prizes',
 };
 
 export default function StationLogin() {
