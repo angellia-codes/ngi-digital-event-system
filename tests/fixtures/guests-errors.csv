@@ -1,0 +1,5 @@
+employee_id,full_name,outlet,phone
+E001,Kadek Ayu Lestari,Outlet Ubud,0812-3456-7001
+E001,Duplicate Person,Outlet Ubud,0812-3456-7002
+E003,No Outlet,,0812-3456-7003
+E004,Bad Phone,Outlet Ubud,12345

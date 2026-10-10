@@ -1,0 +1,48 @@
+.adm { max-width: 1100px; margin: 0 auto; padding: 0 var(--nf-gutter) 64px; }
+.adm-nav { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; padding: 14px 0; margin-bottom: 24px; border-bottom: 1px solid var(--nf-line); }
+.adm-nav__brand { font-family: var(--nf-font-display); color: var(--nf-gold); font-size: 18px; margin-right: 16px; }
+.adm-nav a { font-family: var(--nf-font-label); text-transform: uppercase; letter-spacing: .06em; padding: 8px 12px; border-radius: 8px; color: var(--nf-text-soft); text-decoration: none; }
+.adm-nav a[aria-current='page'] { background: var(--nf-gold); color: var(--nf-black); }
+.adm-nav__spacer { flex: 1; }
+.adm-nav__who { color: var(--nf-text-muted); font-size: 13px; margin-right: 8px; }
+
+.adm-title { font-family: var(--nf-font-heading); font-weight: 400; font-size: 32px; text-transform: uppercase; margin: 0 0 16px; }
+.adm-sub { font-family: var(--nf-font-label); text-transform: uppercase; letter-spacing: .06em; color: var(--nf-gold); font-size: 14px; margin: 28px 0 10px; }
+.adm-muted { color: var(--nf-text-muted); }
+.adm-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+.adm-spacer { flex: 1; }
+
+.adm-card { background: var(--nf-card); border: 1px solid var(--nf-line); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+.adm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.adm-stat { background: var(--nf-card); border: 1px solid var(--nf-line); border-radius: 12px; padding: 14px; }
+.adm-stat__n { font-family: var(--nf-font-heading); font-size: 34px; line-height: 1; }
+.adm-stat__l { color: var(--nf-text-soft); font-size: 13px; margin-top: 6px; }
+
+.adm-badge { display: inline-block; font-family: var(--nf-font-label); text-transform: uppercase; letter-spacing: .06em; font-size: 12px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--nf-line-dash); color: var(--nf-text-soft); }
+.adm-badge--gold { border-color: var(--nf-gold); color: var(--nf-gold); }
+.adm-badge--pink { border-color: var(--nf-pink); color: var(--nf-pink); }
+.adm-badge--green { border-color: var(--nf-green); color: var(--nf-green); }
+
+.adm-table-wrap { overflow-x: auto; border: 1px solid var(--nf-line); border-radius: 12px; }
+.adm-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.adm-table th { text-align: left; font-family: var(--nf-font-label); text-transform: uppercase; letter-spacing: .05em; font-weight: 400; color: var(--nf-text-soft); padding: 10px 12px; background: var(--nf-surface); white-space: nowrap; }
+.adm-table td { padding: 9px 12px; border-top: 1px solid var(--nf-line); vertical-align: middle; }
+.adm-table tr.is-dim td { color: var(--nf-text-muted); }
+
+.adm-input, .adm-select, .adm-textarea { background: var(--nf-surface); color: var(--nf-text); border: 1px solid var(--nf-line-dash); border-radius: 8px; padding: 9px 12px; font: inherit; min-width: 0; }
+.adm-textarea { width: 100%; min-height: 110px; resize: vertical; }
+.adm-field { display: grid; gap: 4px; margin-bottom: 10px; }
+.adm-field > span { color: var(--nf-text-soft); font-size: 12px; }
+
+.btn { font-family: var(--nf-font-label); text-transform: uppercase; letter-spacing: .06em; font-size: 13px; padding: 9px 16px; border-radius: var(--nf-radius-btn); border: 1px solid var(--nf-line-dash); background: var(--nf-surface); color: var(--nf-text); cursor: pointer; text-decoration: none; display: inline-block; }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn--gold { background: var(--nf-gold); border-color: var(--nf-gold); color: var(--nf-black); }
+.btn--danger { background: transparent; border-color: var(--nf-pink); color: var(--nf-pink); }
+
+.adm-drop { border: 2px dashed var(--nf-line-dash); border-radius: 12px; padding: 22px; text-align: center; color: var(--nf-text-soft); }
+.adm-drop.is-over { border-color: var(--nf-gold); color: var(--nf-gold); }
+.adm-msg { padding: 10px 14px; border-radius: 8px; margin: 10px 0; border: 1px solid var(--nf-line-dash); }
+.adm-msg--error { border-color: var(--nf-pink); color: var(--nf-pink); }
+.adm-msg--ok { border-color: var(--nf-green); color: var(--nf-green); }
+.adm-list { margin: 6px 0 0; padding-left: 18px; max-height: 220px; overflow: auto; }
+.adm-login { max-width: 420px; margin: 12vh auto 0; padding: 0 var(--nf-gutter); }
