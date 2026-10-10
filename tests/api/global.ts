@@ -1,10 +1,12 @@
 import { createClient } from '@supabase/supabase-js';
 import { loadEnv } from 'vite';
+import { assertTestEnv } from '../../scripts/guard-test-env.mjs';
 
 // The pgTAP suites assume an empty database, so leave no API-test data behind.
 // Safety: only runs when API tests were requested, and only if the event is still in rehearsal mode.
 export async function teardown() {
   if (!process.argv.some((a) => a.includes('tests/api') || a === 'tests/api')) return;
+  assertTestEnv(); // never reset or delete anything unless .env.test is a separate project
   const env = loadEnv('test', process.cwd(), '');
   const event = env.EVENT_ID;
   const svc = createClient(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, { auth: { persistSession: false } });

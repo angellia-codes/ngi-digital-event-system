@@ -1,5 +1,8 @@
 import { defineConfig } from '@playwright/test';
 
+import { assertTestEnv } from './scripts/guard-test-env.mjs';
+
+assertTestEnv();
 process.loadEnvFile('.env.test'); // Node 20.12 or newer
 
 export default defineConfig({

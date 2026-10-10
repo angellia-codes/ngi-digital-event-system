@@ -1,3 +1,5 @@
+import { assertTestEnv } from '../../scripts/guard-test-env.mjs';
+assertTestEnv();
 import { createClient } from '@supabase/supabase-js';
 import { expect, type Page } from '@playwright/test';
 

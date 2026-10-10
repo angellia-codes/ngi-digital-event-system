@@ -1,6 +1,8 @@
 // Runs supabase/tests/database/*.test.sql (pgTAP) against DATABASE_URL without Docker/pg_prove.
 // Each test file wraps itself in begin/rollback, so nothing persists.
 import pg from 'pg';
+import { assertTestEnv } from './guard-test-env.mjs';
+assertTestEnv();
 import fs from 'node:fs';
 import path from 'node:path';
 

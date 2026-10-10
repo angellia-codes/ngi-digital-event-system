@@ -1,4 +1,6 @@
 import pg from 'pg';
+import { assertTestEnv } from '../guard-test-env.mjs';
+assertTestEnv();
 
 export const EVENT = process.env.EVENT_ID;
 // Supabase's session pooler caps clients at 15; the transaction pooler (6543) allows the 40 this script opens.

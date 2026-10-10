@@ -1,3 +1,5 @@
+import { assertTestEnv } from '../guard-test-env.mjs';
+assertTestEnv();
 export const BASE = process.env.APP_URL ?? 'http://localhost:3000';
 
 /** Runs fn over items with at most `size` in flight. */

@@ -1,3 +1,5 @@
+import { assertTestEnv } from '../../scripts/guard-test-env.mjs';
+assertTestEnv();
 import { createClient } from '@supabase/supabase-js';
 import { expect } from 'vitest';
 import type { Role } from '@/lib/session';
