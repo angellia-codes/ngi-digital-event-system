@@ -21,8 +21,8 @@ export const ROLE_NAME: Record<Role, string> = {
   admin: 'Admin console',
 };
 
-/** Six random digits from the browser or Node crypto source. */
+/** Four random digits from the browser or Node crypto source. */
 export function randomPin(): string {
-  const n = crypto.getRandomValues(new Uint32Array(1))[0] % 1_000_000;
-  return String(n).padStart(6, '0');
+  const n = crypto.getRandomValues(new Uint32Array(1))[0] % 10_000;
+  return String(n).padStart(4, '0');
 }

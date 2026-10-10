@@ -13,7 +13,7 @@
 | :---- | :---- |
 | Stack | Next.js on Vercel. Supabase (Postgres, Realtime, Auth) in a **new dedicated project**, Pro plan, Singapore region |
 | Where the rules live | **Postgres functions** called only from Next.js route handlers with the service key (approach A). Constraints and transactions enforce the rules, not application code |
-| Auth | Guests: token link. Station staff: 6-digit role PIN, signed session cookie. Admin: a 6-digit PIN (role `admin`) on the same login screen; no Google sign-in. Stage: display key then cookie |
+| Auth | Guests: token link. Station staff: 4-digit role PIN, signed session cookie. Admin: a 4-digit PIN (role `admin`) on the same login screen; no Google sign-in. Stage: display key then cookie |
 | Draw stage flow | Projector shows **prize and number only** until the MC confirms. Confirming reveals the winner's name, outlet and department (no congratulations wording, by HR's decision on 10 Oct) |
 | Who confirms a draw | The **MC** (draw role). The Prize Verification screen is a backup. First action wins; repeats are harmless |
 | Single event per deployment | `EVENT_ID` environment variable. The schema carries `event_id` everywhere so it can be reused |
@@ -43,7 +43,7 @@ Stage display ──(display key cookie)─────┴──(anon key, read 
 | :---- | :---- | :---- |
 | Guest | 128-bit token in the URL path | Looked up server-side. The guest sees only their own row. Invalid lookups are rate-limited (20 per minute per IP). Valid lookups are not counted |
 | Station staff | Signed cookie `nf_station` (HS256: role, station label, `session_version`; httpOnly, Secure, 14 hours) | Verified on every request, plus a database check of `session_version`. Rotating or disabling a PIN logs that role out immediately |
-| Admin | 6-digit PIN, role `admin` | Same signed `nf_station` cookie as the stations; every `/admin` page and `/api/admin` route accepts only role `admin`. Audited as actor `admin` |
+| Admin | 4-digit PIN, role `admin` | Same signed `nf_station` cookie as the stations; every `/admin` page and `/api/admin` route accepts only role `admin`. Audited as actor `admin` |
 | Stage | `/stage?key=…` compared with a hash, then httpOnly cookie `nf_stage` and redirect without the key | Cookie checked by `/api/stage/*` |
 
 **Environment variables:** `SUPABASE_URL`, `SUPABASE_ANON_KEY` (public), `SUPABASE_SERVICE_ROLE_KEY` (server only), `STATION_SESSION_SECRET`, `EVENT_ID`.
@@ -57,7 +57,7 @@ Stage display ──(display key cookie)─────┴──(anon key, read 
 | Table | Key columns | Notes |
 | :---- | :---- | :---- |
 | `events` | `id`, `name`, `event_date`, `starts_at`, `venue`, `next_prize_number`, `display_key_hash`, `mode` (`rehearsal` / `live`), `config` | One row per event |
-| `station_pins` | `event_id`, `role`, `pin_hash`, `active`, `session_version` | Roles: `checkin`, `merchandise`, `draw`, `prizes`. bcrypt via pgcrypto. PINs unique across roles, 6 digits |
+| `station_pins` | `event_id`, `role`, `pin_hash`, `active`, `session_version` | Roles: `checkin`, `merchandise`, `draw`, `prizes`. bcrypt via pgcrypto. PINs unique across roles, 4 digits |
 | `auth_attempts` | `scope`, `key`, `at`, `success` | PIN and token lockouts |
 | `import_batches` | `id`, `filename`, `uploaded_by`, `inserted`, `updated`, `flagged_missing` | One per CSV import |
 | `guests` | `employee_id`, `full_name`, `outlet`, `department`, `position`, `phone`, `category`, `invite_token`, `merch_token`, `rsvp_status`, `rsvp_at`, `first_opened_at`, `is_walk_in`, `active`, `last_import_id` | Unique `(event_id, employee_id)`. Walk-ins without an ID get `WALKIN-n` |

@@ -25,7 +25,7 @@ begin
   if p_role not in ('checkin', 'merchandise', 'draw', 'prizes', 'admin') then
     return jsonb_build_object('status', 'INVALID_ROLE');
   end if;
-  if p_pin is null or p_pin !~ '^[0-9]{6}$' then
+  if p_pin is null or p_pin !~ '^[0-9]{4}$' then
     return jsonb_build_object('status', 'INVALID_PIN');
   end if;
   if exists (select 1 from public.station_pins

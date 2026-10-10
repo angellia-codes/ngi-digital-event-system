@@ -56,9 +56,9 @@ export default function StationLogin() {
         <h1>{t('login.title')}</h1>
         {step === 'pin' ? (
           <form onSubmit={submitPin} className="login">
-            <input className="field" type="password" inputMode="numeric" pattern="[0-9]{6}" maxLength={6} autoComplete="off" autoFocus
-              aria-label={t('login.pin')} placeholder="••••••" value={pin} onChange={(e) => setPin(e.target.value.replace(/\D/g, ''))} />
-            <button className="btn--staff" type="submit" disabled={busy || pin.length !== 6}>{t('login.submit')}</button>
+            <input className="field" type="password" inputMode="numeric" pattern="[0-9]{4}" maxLength={4} autoComplete="off" autoFocus
+              aria-label={t('login.pin')} placeholder="••••" value={pin} onChange={(e) => setPin(e.target.value.replace(/\D/g, ''))} />
+            <button className="btn--staff" type="submit" disabled={busy || pin.length !== 4}>{t('login.submit')}</button>
           </form>
         ) : (
           <>

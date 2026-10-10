@@ -19,7 +19,7 @@
 - **Pass and stage details (10 Oct):** no congratulations wording anywhere; the stage counter "UNDIAN 3 DARI 12" means slot 3 of the prize's 12 slots; the pass shows time and venue only once HR has entered them (open decision 1).
 - **MC confirms:** the MC (draw role) confirms a winner or marks a no-show. The Prize Verification screen is a backup. The first action wins; repeats are harmless.
 - **Data model:** `door_prize_numbers` merged into `check_ins`; new tables `import_batches`, `auth_attempts`, `stage_heartbeat`; new draw status `void_admin`; `events.mode` for rehearsal and live; `stage_state` gains `rev` and `options`.
-- **Auth detail:** PINs are 6 digits and unique across roles; lockouts are per device.
+- **Auth detail:** PINs are 4 digits and unique across roles; lockouts are per device.
 - **Routes and decisions:** new stage API routes; decisions log and open decisions updated.
 
 ### v1.1 compared with v1.0
@@ -314,7 +314,7 @@ All tables have `event_id`. Timestamps are UTC, displayed in Asia/Makassar (WITA
 | :---- | :---- | :---- |
 | `events` | Event record and config | `id`, `name`, `event_date`, `venue`, `start_time`, `next_prize_number`, `display_key_hash`, `mode` (`rehearsal` / `live`), `config` (jsonb) |
 | `admins` | Admin allowlist | `event_id`, `email`, `name` |
-| `station_pins` | Role PINs | `event_id`, `role`, `pin_hash`, `active`, `session_version`. PINs are 6 digits, stored hashed, unique across roles |
+| `station_pins` | Role PINs | `event_id`, `role`, `pin_hash`, `active`, `session_version`. PINs are 4 digits, stored hashed, unique across roles |
 | `guests` | Master guest list | `id`, `employee_id`, `full_name`, `outlet`, `department`, `position`, `phone`, `category`, `invite_token`, `merch_token`, `rsvp_status`, `rsvp_at`, `first_opened_at`, `is_walk_in`, `active`. Unique `(event_id, employee_id)`, unique tokens |
 | `check_ins` | One row per checked-in guest, including the Door Prize number | `guest_id` unique, `checked_in_at`, `method` (scan / manual), `station_label`, `actor`, `prize_number` (not null). Unique `(event_id, prize_number)` |
 | `merchandise_redemptions` | Claims | `guest_id`, `status` (redeemed / voided), `redeemed_at`, `station`, `actor`, `void_reason`. **Partial unique index on `guest_id` where `status = 'redeemed'`** |

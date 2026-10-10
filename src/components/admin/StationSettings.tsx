@@ -13,7 +13,7 @@ function PinLine({ row, reload }: { row: PinRow; reload: () => void }) {
   async function save() {
     const r = await api('/api/admin/settings/pin', { role: row.role, pin });
     if (r.status === 'OK') { setMsg(`PIN set to ${pin}. Write it down now; it cannot be shown again. Devices on this role were signed out.`); setPin(''); reload(); }
-    else setMsg(r.status === 'INVALID_PIN' ? 'The PIN must be exactly 6 digits.' : r.status === 'PIN_IN_USE' ? 'Another role already uses that PIN.' : 'Could not save. Try again.');
+    else setMsg(r.status === 'INVALID_PIN' ? 'The PIN must be exactly 4 digits.' : r.status === 'PIN_IN_USE' ? 'Another role already uses that PIN.' : 'Could not save. Try again.');
   }
   async function toggle() {
     const r = await api('/api/admin/settings/pin-active', { role: row.role, active: !row.active });
@@ -27,9 +27,9 @@ function PinLine({ row, reload }: { row: PinRow; reload: () => void }) {
       <td>{!row.is_set ? <span className="adm-badge adm-badge--pink">not set</span> : row.active ? <span className="adm-badge adm-badge--green">active</span> : <span className="adm-badge">off</span>}</td>
       <td>
         <span className="adm-row" style={{ margin: 0 }}>
-          <input className="adm-input" inputMode="numeric" maxLength={6} placeholder="6 digits" value={pin} onChange={(e) => setPin(e.target.value.replace(/\D/g, ''))} style={{ width: 110 }} aria-label={`New PIN for ${ROLE_NAME[row.role]}`} />
+          <input className="adm-input" inputMode="numeric" maxLength={4} placeholder="4 digits" value={pin} onChange={(e) => setPin(e.target.value.replace(/\D/g, ''))} style={{ width: 110 }} aria-label={`New PIN for ${ROLE_NAME[row.role]}`} />
           <button className="btn" onClick={() => setPin(randomPin())}>Generate</button>
-          <button className="btn btn--gold" onClick={save} disabled={pin.length !== 6}>Set PIN</button>
+          <button className="btn btn--gold" onClick={save} disabled={pin.length !== 4}>Set PIN</button>
           {row.is_set && <button className="btn" onClick={toggle}>{row.active ? 'Turn off' : 'Turn on'}</button>}
         </span>
         {msg && <div className="adm-msg adm-msg--ok">{msg}</div>}

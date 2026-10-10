@@ -1,15 +1,12 @@
 import { defineConfig } from 'vitest/config';
-import { loadEnv } from 'vite';
 import path from 'node:path';
 
-export default defineConfig(({ mode }) => ({
+// Unit tests only: they never touch a database. The app has one Supabase project, the production one.
+export default defineConfig({
   resolve: { alias: { '@': path.resolve(__dirname, 'src') } },
   test: {
     environment: 'node',
-    env: loadEnv(mode === 'test' ? 'test' : mode, process.cwd(), ''),
-    globalSetup: ['tests/api/global.ts'],
-    fileParallelism: false, // API tests share one local database
-    testTimeout: 120_000, // API tests hit the remote dev project, not a local database
-    include: ['tests/unit/**/*.test.ts', 'tests/api/**/*.test.ts'],
+    env: { STATION_SESSION_SECRET: 'unit-test-secret-unit-test-secret-1234', EVENT_ID: '00000000-0000-4000-8000-000000000001', APP_URL: 'http://localhost:3000' },
+    include: ['tests/unit/**/*.test.ts'],
   },
-}));
+});

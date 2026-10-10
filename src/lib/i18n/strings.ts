@@ -62,7 +62,7 @@ const id = {
   'staff.already_in': 'sudah check-in',
 
   'login.title': 'MASUK STAF',
-  'login.pin': 'PIN 6 digit',
+  'login.pin': 'PIN 4 digit',
   'login.submit': 'MASUK',
   'login.invalid': 'PIN salah',
   'login.locked': 'Terlalu banyak percobaan. Tunggu 5 menit.',
@@ -134,7 +134,7 @@ const en: Record<StringKey, string> = {
   'staff.already_in': 'already checked in',
 
   'login.title': 'STAFF LOGIN',
-  'login.pin': '6-digit PIN',
+  'login.pin': '4-digit PIN',
   'login.submit': 'LOG IN',
   'login.invalid': 'Wrong PIN',
   'login.locked': 'Too many attempts. Wait 5 minutes.',

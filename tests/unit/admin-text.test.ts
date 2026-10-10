@@ -15,11 +15,11 @@ describe('describeImportError', () => {
 });
 
 describe('randomPin', () => {
-  it('is always six digits, leading zeros included', () => {
+  it('is always four digits, leading zeros included', () => {
     const seen = new Set<string>();
     for (let i = 0; i < 300; i++) {
       const p = randomPin();
-      expect(p).toMatch(/^\d{6}$/);
+      expect(p).toMatch(/^\d{4}$/);
       seen.add(p);
     }
     expect(seen.size).toBeGreaterThan(250);

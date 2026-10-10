@@ -1,6 +1,6 @@
-# Production and staging setup
+# Production setup
 
-Do this for **staging first**, then production. Staging is a second Supabase project plus a Vercel preview deployment, seeded with 215 fake employees. Never run `supabase/seed.sql` on production.
+There is one Supabase project and one Vercel project: production. Rehearsals run on it in **rehearsal mode** and are wiped with Reset rehearsal data. There is no staging or test project, and the automated database, API and browser tests were removed on purpose (only unit tests remain). Never run `supabase/seed.sql` here.
 
 ## Before you start
 
@@ -9,7 +9,7 @@ Do this for **staging first**, then production. Staging is a second Supabase pro
 
 ## 1. Supabase project
 
-1. Create a **Pro** project in **Singapore (ap-southeast-1)**. Name it `nourishfest-prod` (`nourishfest-staging` for staging). Save the database password in the password manager.
+1. Create a **Pro** project in **Singapore (ap-southeast-1)**. Name it `nourishfest-prod`. Save the database password in the password manager.
 2. Link and apply the schema. Nothing is ever edited by hand in the dashboard.
    ```bash
    npx supabase login
@@ -24,16 +24,16 @@ Do this for **staging first**, then production. Staging is a second Supabase pro
            '{"station_labels": ["Meja 1", "Meja 2", "Meja 3", "Booth 1", "Booth 2"]}')
    returning id;
    ```
-4. Authentication: there is no Google or e-mail sign-in. The admin console uses an **admin PIN** (a six-digit PIN like the station PINs, role `admin`). Set the first one from your laptop; the PIN stays in your environment and is never typed into chat:
+4. Authentication: there is no Google or e-mail sign-in. The admin console uses an **admin PIN** (a four-digit PIN like the station PINs, role `admin`). Set the first one from your laptop; the PIN stays in your environment and is never typed into chat:
    ```powershell
-   $env:ADMIN_PIN = '<6 digits>'; node --env-file=.env.local scripts/set-admin-pin.mjs
+   $env:ADMIN_PIN = '<4 digits>'; node --env-file=.env.local scripts/set-admin-pin.mjs
    ```
    After that the admin PIN can be changed in Settings. Whoever holds it can go live, reset, void draws and download every report: share it with two people at most, and keep it different from every desk PIN.
 
 ## 3. Vercel project
 
 1. Import the repository. Framework: Next.js. `vercel.json` already pins functions to Singapore (`sin1`) next to the database.
-2. Environment variables (Production, and Preview for staging):
+2. Environment variables (Production):
 
    | Name | Value |
    | :---- | :---- |
@@ -55,28 +55,17 @@ Do this for **staging first**, then production. Staging is a second Supabase pro
 
 1. Open `/station`, enter the admin PIN (it opens `/admin`), see the dashboard with the `rehearsal` badge.
 2. Settings: generate and set the four desk PINs; write them in the password manager. Check the station names.
-3. Guests: import the real CSV (or the fake one on staging). Confirm the preview counts, import, spot-check rows.
+3. Guests: import the real CSV. Confirm the preview counts, import, spot-check rows.
 4. Download the invitations CSV and open your own pass link on your phone. RSVP.
 5. At a station phone, log in with the Check-in PIN, scan your pass, then hand over merchandise with the Merchandise PIN.
 6. Settings: **Reset rehearsal data**. Confirm the dashboard returns to zero check-ins. Guests, RSVPs and PINs stay.
 
-## 5. Staging load run
-
-Seed and run the load scripts against the staging database and staging URL:
-```bash
-export DATABASE_URL='<staging connection string>' APP_URL='https://<staging-domain>' EVENT_ID='<staging event id>'
-node scripts/load/seed-fake-guests.mjs 215
-node scripts/load/pass-pages.mjs
-node scripts/load/scans.mjs
-```
-Staging uses its own PINs: pass `CHECKIN_PIN=<staging check-in PIN>` to `scans.mjs`.
-
-## 6. Backups and watching
+## 5. Backups and watching
 
 - Supabase Pro daily backups are on (Database, Backups). Note the retention shown.
 - Bookmark Vercel runtime logs and Supabase logs for the event day. Logs contain no full tokens or PINs by design.
 
-## 7. Never do early
+## 6. Never do early
 
 - Do not click **Go live** before the morning of 10 December. It is one-way and locks the rehearsal reset.
 - Do not share the service role key. If it ever leaks, rotate it in Supabase and in Vercel, then redeploy.

@@ -4,7 +4,7 @@
 import pg from 'pg';
 
 const pin = process.env.ADMIN_PIN ?? '';
-if (!/^[0-9]{6}$/.test(pin)) { console.error('Set ADMIN_PIN to exactly 6 digits.'); process.exit(2); }
+if (!/^[0-9]{4}$/.test(pin)) { console.error('Set ADMIN_PIN to exactly 4 digits.'); process.exit(2); }
 if (!process.env.DATABASE_URL || !process.env.EVENT_ID) { console.error('DATABASE_URL and EVENT_ID are required (use --env-file=.env.local).'); process.exit(2); }
 
 const db = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });

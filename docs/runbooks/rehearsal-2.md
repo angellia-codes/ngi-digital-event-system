@@ -11,7 +11,6 @@ Projector laptop and its cable, the phone hotspot SIM, staff phones, the spare d
 ## 1. Network (30 minutes)
 
 - [ ] The projector laptop runs on its **own** connection (hotspot or cable), not guest Wi-Fi. Note which: ____________
-- [ ] From the projector laptop, on that connection, run the latency check against **staging**: `node --env-file=.env.test scripts/load/stage-latency.mjs` (with the staging URLs in `.env.test`). Result: draw ____ ms, confirm ____ ms (p95 under 2000).
 - [ ] Walk to each place where a desk or booth will stand (check-in 1 and 2, merchandise, prize desk, MC position). On a staff phone, open `/station`, log in, and load one result. Note any spot with no signal: ____________
 - [ ] If Wi-Fi is the only option for staff, test at full load: 10 phones on the SSID at once.
 

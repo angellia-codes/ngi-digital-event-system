@@ -6,8 +6,7 @@ Goal: every person who will work on 10 December has used their own screen on a r
 
 ## Before (by 27 November)
 
-- [ ] Automated checks pass on the commit that is deployed (record the commit): `supabase test db`, `npm run test:unit`, `npm run test:api`, `node --env-file=.env.test scripts/concurrency/draw.mjs`, `npm run e2e`.
-- [ ] On staging: `scripts/load/stage-latency.mjs` passes (p95 under 2 s).
+- [ ] `npm run test:unit`, `npm run lint` and `npm run build` pass on the commit that is deployed (record the commit): ____________
 - [ ] Supabase dashboard, Advisors, Security: no errors on production.
 - [ ] Prizes entered in Admin, Prizes (or placeholders: `scripts/rehearsal/seed-rehearsal.mjs prizes`; remove them afterwards).
 - [ ] Stage display key created (see `stage-setup.md`).
