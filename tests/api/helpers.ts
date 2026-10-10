@@ -30,6 +30,8 @@ export async function seedGuests(n = 3): Promise<TestGuest[]> {
   const { data, error } = await svc().rpc('import_guests', { p_event: EVENT, p_rows: rows, p_filename: 'test.csv', p_actor: 'test' });
   expect(error).toBeNull();
   expect(data.status).toBe('OK');
+  // resetEvent keeps guests, so undo any deactivation or RSVP left by an earlier test
+  await svc().from('guests').update({ active: true, rsvp_status: 'pending', first_opened_at: null }).eq('event_id', EVENT).like('employee_id', 'T%');
   const { data: guests } = await svc()
     .from('guests').select('id, employee_id, full_name, invite_token, merch_token')
     .eq('event_id', EVENT).like('employee_id', 'T%').order('employee_id');

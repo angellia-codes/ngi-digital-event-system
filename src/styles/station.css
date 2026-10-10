@@ -1,0 +1,60 @@
+.station { min-height: 100dvh; display: flex; flex-direction: column; max-width: 520px; margin: 0 auto; background: var(--nf-black); }
+.station__bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 14px var(--nf-gutter); min-height: 56px; }
+.station__title { margin: 0; font-family: var(--nf-font-heading); font-size: 22px; letter-spacing: 0.08em; color: var(--nf-gold); }
+.station__chip { font-family: var(--nf-font-label); font-weight: 600; font-size: 13px; letter-spacing: 0.14em; border: 2px solid var(--nf-gold); color: var(--nf-gold); padding: 2px 10px; border-radius: var(--nf-radius-pill); }
+.station__main { flex: 1; display: flex; flex-direction: column; }
+.station__logout { background: none; border: 0; color: var(--nf-text-muted); font-family: var(--nf-font-label); letter-spacing: 0.1em; min-height: 48px; padding: 0 8px; }
+
+.login { padding: var(--nf-gutter); display: flex; flex-direction: column; gap: 16px; max-width: 420px; margin: 0 auto; }
+.login h1 { margin: 0; font-family: var(--nf-font-heading); color: var(--nf-gold); letter-spacing: 0.06em; }
+.field { width: 100%; min-height: 64px; border-radius: var(--nf-radius-btn); border: 2px solid var(--nf-line-dash); background: var(--nf-card); color: var(--nf-text); font-size: 28px; letter-spacing: 0.4em; text-align: center; }
+.field--text { font-size: 18px; letter-spacing: normal; text-align: left; padding: 0 16px; min-height: 56px; }
+.btn--staff { min-height: 64px; width: 100%; border: 0; border-radius: 14px; background: var(--nf-gold); color: var(--nf-black); font-family: var(--nf-font-heading); font-size: 24px; letter-spacing: 0.08em; }
+.btn--staff-dark { background: var(--nf-black); color: var(--nf-text); }
+.choices { display: grid; gap: 10px; }
+.choice { min-height: 56px; border-radius: var(--nf-radius-btn); border: 2px solid var(--nf-gold); background: transparent; color: var(--nf-gold); font-family: var(--nf-font-heading); font-size: 20px; }
+.choice[aria-pressed='true'] { background: var(--nf-gold); color: var(--nf-black); }
+
+.scanner { position: relative; height: 190px; background: var(--nf-surface); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.scanner__video { position: absolute; inset: 0; }
+.scanner__video video { width: 100% !important; height: 190px !important; object-fit: cover; }
+.scanner__hint { position: absolute; bottom: 8px; left: 0; right: 0; text-align: center; font-family: var(--nf-font-label); font-size: 12px; letter-spacing: 0.16em; color: #8A8A84; }
+.scanner__gate { position: relative; padding: 16px; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.scanner__gate p { margin: 0; color: var(--nf-text-soft); }
+.scanner__gate .btn--staff { width: auto; min-height: 56px; padding: 0 24px; }
+.brackets { position: absolute; left: 50%; top: 50%; width: 170px; height: 130px; transform: translate(-50%, -55%); pointer-events: none; }
+.brackets i { position: absolute; width: 28px; height: 28px; border: 0 solid var(--nf-gold); }
+.brackets i:nth-child(1) { left: 0; top: 0; border-left-width: 4px; border-top-width: 4px; }
+.brackets i:nth-child(2) { right: 0; top: 0; border-right-width: 4px; border-top-width: 4px; }
+.brackets i:nth-child(3) { left: 0; bottom: 0; border-left-width: 4px; border-bottom-width: 4px; }
+.brackets i:nth-child(4) { right: 0; bottom: 0; border-right-width: 4px; border-bottom-width: 4px; }
+.brackets--problem i { border-color: var(--nf-pink); }
+
+.panel { flex: 1; padding: 18px var(--nf-gutter) 16px; display: flex; flex-direction: column; gap: 8px; color: var(--nf-black); }
+.panel--green { background: var(--nf-green); }
+.panel--pink { background: var(--nf-pink); }
+.panel--gold { background: var(--nf-gold); }
+.panel--neutral { background: var(--nf-card); color: var(--nf-text); }
+.panel__head { display: flex; align-items: center; gap: 12px; }
+.panel__icon { width: 52px; height: 52px; border-radius: 999px; background: var(--nf-black); display: flex; align-items: center; justify-content: center; flex: none; }
+.panel--green .panel__icon svg { stroke: var(--nf-green); }
+.panel--pink .panel__icon svg { stroke: var(--nf-pink); }
+.panel--gold .panel__icon svg { stroke: var(--nf-gold); }
+.panel__title { font-family: var(--nf-font-heading); font-size: 32px; letter-spacing: 0.04em; line-height: 1.05; }
+.panel__name { font-family: var(--nf-font-heading); font-size: 44px; line-height: 1.02; text-transform: uppercase; margin-top: 6px; overflow-wrap: anywhere; }
+.panel__meta { font-family: var(--nf-font-label); font-weight: 600; font-size: 18px; letter-spacing: 0.08em; }
+.panel__note { font-size: 14px; font-weight: 600; }
+.panel__prize { margin-top: 10px; background: var(--nf-black); border-radius: 16px; padding: 12px 16px 6px; display: flex; flex-direction: column; align-items: center; }
+.panel__prize b { font-family: var(--nf-font-label); font-weight: 600; font-size: 14px; letter-spacing: 0.3em; color: var(--nf-gold); }
+.panel__prize span { font-family: var(--nf-font-display); font-size: 96px; line-height: 1.05; color: var(--nf-gold); text-shadow: 4px 4px 0 var(--nf-pink); }
+.panel__actions { margin-top: auto; display: grid; gap: 10px; }
+
+.tabs { display: flex; border-top: 2px solid var(--nf-line); height: 64px; background: var(--nf-black); }
+.tabs__item { flex: 1; display: flex; align-items: center; justify-content: center; border: 0; border-top: 3px solid transparent; background: transparent; color: var(--nf-text-muted); font-family: var(--nf-font-label); font-weight: 600; font-size: 14px; letter-spacing: 0.14em; }
+.tabs__item[aria-selected='true'] { color: var(--nf-gold); border-top-color: var(--nf-gold); }
+
+.search { padding: var(--nf-gutter); display: flex; flex-direction: column; gap: 12px; }
+.search__row { min-height: 64px; border: 2px solid var(--nf-line-dash); border-radius: var(--nf-radius-btn); background: var(--nf-card); color: var(--nf-text); padding: 8px 16px; display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 2px; }
+.search__row b { font-family: var(--nf-font-heading); font-size: 20px; text-transform: uppercase; font-weight: 400; }
+.search__row span { color: var(--nf-text-soft); font-size: 13px; }
+.search__empty { color: var(--nf-text-muted); margin: 0; }
