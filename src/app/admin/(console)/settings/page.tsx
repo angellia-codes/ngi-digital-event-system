@@ -1,5 +1,6 @@
 'use client';
 import { RehearsalPanel } from '@/components/admin/RehearsalPanel';
+import { StagePanel } from '@/components/admin/StagePanel';
 import { StationSettings, type PinRow } from '@/components/admin/StationSettings';
 import { useLoad } from '@/lib/use-load';
 
@@ -14,6 +15,7 @@ export default function SettingsPage() {
       <h1 className="adm-title">Settings</h1>
       <p className="adm-muted">{data.event.name} · {data.event.event_date}</p>
       <StationSettings key={data.station_labels.join('|')} pins={data.pins} labels={data.station_labels} reload={reload} />
+      <StagePanel />
       <RehearsalPanel mode={data.mode} reload={reload} />
     </>
   );

@@ -1,6 +1,7 @@
 import { AdminNav } from '@/components/admin/AdminNav';
 import { requireAdminPage } from '@/lib/admin-page';
 import '@/styles/admin.css';
+import '@/styles/admin-draw.css';
 
 export const dynamic = 'force-dynamic';
 
