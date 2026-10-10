@@ -9,9 +9,10 @@
     "lint": "eslint",
     "test:unit": "vitest run tests/unit",
     "test:api": "vitest run tests/api",
-    "test:db": "supabase test db",
+    "test:db": "node scripts/run-db-tests.mjs",
     "db:reset": "supabase db reset",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "db:push": "supabase db push --db-url \"$DATABASE_URL\""
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
