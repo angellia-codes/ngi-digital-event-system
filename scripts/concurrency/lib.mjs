@@ -10,6 +10,7 @@ export const pool = new pg.Pool({ connectionString: url, max: 40, ssl: { rejectU
 export const q = async (sql, params = []) => (await pool.query(sql, params)).rows;
 
 export async function clean() {
+  await q('delete from draws where event_id = $1', [EVENT]);
   await q('delete from merchandise_redemptions where event_id = $1', [EVENT]);
   await q('delete from check_ins where event_id = $1', [EVENT]);
   await q('update events set next_prize_number = 1 where id = $1', [EVENT]);
@@ -17,7 +18,8 @@ export async function clean() {
 
 export async function purge() {
   await clean();
-  await q(`delete from guests where event_id = $1 and employee_id ~ '^(CA|CB|MA|MB)-'`, [EVENT]);
+  await q('delete from prizes where event_id = $1', [EVENT]);
+  await q(`delete from guests where event_id = $1 and employee_id ~ '^(CA|CB|MA|MB|DA|DB|DC)-'`, [EVENT]);
   await q('delete from audit_log where event_id = $1', [EVENT]);
   await q('delete from attempt_log where event_id = $1', [EVENT]);
 }
