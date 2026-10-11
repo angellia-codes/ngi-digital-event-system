@@ -17,7 +17,7 @@ export function TicketCard({ data }: { data: PassData }) {
       <div className="ticket__divider" aria-hidden="true" />
       <div className="ticket__bottom">
         <span className="pill">{t('pass.checkin_label')}</span>
-        <QrTile payload={payloadFor('checkin', data.invite_token)} frame="gold" alt={`QR check-in ${data.guest.full_name}`} />
+        <QrTile payload={payloadFor('checkin', data.invite_token)} frame="gold" alt={`QR check-in untuk ${data.guest.full_name}`} />
         <p className="helper">{t('pass.show_qr')}</p>
         <p className="caption">{t('pass.brightness')}</p>
       </div>

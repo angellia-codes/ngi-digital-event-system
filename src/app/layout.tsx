@@ -16,7 +16,7 @@ export const viewport: Viewport = { width: 'device-width', initialScale: 1, them
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" className={`${bungee.variable} ${anton.variable} ${oswald.variable} ${archivo.variable}`}>
+    <html lang="en" className={`${bungee.variable} ${anton.variable} ${oswald.variable} ${archivo.variable}`}>
       <body>
         <I18nProvider>{children}</I18nProvider>
       </body>

@@ -1,9 +1,10 @@
 .station { min-height: 100dvh; display: flex; flex-direction: column; max-width: 520px; margin: 0 auto; background: var(--nf-black); }
-.station__bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 14px var(--nf-gutter); min-height: 56px; }
+.station__bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px var(--nf-gutter); min-height: 56px; }
+.station__bar .lang__btn { min-width: 56px; min-height: 52px; font-size: 15px; }
 .station__title { margin: 0; font-family: var(--nf-font-heading); font-size: 22px; letter-spacing: 0.08em; color: var(--nf-gold); }
 .station__chip { font-family: var(--nf-font-label); font-weight: 600; font-size: 13px; letter-spacing: 0.14em; border: 2px solid var(--nf-gold); color: var(--nf-gold); padding: 2px 10px; border-radius: var(--nf-radius-pill); }
 .station__main { flex: 1; display: flex; flex-direction: column; }
-.station__logout { background: none; border: 0; color: var(--nf-text-muted); font-family: var(--nf-font-label); letter-spacing: 0.1em; min-height: 48px; padding: 0 8px; }
+.station__logout { background: none; border: 0; color: var(--nf-text-muted); font-family: var(--nf-font-label); letter-spacing: 0.1em; min-height: 56px; padding: 0 8px; }
 
 .login { padding: var(--nf-gutter); display: flex; flex-direction: column; gap: 16px; max-width: 420px; margin: 0 auto; }
 .login h1 { margin: 0; font-family: var(--nf-font-heading); color: var(--nf-gold); letter-spacing: 0.06em; }
@@ -40,11 +41,11 @@
 .panel--green .panel__icon svg { stroke: var(--nf-green); }
 .panel--pink .panel__icon svg { stroke: var(--nf-pink); }
 .panel--gold .panel__icon svg { stroke: var(--nf-gold); }
-.panel__title { font-family: var(--nf-font-heading); font-size: 32px; letter-spacing: 0.04em; line-height: 1.05; }
-.panel__name { font-family: var(--nf-font-heading); font-size: 44px; line-height: 1.02; text-transform: uppercase; margin-top: 6px; overflow-wrap: anywhere; }
-.panel__meta { font-family: var(--nf-font-label); font-weight: 600; font-size: 18px; letter-spacing: 0.08em; }
+.panel__title { font-family: var(--nf-font-heading); font-size: 30px; letter-spacing: 0.04em; line-height: 1.05; }
+.panel__name { font-family: var(--nf-font-heading); font-size: 40px; line-height: 1.02; text-transform: uppercase; margin-top: 6px; overflow-wrap: anywhere; }
+.panel__meta { font-family: var(--nf-font-label); font-weight: 600; font-size: 16px; letter-spacing: 0.08em; }
 .panel__note { font-size: 14px; font-weight: 600; }
-.panel__prize { margin-top: 10px; background: var(--nf-black); border-radius: 16px; padding: 12px 16px 6px; display: flex; flex-direction: column; align-items: center; }
+.panel__prize { margin-top: 10px; background: var(--nf-black); border-radius: 16px; padding: 10px 8px 4px; display: flex; flex-direction: column; align-items: center; }
 .panel__prize b { font-family: var(--nf-font-label); font-weight: 600; font-size: 14px; letter-spacing: 0.3em; color: var(--nf-gold); }
 .panel__prize span { font-family: var(--nf-font-display); font-size: 96px; line-height: 1.05; color: var(--nf-gold); text-shadow: 4px 4px 0 var(--nf-pink); }
 .panel__actions { margin-top: auto; display: grid; gap: 10px; }

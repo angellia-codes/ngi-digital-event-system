@@ -12,20 +12,20 @@
 .adm-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
 .adm-spacer { flex: 1; }
 
-.adm-card { background: var(--nf-card); border: 1px solid var(--nf-line); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+.adm-card { background: var(--nf-card); border: 1px solid var(--nf-line); border-radius: var(--nf-radius-card); padding: 16px; margin-bottom: 16px; }
 .adm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-bottom: 20px; }
-.adm-stat { background: var(--nf-card); border: 1px solid var(--nf-line); border-radius: 12px; padding: 14px; }
+.adm-stat { background: var(--nf-card); border: 1px solid var(--nf-line); border-top: 3px solid var(--nf-gold); border-radius: var(--nf-radius-card); padding: 14px; }
 .adm-stat__n { font-family: var(--nf-font-heading); font-size: 34px; line-height: 1; }
-.adm-stat__l { color: var(--nf-text-soft); font-size: 13px; margin-top: 6px; }
+.adm-stat__l { color: var(--nf-text-soft); font-family: var(--nf-font-label); text-transform: uppercase; letter-spacing: .08em; font-size: 13px; margin-top: 6px; }
 
 .adm-badge { display: inline-block; font-family: var(--nf-font-label); text-transform: uppercase; letter-spacing: .06em; font-size: 12px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--nf-line-dash); color: var(--nf-text-soft); }
 .adm-badge--gold { border-color: var(--nf-gold); color: var(--nf-gold); }
 .adm-badge--pink { border-color: var(--nf-pink); color: var(--nf-pink); }
 .adm-badge--green { border-color: var(--nf-green); color: var(--nf-green); }
 
-.adm-table-wrap { overflow-x: auto; border: 1px solid var(--nf-line); border-radius: 12px; }
+.adm-table-wrap { overflow-x: auto; background: var(--nf-card); border: 1px solid var(--nf-line); border-radius: var(--nf-radius-card); }
 .adm-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.adm-table th { text-align: left; font-family: var(--nf-font-label); text-transform: uppercase; letter-spacing: .05em; font-weight: 400; color: var(--nf-text-soft); padding: 10px 12px; background: var(--nf-surface); white-space: nowrap; }
+.adm-table th { text-align: left; font-family: var(--nf-font-label); text-transform: uppercase; letter-spacing: .05em; font-weight: 400; color: var(--nf-text-soft); padding: 10px 12px; background: var(--nf-card); border-bottom: 2px solid var(--nf-line); white-space: nowrap; }
 .adm-table td { padding: 9px 12px; border-top: 1px solid var(--nf-line); vertical-align: middle; }
 .adm-table tr.is-dim td { color: var(--nf-text-muted); }
 

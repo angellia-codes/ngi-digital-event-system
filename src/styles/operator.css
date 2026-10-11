@@ -9,14 +9,14 @@
 .op__form .field { flex: 1; letter-spacing: .2em; }
 .op__form .btn--staff { width: auto; padding: 0 20px; }
 .choice small { display: block; font-family: var(--nf-font-label); font-size: 12px; letter-spacing: .12em; opacity: .85; }
-.choice:disabled { opacity: .35; }
+.choice:disabled { opacity: .4; }
 .btn--staff:disabled { opacity: .4; }
 
 .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--nf-line-dash); flex: none; }
 .dot--ok { background: var(--nf-green); }
 .dot--down { background: var(--nf-pink); }
 
-.winner { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px; text-align: center; background: var(--nf-card); border: 4px solid var(--nf-gold); border-radius: 18px; }
+.winner { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px; text-align: center; background: var(--nf-card); border: 3px solid var(--nf-gold); border-radius: 18px; }
 .winner--green { border-color: var(--nf-green); }
 .winner--pink { border-color: var(--nf-pink); }
 .winner__tag { padding: 2px 14px; border-radius: 999px; background: var(--nf-gold); color: #000; font-family: var(--nf-font-label); font-weight: 600; font-size: 13px; letter-spacing: .16em; }
@@ -38,6 +38,6 @@
 .btn-confirm, .btn-noshow { min-height: 64px; border: 0; border-radius: 14px; color: #000; font-family: var(--nf-font-heading); font-size: 22px; letter-spacing: .04em; }
 .btn-confirm { background: var(--nf-green); }
 .btn-noshow { background: var(--nf-pink); }
-.btn-confirm:disabled, .btn-noshow:disabled { opacity: .45; }
+.btn-confirm:disabled, .btn-noshow:disabled { opacity: .4; }
 .winner--compact .btn-confirm, .winner--compact .btn-noshow { font-size: 18px; }
 .btn-confirm--wide { width: 100%; }

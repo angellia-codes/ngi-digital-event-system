@@ -4,7 +4,7 @@ import { translate, type Lang, type StringKey } from './strings';
 
 type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (key: StringKey, vars?: Record<string, string | number>) => string };
 const KEY = 'nf_lang';
-const I18n = createContext<Ctx>({ lang: 'id', setLang: () => {}, t: (k, v) => translate('id', k, v) });
+const I18n = createContext<Ctx>({ lang: 'en', setLang: () => {}, t: (k, v) => translate('en', k, v) });
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<Lang>('en'); // English is the default

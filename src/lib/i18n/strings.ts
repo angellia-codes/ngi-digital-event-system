@@ -69,6 +69,20 @@ const id = {
   'login.pick_station': 'Pilih meja / booth',
   'login.continue': 'LANJUT',
   'login.coming_soon': 'Layar ini belum tersedia.',
+
+  'hub.title': 'BUKA LAYAR',
+  'hub.checkin': 'Check-in',
+  'hub.checkin_sub': 'Pindai pass tamu di pintu masuk',
+  'hub.merchandise': 'Merchandise',
+  'hub.merchandise_sub': 'Serahkan merchandise, 1x per tamu',
+  'hub.draw': 'Undian',
+  'hub.draw_sub': 'Jalankan undian door prize',
+  'hub.prizes': 'Hadiah',
+  'hub.prizes_sub': 'Serahkan hadiah ke pemenang',
+  'hub.stage': 'Panggung',
+  'hub.stage_sub': 'Layar proyektor langsung',
+  'hub.admin': 'Admin',
+  'hub.admin_sub': 'Tamu, hadiah & laporan',
   ...DRAW_ID,
 } as const;
 
@@ -141,6 +155,20 @@ const en: Record<StringKey, string> = {
   'login.pick_station': 'Choose your desk / booth',
   'login.continue': 'CONTINUE',
   'login.coming_soon': "This screen isn't available yet.",
+
+  'hub.title': 'OPEN A SCREEN',
+  'hub.checkin': 'Check-in',
+  'hub.checkin_sub': 'Scan guest passes at the door',
+  'hub.merchandise': 'Merchandise',
+  'hub.merchandise_sub': 'Hand over merch, 1x per guest',
+  'hub.draw': 'Draw',
+  'hub.draw_sub': 'Run the door-prize draw',
+  'hub.prizes': 'Prizes',
+  'hub.prizes_sub': 'Hand prizes to the winners',
+  'hub.stage': 'Stage',
+  'hub.stage_sub': 'Live projector display',
+  'hub.admin': 'Admin',
+  'hub.admin_sub': 'Guests, prizes & reports',
   ...DRAW_EN,
 };
 

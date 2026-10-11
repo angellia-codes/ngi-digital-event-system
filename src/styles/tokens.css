@@ -29,4 +29,12 @@ html, body { margin: 0; padding: 0; background: var(--nf-black); color: var(--nf
 body { font-family: var(--nf-font-body); font-size: 14px; line-height: 1.45; min-width: 360px; -webkit-text-size-adjust: 100%; }
 button { font: inherit; cursor: pointer; }
 :focus-visible { outline: 3px solid var(--nf-gold); outline-offset: 2px; }
+.panel--green :focus-visible, .panel--pink :focus-visible, .panel--gold :focus-visible, .merch__banner :focus-visible { outline-color: var(--nf-black); }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* Language toggle (ID / EN): shared by the pass, station and admin screens */
+.lang { display: inline-flex; border: 2px solid var(--nf-gold); border-radius: var(--nf-radius-pill); overflow: hidden; background: var(--nf-card); }
+.lang__btn { min-width: 48px; min-height: 48px; border: 0; background: transparent; color: var(--nf-gold); font-family: var(--nf-font-label); font-weight: 600; font-size: 14px; letter-spacing: 0.14em; cursor: pointer; transition: background-color .15s, color .15s; }
+.lang__btn:hover:not(.lang__btn--on) { background: rgba(212, 175, 55, 0.14); }
+.lang__btn--on { background: var(--nf-gold); color: var(--nf-black); }
+.lang__btn:focus-visible { outline-offset: -4px; }

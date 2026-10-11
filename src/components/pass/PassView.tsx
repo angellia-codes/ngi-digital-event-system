@@ -57,13 +57,13 @@ export function PassView({ token, initial }: { token: string; initial: PassData 
   const when = [formatDateLong(data.event.date, lang), data.event.venue].filter(Boolean).join(' · ');
 
   return (
+    <div className={data.checked_in ? 'pass-bg pass-bg--after' : 'pass-bg'}>
     <main className="pass">
-      <header className="pass__top"><span className="label">NOURISHFEST 2026</span><LangToggle /></header>
+      <header className="pass__top"><span className="label">NOURISH GROUP INDONESIA</span><LangToggle /></header>
       {!data.checked_in ? (
         <>
           <div className="pass__hero">
             <Wordmark />
-            <p className="sticker">{t('brand.tagline')}</p>
             <p className="pass__when">{when}</p>
           </div>
           <TicketCard data={data} />
@@ -73,7 +73,7 @@ export function PassView({ token, initial }: { token: string; initial: PassData 
         <>
           <div className="pass__who">
             <p className="pass__name">{data.guest.full_name}</p>
-            {data.checked_in_at && <span className="chip chip--ok">{t('pass.checked_in_at', { time: formatTimeWita(data.checked_in_at) })}</span>}
+            {data.checked_in_at && <span className="chip chip--ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7" /></svg>{t('pass.checked_in_at', { time: formatTimeWita(data.checked_in_at) })}</span>}
           </div>
           {data.prize_number !== null && <PrizeNumber n={data.prize_number} reveal={reveal} />}
           {data.merchandise && <MerchCard merch={data.merchandise} name={data.guest.full_name} reveal={reveal} />}
@@ -81,5 +81,6 @@ export function PassView({ token, initial }: { token: string; initial: PassData 
         </>
       )}
     </main>
+    </div>
   );
 }

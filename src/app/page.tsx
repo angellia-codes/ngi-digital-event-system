@@ -1,8 +1,17 @@
+import { Hub } from '@/components/Hub';
+import { Wordmark } from '@/components/Wordmark';
+import '@/styles/hub.css';
+import '@/styles/pass.css';
+
 export default function Home() {
   return (
-    <main style={{ padding: 'var(--nf-gutter)' }}>
-      <h1 style={{ fontFamily: 'var(--nf-font-display)', color: 'var(--nf-gold)', margin: 0 }}>NOURISHFEST 2026</h1>
-      <p>MOVE IN UNITY.</p>
-    </main>
+    <div className="pass-bg">
+      <main className="hub">
+        <Wordmark />
+        <p className="sticker">MOVE IN UNITY.</p>
+        <p className="hub__tagline">Together, We Make a Difference</p>
+        <Hub />
+      </main>
+    </div>
   );
 }

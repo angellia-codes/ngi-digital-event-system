@@ -18,8 +18,8 @@ export function MerchCard({ merch, name, reveal }: { merch: NonNullable<PassData
   return (
     <section className={reveal ? 'merch merch--reveal' : 'merch'}>
       <div className="merch__banner">{t('merch.banner')}</div>
+      <QrTile payload={payloadFor('merch', merch.token)} frame="pink" alt={`QR merchandise untuk ${name}`} />
       <span className="pill pill--pink">{t('merch.once')}</span>
-      <QrTile payload={payloadFor('merch', merch.token)} frame="pink" alt={`QR merchandise ${name}`} />
       <p className="helper">{t('merch.show')}</p>
       <p className="caption caption--warn">{t('merch.warn')}</p>
     </section>

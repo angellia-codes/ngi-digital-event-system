@@ -1,10 +1,11 @@
 # NourishFest 2026 — Design Guide
 
-**Version:** 1.2
+**Version:** 1.3
 **Status:** Draft for approval
-**Last updated:** 10 October 2026
+**Last updated:** 11 October 2026
 **Applies to:** NourishFest 2026 Digital Event Experience (see PRD v1.2 and the Technical Design Spec)
 **Visual reference:** "NourishFest 2026 Mockups" canvas (six screens: pass before check-in, pass after check-in, staff scan success, staff scan duplicate, stage display with the winning number, stage display with the winner revealed)
+**Changes in 1.3 (11 Oct, synced to the current mockups):** pass header shows the company name; no tagline sticker on the pass (the tagline lives on the stage and idle screen); wordmark is two-tone (NOURISH off-white, FEST 2026 gold) at 50 px; date line is gold; pass backgrounds are page-wide with a different glow before and after check-in; the staff result type scale is 30 / 40 / 16 px; the stage LIVE badge is an outline pill; stage footer shows the tagline in pink Anton and the slot counter in muted Oswald; stage number shadows are 10 px (landed) and 7 px (revealed) with a gold glow; merchandise card text is stacked (QR, "1X PER ORANG" as pink text, helper, muted warning) (sections 5.2, 7, 8.8, 9.1, 9.2, 9.7, 14.3).
 **Changes in 1.2 (10 Oct, synced to the updated mockups):** no congratulations wording anywhere, and the revealed stage shows name, outlet and department; the slot counter means slot n of the prize's total slots; the merchandise card is stacked with a larger QR and the helper text below it; QR frames are 8 px and the pass card border is 5 px; date line shows placeholders until HR supplies time and venue (sections 8.2, 8.3, 8.6, 8.8, 9.1, 14.3).
 **Changes in 1.1:** the stage display now shows the prize and number first and reveals the winner after the MC confirms (sections 8.8, 9.5–9.7, 11, 13.1).
 
@@ -19,7 +20,7 @@
 | Tagline | **MOVE IN UNITY.** Together, We Make a Difference |
 | Vibe | Urban street culture and block-party energy. Graffiti art, bomboxes, old-school swagger. High energy, bold, unapologetic |
 | Audience | About 215 Nourish Group employees, mostly on mid-range phones, in a loud, dim, crowded venue |
-| Languages | Indonesian (default) and English |
+| Languages | English (default) and Indonesian |
 
 ---
 
@@ -130,23 +131,23 @@ All four are on Google Fonts under open licences.
 
 | Style | Font | Size | Notes |
 | :---- | :---- | :---- | :---- |
-| Wordmark (pass) | Bungee | 54 px, line-height 0.95 | Two lines: NOURISH / FEST 2026, pink hard shadow 3 px |
+| Wordmark (pass) | Bungee | 50 px, line-height 0.95 | Two lines: NOURISH (off-white) / FEST 2026 (gold), pink hard shadow 3 px |
 | Door Prize number (pass) | Bungee | 150 px | Gold, pink hard shadow 5 px + soft gold glow |
 | Guest name (pass card) | Anton | 38 px, uppercase | Wraps to two lines if needed |
 | Guest name (pass, after check-in) | Anton | 24 px, uppercase | Next to the check-in status chip |
-| Staff result: status title | Anton | 32 px | |
-| Staff result: guest name | Anton | 44 px, uppercase | |
+| Staff result: status title | Anton | 30 px | |
+| Staff result: guest name | Anton | 40 px, uppercase | |
 | Staff result: Door Prize number | Bungee | 96 px | In a black card |
-| Staff result: outlet line | Oswald 600 | 18 px, tracking 0.08em | |
+| Staff result: outlet line | Oswald 600 | 16 px, tracking 0.08em | |
 | Button | Anton | 18–24 px, tracking 0.04–0.08em | |
 | Label / chip | Oswald 600 | 13–16 px, tracking 0.14–0.32em, uppercase | |
 | Body | Archivo | 14 px | |
 | Caption | Archivo | 12–13 px | Never below 12 px |
-| Stage: prize banner | Anton | 34 px | Rotated sticker |
+| Stage: prize banner | Anton | 34 px | Rotated sticker, -1.5° |
 | Stage: winning number (landed) | Bungee | 300 px | At 1280 × 720 artboard; scale proportionally |
 | Stage: winning number (after reveal) | Bungee | 180 px | Shrinks to make room for the name |
-| Stage: winner name | Anton | 110 px, uppercase | Keep at 100 px or larger |
-| Stage: outlet | Oswald 600 | 38 px, tracking 0.2em | |
+| Stage: winner name | Anton | 100 px, uppercase | Keep at 100 px or larger |
+| Stage: outlet and department | Oswald 600 | 34 px, tracking 0.2em | Gold |
 | Stage: "NOMOR PEMENANG" label | Oswald 600 | 30 px, tracking 0.3em | Gold, above the landed number |
 
 ### 5.3 Rules
@@ -185,8 +186,8 @@ All drawn in CSS or inline SVG.
 | Motif | Where | How |
 | :---- | :---- | :---- |
 | Halftone dot grid | Block Party backgrounds | `radial-gradient` gold at about 20% opacity, 14 px spacing (18 px on stage) |
-| Colour glows | Block Party backgrounds | One pink glow top-left or bottom-left, one green or gold glow on the opposite side, low opacity |
-| Sticker tag | Tagline, stage prize banner | Solid pink or green fill, black Anton text, rotated -2° to -1.5° |
+| Colour glows | Block Party backgrounds | Page-wide, behind cards. Pass before check-in: pink glow top-left (38%), green glow right (14%). Pass after check-in: gold glow top-centre (28%), pink glow bottom-left (30%). Stage: gold ellipse centre (30%), pink bottom-left (35%), green bottom-right (16%) |
+| Sticker tag | Stage prize banner, idle-screen tagline | Solid pink or green fill, black Anton text, rotated -2° to -1.5°. Not used on the pass page |
 | Equalizer bars | Stage display sides | 16 px wide bars in pink / green / gold, varied heights; animate with a looping height keyframe |
 | Ticket stub | Pass card | Dashed divider between name block and QR block |
 | Spray tag, boombox, vinyl, brick wall | Optional accents on landing page and stage | Original SVG only. Keep file size small |
@@ -248,7 +249,7 @@ Three tabs: SCAN, CARI MANUAL (manual search), and a live counter (for example "
 
 ### 8.8 Stage display parts
 
-Header "NOURISHFEST 2026 · DOOR PRIZE" with a LIVE badge (green pill with dot), pink prize banner sticker ("HADIAH UTAMA · {prize}"), giant number with a "NOMOR PEMENANG" label and a "MENUNGGU PEMENANG..." line while the winner is being checked. After the MC confirms: the number shrinks to 180 px and the winner's name, outlet and department appear, with no congratulations wording. Footer: "MOVE IN UNITY." and the slot counter ("UNDIAN 3 DARI 12" = slot 3 of the 12 slots of this prize).
+Header "NOURISHFEST 2026 · DOOR PRIZE" with a LIVE badge (green outline pill, 2 px, with a green dot), pink prize banner sticker ("HADIAH UTAMA · {prize}"), giant number with a "NOMOR PEMENANG" label and a "MENUNGGU PEMENANG..." line while the winner is being checked. After the MC confirms: the number shrinks to 180 px and the winner's name, outlet and department appear, with no congratulations wording. Footer: "MOVE IN UNITY." (Anton 28 px, pink) and the slot counter (Oswald 22 px, muted) ("UNDIAN 3 DARI 12" = slot 3 of the 12 slots of this prize).
 
 **The name never appears on the stage before the MC confirms.** The landed view shows the prize and the number only.
 
@@ -262,8 +263,8 @@ Ops mode with brand colours. Counter tiles: large Bungee or Anton number, Oswald
 
 ### 9.1 Pass page — before check-in (`/pass/[token]`) — Block Party
 
-1. Header: event short name (Oswald, gold) and language toggle.
-2. Wordmark in Bungee with pink hard shadow, tagline sticker "MOVE IN UNITY.", date · time · venue line ("10 DES 2026 · {jam} · {lokasi}"). Time and venue appear only once HR has entered them; until then the line shows the date alone. The mockup shows `[JAM]` and `[LOKASI]` placeholders.
+1. Header: company name "NOURISH GROUP INDONESIA" (Oswald, gold, small) and language toggle.
+2. Two-tone wordmark in Bungee with pink hard shadow (no tagline sticker on the pass), date · time · venue line in gold Oswald 13 px ("10 DES 2026 · {jam} · {lokasi}"). Time and venue appear only once HR has entered them; until then the line shows the date alone. The mockup shows `[JAM]` and `[LOKASI]` placeholders.
 3. Ticket card with the guest's details and the gold-framed check-in QR.
 4. RSVP block: label "KONFIRMASI KEHADIRAN", two buttons side by side. After a tap, show a one-line confirmation and a small "Ubah jawaban" link.
 5. States: link opened first time (record `first_opened_at`), invalid or expired token (friendly message, no data), loading (skeleton card, no spinner over the QR).
@@ -271,9 +272,9 @@ Ops mode with brand colours. Counter tiles: large Bungee or Anton number, Oswald
 ### 9.2 Pass page — after check-in — Block Party
 
 1. Header and language toggle.
-2. Guest name and green status chip with check-in time.
+2. Guest name (Anton 24 px) and green status chip with a check icon and the check-in time, on one row.
 3. **Door Prize number takes over the page**: label "NOMOR DOOR PRIZE", Bungee 150 px gold, pink shadow, short helper line.
-4. Merchandise card with pink banner, pink-framed QR, "1X PER ORANG" tag.
+4. Merchandise card (3 px pink border) with pink banner, then the pink-framed QR, then "1X PER ORANG" as pink Oswald text, the helper line, and a muted 12 px warning ("Bukan QR check-in. Jangan dibagikan").
 5. "SIMPAN SEBAGAI GAMBAR" button. The saved image is a clean **9:16** card (name, outlet, number, no buttons).
 6. Reveal motion on first view after check-in (section 11).
 7. After merchandise is claimed, the merchandise card changes to a muted "SUDAH DIAMBIL" state with the time, and the QR is hidden.
@@ -395,12 +396,12 @@ Rules: respect `prefers-reduced-motion`; no motion on staff screens other than r
 
 - **Tone:** upbeat, short, street-smart, respectful. Headlines are punchy; helper text is plain.
 - **Avoid:** slang that excludes people, jokes about names or outlets, anything that sounds like a loan or prize scam.
-- **Indonesian first.** Casual "aku/kamu" on guest screens, neutral on staff and admin screens.
+- **English by default, Indonesian one tap away.** Indonesian uses casual "aku/kamu" on guest screens and neutral wording on staff and admin screens.
 - All strings come from one translation file. Indonesian wording is drafted here and must be reviewed by HR before launch.
 
 ### 13.1 Starter string set
 
-| Key | Indonesian (default, needs review) | English |
+| Key | Indonesian (needs review) | English (default) |
 | :---- | :---- | :---- |
 | `brand.company` | NOURISH GROUP INDONESIA | NOURISH GROUP INDONESIA |
 | `pass.greeting` | HALO, | HELLO, |
@@ -506,6 +507,10 @@ Keep the theme in one file so the logo, colours and fonts can be swapped without
 - The mockup QR is a placeholder image with small padding. Final QR follows 8.2 (quiet zone of 4 modules, at least 5 px per module, 6 px by default, so the symbol is 222 px plus the 8 px frame).
 - Mockup staff headers show only the page title ("CHECK-IN"). The build also shows the station label chip and the language toggle (8.5, 9.3).
 - The mockup stage boards show the outlet · department line as "NOURISH GROUP · HR"; real data comes from the winner's record. The slot counter "UNDIAN 3 DARI 12" is slot 3 of 12 slots of the current prize.
+- The mockup RSVP buttons are drawn 49 px high; the build keeps 52 px (section 6) for the touch target.
+- The mockup draws the staff camera area very tall; the build uses the 190 px strip in 8.6.
+- English is the default language everywhere (pass, staff, admin and stage), and a saved ID/EN choice in the browser overrides it. The original brief and PRD said Indonesian; to switch back, change the default in `src/lib/i18n/index.tsx`, `src/lib/stage.ts` (`DEFAULT_OPTIONS`) and `<html lang>` in `src/app/layout.tsx`.
+- The equalizer bars are on the idle stage screen only; the other stage states keep the full width for the number and name.
 - Mockups use text for the wordmark. If a NourishFest logo is provided, it replaces the wordmark in the header only; keep the Bungee wordmark on the pass hero.
 - Mockups do not yet cover: merchandise booth, MC operator, prize verification, admin screens, void state, idle, intro and batch stage states. They follow sections 9.4 to 9.8.
 - The mockup stage boards show the landed and revealed states only.
