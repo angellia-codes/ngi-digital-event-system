@@ -6,7 +6,7 @@ import { env } from '@/lib/env';
 import { stationLabels } from '@/lib/labels';
 import { DEVICE_COOKIE, deviceCookie, signStation, stationCookie, type Role } from '@/lib/session';
 
-const schema = z.object({ pin: z.string().regex(/^\d{6}$/) });
+const schema = z.object({ pin: z.string().regex(/^\d{4}$/) });
 
 export const POST = guard(async (req: Request) => {
   if (!sameOrigin(req)) return fail(403, 'BAD_ORIGIN');
