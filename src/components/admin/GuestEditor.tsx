@@ -4,7 +4,7 @@ import { api } from '@/lib/client';
 
 export type AdminGuest = {
   id: string; employee_id: string; full_name: string; outlet: string; department: string | null; position: string | null;
-  phone: string | null; rsvp_status: string; opened: boolean; active: boolean; flagged_missing: boolean; is_walk_in: boolean;
+  phone: string | null; opened: boolean; active: boolean; flagged_missing: boolean; is_walk_in: boolean;
   checked_in_at: string | null; prize_number: number | null; merch: string;
 };
 

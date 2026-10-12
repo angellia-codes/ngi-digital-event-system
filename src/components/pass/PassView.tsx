@@ -8,7 +8,6 @@ import type { PassData } from '@/lib/pass';
 import { formatDateLong, formatTimeWita } from '@/lib/time';
 import { MerchCard } from './MerchCard';
 import { PrizeNumber } from './PrizeNumber';
-import { RsvpBlock } from './RsvpBlock';
 import { SaveImage } from './SaveImage';
 import { TicketCard } from './TicketCard';
 import '@/styles/pass.css';
@@ -67,7 +66,6 @@ export function PassView({ token, initial }: { token: string; initial: PassData 
             <p className="pass__when">{when}</p>
           </div>
           <TicketCard data={data} />
-          <RsvpBlock token={token} status={data.guest.rsvp_status} onChange={(s) => setData({ ...data, guest: { ...data.guest, rsvp_status: s } })} />
         </>
       ) : (
         <>

@@ -18,7 +18,7 @@ Nothing new is deployed today. If a critical fix is needed, it runs on staging f
 ## Backups (evening)
 
 - [ ] Admin, Reports: download all seven files. They open in Excel.
-  - Guests, Check-ins, Merchandise, Draw history, Audit log, RSVP not answered, Invitation links.
+  - Guests, Check-ins, Merchandise, Draw history, Audit log, Invitation links.
 - [ ] Save them to the HR drive (restricted access) and to a USB stick that comes to the venue. Delete the copies from Downloads.
 - [ ] **Print the guest list**: open the Guests file, sort by outlet then name, print two copies. This is the paper fallback.
 

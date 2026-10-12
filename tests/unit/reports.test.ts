@@ -10,8 +10,8 @@ describe('witaStamp', () => {
 });
 
 describe('isReportName', () => {
-  it.each(['guests', 'check-ins', 'merchandise', 'draws', 'audit', 'rsvp-pending'])('knows %s', (n) => expect(isReportName(n)).toBe(true));
-  it.each(['invitations', '../etc', 'toString', '__proto__', ''])('rejects %s', (n) => expect(isReportName(n)).toBe(false));
+  it.each(['guests', 'check-ins', 'merchandise', 'draws', 'audit'])('knows %s', (n) => expect(isReportName(n)).toBe(true));
+  it.each(['rsvp-pending', 'invitations', '../etc', 'toString', '__proto__', ''])('rejects %s', (n) => expect(isReportName(n)).toBe(false));
 });
 
 describe('buildReportCsv', () => {
@@ -21,13 +21,12 @@ describe('buildReportCsv', () => {
     expect(parse(csv).meta.fields).toEqual(REPORTS.draws.cols.map((c) => c.header));
     expect(parse(csv).data).toEqual([]);
   });
-  it('keeps the column order and formats times, booleans and phones', () => {
-    const csv = buildReportCsv('rsvp-pending', [
-      { employee_id: 'E1', full_name: 'Ayu', outlet: 'A', department: null, phone: '+62 812-3456-7001', opened: false },
+  it('keeps the column order and formats times and booleans', () => {
+    const csv = buildReportCsv('guests', [
+      { employee_id: 'E1', full_name: 'Ayu', outlet: 'A', department: null, opened: false },
     ]);
     const row = parse(csv).data[0];
-    expect(Object.keys(row)).toEqual(REPORTS['rsvp-pending'].cols.map((c) => c.header));
-    expect(row.Phone).toBe('6281234567001');
+    expect(Object.keys(row)).toEqual(REPORTS.guests.cols.map((c) => c.header));
     expect(row['Opened invitation']).toBe('no');
     expect(row.Department).toBe('');
 
@@ -39,7 +38,7 @@ describe('buildReportCsv', () => {
   });
   it('neutralises spreadsheet formulas in every text cell', () => {
     const csv = buildReportCsv('guests', [
-      { employee_id: '=1+1', full_name: '@SUM(A1)', outlet: '-cmd', department: '+x', position: '\tTab', category: null, rsvp_status: 'yes', opened: true, checked_in_at: null, prize_number: null, merchandise: '', walk_in: false, active: true },
+      { employee_id: '=1+1', full_name: '@SUM(A1)', outlet: '-cmd', department: '+x', position: '\tTab', category: null, opened: true, checked_in_at: null, prize_number: null, merchandise: '', walk_in: false, active: true },
     ]);
     const row = parse(csv).data[0];
     expect(row['Employee ID']).toBe("'=1+1");

@@ -16,14 +16,14 @@
 .choice { min-height: 56px; border-radius: var(--nf-radius-btn); border: 2px solid var(--nf-gold); background: transparent; color: var(--nf-gold); font-family: var(--nf-font-heading); font-size: 20px; }
 .choice[aria-pressed='true'] { background: var(--nf-gold); color: var(--nf-black); }
 
-.scanner { position: relative; height: 190px; background: var(--nf-surface); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.scanner { position: relative; height: clamp(190px, 45dvh, 420px); background: var(--nf-surface); display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .scanner__video { position: absolute; inset: 0; }
-.scanner__video video { width: 100% !important; height: 190px !important; object-fit: cover; }
-.scanner__hint { position: absolute; bottom: 8px; left: 0; right: 0; text-align: center; font-family: var(--nf-font-label); font-size: 12px; letter-spacing: 0.16em; color: #8A8A84; }
+.scanner__video video { width: 100% !important; height: 100% !important; object-fit: cover; }
+.scanner__hint { margin: 0; position: absolute; bottom: 8px; left: 0; right: 0; text-align: center; font-family: var(--nf-font-label); font-size: 12px; letter-spacing: 0.16em; color: #8A8A84; }
 .scanner__gate { position: relative; padding: 16px; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; }
 .scanner__gate p { margin: 0; color: var(--nf-text-soft); }
 .scanner__gate .btn--staff { width: auto; min-height: 56px; padding: 0 24px; }
-.brackets { position: absolute; left: 50%; top: 50%; width: 170px; height: 130px; transform: translate(-50%, -55%); pointer-events: none; }
+.brackets { position: absolute; left: 50%; top: 50%; width: min(180px, 55%); aspect-ratio: 1; transform: translate(-50%, -50%); pointer-events: none; }
 .brackets i { position: absolute; width: 28px; height: 28px; border: 0 solid var(--nf-gold); }
 .brackets i:nth-child(1) { left: 0; top: 0; border-left-width: 4px; border-top-width: 4px; }
 .brackets i:nth-child(2) { right: 0; top: 0; border-right-width: 4px; border-top-width: 4px; }

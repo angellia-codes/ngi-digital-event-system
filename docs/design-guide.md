@@ -40,7 +40,7 @@
 
 | | **Block Party** | **Ops** |
 | :---- | :---- | :---- |
-| Screens | Pass page (before and after check-in), RSVP, stage display | Check-in, merchandise booth, MC operator, prize verification, admin |
+| Screens | Pass page (before and after check-in), stage display | Check-in, merchandise booth, MC operator, prize verification, admin |
 | Look | Full graffiti energy: big type, halftone dots, glow, hard pink shadows, rotated sticker tags | Flat black, huge touch targets, brand colours and fonts, **no decoration behind results** |
 | Motion | Pass reveal, number roll | Result transitions only |
 | Priority | Feel | Speed and certainty |
@@ -80,8 +80,8 @@ A decorated background behind a scan result costs seconds at the door. In Ops mo
 | Success | Green with black text | Check | CHECK-IN BERHASIL / CHECKED IN |
 | Already done / duplicate / blocked | Pink with black text | Exclamation | SUDAH CHECK-IN / ALREADY CHECKED IN |
 | Needs attention / retry / wrong code type | Gold with black text | Refresh or swap | COBA LAGI / TRY AGAIN |
-| Primary action | Pink fill, black text | none | AKU IKUT / I'M IN |
-| Secondary action | Outline (off-white or gold) | none | TIDAK BISA / CAN'T MAKE IT |
+| Primary action | Pink fill, black text | none | SIMPAN SEBAGAI GAMBAR / SAVE AS IMAGE |
+| Secondary action | Outline (off-white or gold) | none | CARI MANUAL / MANUAL SEARCH |
 
 ### 4.4 Contrast (calculated, WCAG 2.x)
 
@@ -241,7 +241,7 @@ Two-segment pill, gold border; active segment gold fill with black text. Top-rig
 
 ### 8.6 Scan result panel (staff)
 
-Full-width coloured panel under a 190 px camera strip: 52 px black circle with icon, status title, guest name, an outlet · department · position line, Door Prize number card, small meta line ("17:42 · Petugas: Check-in" on success, "Check-in pertama 17:42." on a duplicate), and a 64 px "SCAN BERIKUTNYA" button. The camera strip shows corner brackets in gold (normal) or pink (problem).
+Full-width coloured panel under a camera area 45% of the screen height (190–420 px): 52 px black circle with icon, status title, guest name, an outlet · department · position line, Door Prize number card, small meta line ("17:42 · Petugas: Check-in" on success, "Check-in pertama 17:42." on a duplicate), and a 64 px "SCAN BERIKUTNYA" button. The camera area shows square corner brackets in gold (normal) or pink (problem) and the hint "KAMERA AKTIF · ARAHKAN KE QR TAMU" at the bottom.
 
 ### 8.7 Staff bottom tab bar
 
@@ -266,7 +266,7 @@ Ops mode with brand colours. Counter tiles: large Bungee or Anton number, Oswald
 1. Header: company name "NOURISH GROUP INDONESIA" (Oswald, gold, small) and language toggle.
 2. Two-tone wordmark in Bungee with pink hard shadow (no tagline sticker on the pass), date · time · venue line in gold Oswald 13 px ("10 DES 2026 · {jam} · {lokasi}"). Time and venue appear only once HR has entered them; until then the line shows the date alone. The mockup shows `[JAM]` and `[LOKASI]` placeholders.
 3. Ticket card with the guest's details and the gold-framed check-in QR.
-4. RSVP block: label "KONFIRMASI KEHADIRAN", two buttons side by side. After a tap, show a one-line confirmation and a small "Ubah jawaban" link.
+4. No RSVP: attendance is mandatory, so the QR is the only action. It fills the ticket width (max 300 px).
 5. States: link opened first time (record `first_opened_at`), invalid or expired token (friendly message, no data), loading (skeleton card, no spinner over the QR).
 
 ### 9.2 Pass page — after check-in — Block Party
@@ -322,7 +322,7 @@ Ops mode with brand colours. Counter tiles: large Bungee or Anton number, Oswald
 ### 9.8 Admin (`/admin/*`) — Ops
 
 - Dashboard counters (section 8.9).
-- Guests: import dropzone with preview and error list, table with search / filter by outlet and RSVP, export buttons, "Add walk-in".
+- Guests: import dropzone with preview and error list, table with search / filter by outlet, export buttons, "Add walk-in".
 - Prizes: sortable list with tier, quantity, batch toggle.
 - Draws and Merchandise: history tables with void actions that open a reason dialog.
 - Settings: PINs (reveal once on creation, rotate), stage key, projector-safe toggle.
@@ -408,12 +408,6 @@ Rules: respect `prefers-reduced-motion`; no motion on staff screens other than r
 | `pass.checkin_label` | PASS CHECK-IN | CHECK-IN PASS |
 | `pass.show_qr` | Tunjukkan QR ini di meja check-in | Show this QR at the check-in desk |
 | `pass.brightness` | Naikkan kecerahan layar agar mudah dipindai | Turn up your screen brightness so it scans easily |
-| `rsvp.title` | KONFIRMASI KEHADIRAN | RSVP |
-| `rsvp.yes` | AKU IKUT | I'M IN |
-| `rsvp.no` | TIDAK BISA | CAN'T MAKE IT |
-| `rsvp.thanks_yes` | Sip, sampai ketemu 10 Desember! | You're in. See you on 10 December! |
-| `rsvp.thanks_no` | Terima kasih sudah memberi kabar | Thanks for letting us know |
-| `rsvp.change` | Ubah jawaban | Change answer |
 | `pass.checked_in_at` | CHECK-IN {time} | CHECKED IN {time} |
 | `pass.prize_number` | NOMOR DOOR PRIZE | DOOR PRIZE NUMBER |
 | `pass.prize_hint` | Tunjukkan nomor ini ke panitia saat dipanggil | Show this number to the committee when it's called |
@@ -504,11 +498,11 @@ Keep the theme in one file so the logo, colours and fonts can be swapped without
 
 ### 14.3 Known differences between the mockups and the final build
 
-- The mockup QR is a placeholder image with small padding. Final QR follows 8.2 (quiet zone of 4 modules, at least 5 px per module, 6 px by default, so the symbol is 222 px plus the 8 px frame).
+- The mockup QR is a placeholder image with small padding. Final QR follows 8.2 (quiet zone of 4 modules, at least 5 px per module, 6 px by default, so the symbol is 222 px plus the 8 px frame). On the pass, the check-in and merchandise QRs scale to their card width, max 300 px; other QR tiles keep the fixed size.
 - Mockup staff headers show only the page title ("CHECK-IN"). The build also shows the station label chip and the language toggle (8.5, 9.3).
 - The mockup stage boards show the outlet · department line as "NOURISH GROUP · HR"; real data comes from the winner's record. The slot counter "UNDIAN 3 DARI 12" is slot 3 of 12 slots of the current prize.
-- The mockup RSVP buttons are drawn 49 px high; the build keeps 52 px (section 6) for the touch target.
-- The mockup draws the staff camera area very tall; the build uses the 190 px strip in 8.6.
+- The mockup shows RSVP buttons; RSVP was removed (attendance is mandatory), so the build has none.
+- The staff camera area follows the mockup: 45% of the screen height, clamped to 190–420 px (8.6).
 - English is the default language everywhere (pass, staff, admin and stage), and a saved ID/EN choice in the browser overrides it. The original brief and PRD said Indonesian; to switch back, change the default in `src/lib/i18n/index.tsx`, `src/lib/stage.ts` (`DEFAULT_OPTIONS`) and `<html lang>` in `src/app/layout.tsx`.
 - The equalizer bars are on the idle stage screen only; the other stage states keep the full width for the number and name.
 - Mockups use text for the wordmark. If a NourishFest logo is provided, it replaces the wordmark in the header only; keep the Bungee wordmark on the pass hero.

@@ -6,7 +6,7 @@ import type { PrizeRow } from '@/lib/prizes';
 import { useLoad } from '@/lib/use-load';
 
 type Dash = {
-  counts: { total: number; checked_in: number; redeemed: number; rsvp_yes: number; rsvp_no: number; rsvp_pending: number; opened: number; mode: string };
+  counts: { total: number; checked_in: number; redeemed: number; opened: number; mode: string };
   outlets: OutletRow[];
   prizes: PrizeRow[];
   draw: { confirmed: number; pending: number; no_shows: number; admin_voids: number; eligible: number };
@@ -22,9 +22,6 @@ export default function Dashboard() {
   const stats: [string, number | string][] = [
     ['Employees', c.total],
     ['Opened their invitation', `${c.opened} / ${c.total}`],
-    ['Coming (RSVP yes)', c.rsvp_yes],
-    ['Not coming (RSVP no)', c.rsvp_no],
-    ['No answer yet', c.rsvp_pending],
     ['Checked in', `${c.checked_in} / ${c.total}`],
     ['Merchandise handed over', `${c.redeemed} / ${c.checked_in}`],
   ];

@@ -73,6 +73,7 @@ export function Scanner({ onCode, paused, problem }: { onCode: (text: string) =>
     <div className="scanner">
       <div id="nf-scanner" className="scanner__video" />
       <div className={problem ? 'brackets brackets--problem' : 'brackets'} aria-hidden="true"><i /><i /><i /><i /></div>
+      <p className="scanner__hint">{t('staff.camera_hint')}</p>
     </div>
   );
 }

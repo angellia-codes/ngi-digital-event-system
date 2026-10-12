@@ -51,7 +51,7 @@ Goal: every person who will work on 10 December has used their own screen on a r
 
 - [ ] Write every problem in the table below with an owner and a due date (before the 8 December freeze).
 - [ ] Remove placeholder prizes if used (`remove-prizes`).
-- [ ] Admin, Settings: **Reset rehearsal data** (type RESET). Dashboard shows 0 checked in, 0 merchandise, 0 draws. Guests, RSVPs and PINs are unchanged.
+- [ ] Admin, Settings: **Reset rehearsal data** (type RESET). Dashboard shows 0 checked in, 0 merchandise, 0 draws. Guests and PINs are unchanged.
 
 | Problem | Owner | Due | Done |
 | :---- | :---- | :---- | :---- |

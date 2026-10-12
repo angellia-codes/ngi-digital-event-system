@@ -56,9 +56,9 @@ There is one Supabase project and one Vercel project: production. Rehearsals run
 1. Open `/station`, enter the admin PIN (it opens `/admin`), see the dashboard with the `rehearsal` badge.
 2. Settings: generate and set the four desk PINs; write them in the password manager. Check the station names.
 3. Guests: import the real CSV. Confirm the preview counts, import, spot-check rows.
-4. Download the invitations CSV and open your own pass link on your phone. RSVP.
+4. Download the invitations CSV and open your own pass link on your phone.
 5. At a station phone, log in with the Check-in PIN, scan your pass, then hand over merchandise with the Merchandise PIN.
-6. Settings: **Reset rehearsal data**. Confirm the dashboard returns to zero check-ins. Guests, RSVPs and PINs stay.
+6. Settings: **Reset rehearsal data**. Confirm the dashboard returns to zero check-ins. Guests and PINs stay.
 
 ## 5. Backups and watching
 

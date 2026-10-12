@@ -1,7 +1,7 @@
 import Papa from 'papaparse';
 import { csvSafe } from './csv';
 
-type Kind = 'text' | 'time' | 'bool' | 'phone';
+type Kind = 'text' | 'time' | 'bool';
 type Col = { key: string; header: string; kind?: Kind };
 type Report = { sql: string; file: string; cols: Col[] };
 
@@ -18,7 +18,7 @@ export const REPORTS = {
     sql: 'guests', file: 'nourishfest-guests.csv',
     cols: [
       ...person,
-      { key: 'position', header: 'Position' }, { key: 'category', header: 'Category' }, { key: 'rsvp_status', header: 'RSVP' },
+      { key: 'position', header: 'Position' }, { key: 'category', header: 'Category' },
       { key: 'opened', header: 'Opened invitation', kind: 'bool' }, { key: 'checked_in_at', header: 'Checked in at', kind: 'time' },
       { key: 'prize_number', header: 'Door Prize no.' }, { key: 'merchandise', header: 'Merchandise' },
       { key: 'walk_in', header: 'Walk-in', kind: 'bool' }, { key: 'active', header: 'Active', kind: 'bool' },
@@ -57,12 +57,6 @@ export const REPORTS = {
       { key: 'details', header: 'Details' },
     ],
   },
-  'rsvp-pending': {
-    sql: 'rsvp_pending', file: 'nourishfest-rsvp-not-answered.csv',
-    cols: [
-      ...person, { key: 'phone', header: 'Phone', kind: 'phone' }, { key: 'opened', header: 'Opened invitation', kind: 'bool' },
-    ],
-  },
 } satisfies Record<string, Report>;
 
 export type ReportName = keyof typeof REPORTS;
@@ -79,7 +73,6 @@ function cell(value: unknown, kind: Kind = 'text'): string {
   if (value === null || value === undefined) return '';
   if (kind === 'time') return witaStamp(String(value));
   if (kind === 'bool') return value ? 'yes' : 'no';
-  if (kind === 'phone') return String(value).replace(/\D/g, ''); // digits only: a leading "+" would be read as a formula
   return csvSafe(String(value));
 }
 

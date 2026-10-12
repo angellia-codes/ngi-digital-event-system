@@ -21,8 +21,7 @@
 
 .ticket { background: var(--nf-card); border: 5px solid var(--nf-gold); border-radius: var(--nf-radius-card); padding: 16px; }
 .ticket__top { display: flex; flex-direction: column; gap: 4px; }
-.ticket__top .label, .rsvp .label { color: var(--nf-text-muted); font-size: 13px; letter-spacing: 0.14em; }
-.rsvp .label { letter-spacing: 0.18em; }
+.ticket__top .label { color: var(--nf-text-muted); font-size: 13px; letter-spacing: 0.14em; }
 .ticket__name { margin: 0; font-family: var(--nf-font-heading); font-size: 38px; line-height: 1.05; text-transform: uppercase; overflow-wrap: anywhere; }
 .ticket__meta { margin: 0; font-family: var(--nf-font-label); font-weight: 600; font-size: 14px; letter-spacing: 0.1em; color: var(--nf-gold); }
 .ticket__divider { margin: 12px -16px; border-top: 2px dashed var(--nf-line-dash); }
@@ -32,6 +31,8 @@
 .qr-frame--gold { border-width: 8px; border-color: var(--nf-gold); }
 .qr-frame--pink { border-width: 8px; border-color: var(--nf-pink); }
 .qr-frame svg { display: block; max-width: 100%; height: auto; }
+.ticket .qr-frame, .merch .qr-frame { width: min(100%, 300px); }
+.ticket .qr-frame svg, .merch .qr-frame svg { width: 100%; }
 
 .btn { min-height: 52px; padding: 0 20px; border-radius: var(--nf-radius-btn); border: 2px solid transparent; font-family: var(--nf-font-heading); font-size: 18px; letter-spacing: 0.04em; }
 .btn--primary { background: var(--nf-pink); color: var(--nf-black); }
@@ -40,10 +41,6 @@
 .btn--outline { background: transparent; border-color: var(--nf-gold); color: var(--nf-gold); letter-spacing: 0.08em; border-radius: 15px; }
 .btn[disabled] { opacity: 0.4; }
 .link { background: none; border: 0; color: var(--nf-gold); text-decoration: underline; min-height: 48px; padding: 0; }
-
-.rsvp { display: flex; flex-direction: column; gap: 10px; }
-.rsvp__buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.rsvp__thanks { margin: 0; font-family: var(--nf-font-heading); font-size: 22px; }
 
 .pass__who { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; justify-content: space-between; }
 .pass__name { margin: 0; font-family: var(--nf-font-heading); font-size: 24px; text-transform: uppercase; overflow-wrap: anywhere; }

@@ -3,7 +3,7 @@ import { isToken } from './qr';
 
 export type PassData = {
   event: { name: string; date: string; starts_at: string | null; venue: string | null };
-  guest: { full_name: string; outlet: string; department: string | null; position: string | null; rsvp_status: 'pending' | 'yes' | 'no' };
+  guest: { full_name: string; outlet: string; department: string | null; position: string | null };
   invite_token: string;
   checked_in: boolean;
   checked_in_at: string | null;

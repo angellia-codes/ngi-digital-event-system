@@ -60,7 +60,7 @@ Stage display ──(display key cookie)─────┴──(anon key, read 
 | `station_pins` | `event_id`, `role`, `pin_hash`, `active`, `session_version` | Roles: `checkin`, `merchandise`, `draw`, `prizes`. bcrypt via pgcrypto. PINs unique across roles, 4 digits |
 | `auth_attempts` | `scope`, `key`, `at`, `success` | PIN and token lockouts |
 | `import_batches` | `id`, `filename`, `uploaded_by`, `inserted`, `updated`, `flagged_missing` | One per CSV import |
-| `guests` | `employee_id`, `full_name`, `outlet`, `department`, `position`, `phone`, `category`, `invite_token`, `merch_token`, `rsvp_status`, `rsvp_at`, `first_opened_at`, `is_walk_in`, `active`, `last_import_id` | Unique `(event_id, employee_id)`. Walk-ins without an ID get `WALKIN-n` |
+| `guests` | `employee_id`, `full_name`, `outlet`, `department`, `position`, `phone`, `category`, `invite_token`, `merch_token`, `first_opened_at`, `is_walk_in`, `active`, `last_import_id` | Unique `(event_id, employee_id)`. Walk-ins without an ID get `WALKIN-n` |
 | `check_ins` | `guest_id` (unique), `checked_in_at`, `method`, `station_label`, `actor`, `prize_number` (NOT NULL) | The Door Prize number lives here. Unique `(event_id, prize_number)` |
 | `merchandise_redemptions` | `guest_id`, `status` (`redeemed` / `voided`), `redeemed_at`, `station_label`, `actor`, `void_reason` | Foreign key `guest_id` → `check_ins.guest_id` |
 | `prizes` | `name`, `tier`, `sort_order`, `quantity`, `draw_as_batch` | Remaining slots are calculated from `draws` |
@@ -95,7 +95,7 @@ The draw pool is checked-in, active guests with no `drawn` or `confirmed` win. T
 
 ### 3.4 Rehearsal and go-live
 
-`events.mode` starts as `rehearsal`. `reset_rehearsal_data` clears check-ins, redemptions, draws, `attempt_log`, rehearsal audit rows, resets the counters and sets the stage to idle. It **keeps** guests, RSVPs, tokens, prizes, settings and PINs, because invitations go out before the rehearsal. It runs only in rehearsal mode. `go_live` is one-way.
+`events.mode` starts as `rehearsal`. `reset_rehearsal_data` clears check-ins, redemptions, draws, `attempt_log`, rehearsal audit rows, resets the counters and sets the stage to idle. It **keeps** guests, tokens, prizes, settings and PINs, because invitations go out before the rehearsal. It runs only in rehearsal mode. `go_live` is one-way.
 
 ---
 
@@ -113,7 +113,6 @@ The draw pool is checked-in, active guests with no `drawn` or `confirmed` win. T
 | :---- | :---- | :---- |
 | `verify_pin(event, pin, device_key)` | Station login | `OK` (returns role), `INVALID`, `LOCKED` |
 | `get_pass(token)` | Pass page | `OK`, `INVALID`. Sets `first_opened_at`. **Returns the merchandise token only after check-in** |
-| `set_rsvp(token, status)` | Pass page | `OK`, `INVALID` |
 | `find_guests(event, q)` | Manual search | `OK` (max 20 rows, no phone) |
 | `check_in(event, token or guest_id, method, station_label, actor)` | Check-in station | `CHECKED_IN`, `ALREADY_CHECKED_IN`, `INVALID`, `NOT_ELIGIBLE` |
 | `redeem_lookup(token or guest_id)` | Merchandise scan | `READY`, `ALREADY_REDEEMED`, `NOT_CHECKED_IN`, `NOT_ELIGIBLE`, `INVALID` |
@@ -180,7 +179,7 @@ The route handler parses the CSV, trims text and normalises phones to `+62…`. 
 
 ### 5.3 Routes
 
-**Guest:** `GET /api/pass/[token]`, `POST /api/pass/[token]/rsvp`.
+**Guest:** `GET /api/pass/[token]`.
 
 **Stage:** `GET /api/stage/enter?key=` (verifies the display key, sets the cookie `nf_stage`, redirects to `/stage`); `GET /api/stage/state`, `POST /api/stage/heartbeat` (cookie `nf_stage`). The `/stage` page forwards `?key=` to the enter route because a server component cannot set a cookie.
 
@@ -197,7 +196,7 @@ The route handler parses the CSV, trims text and normalises phones to `+62…`. 
 | `POST /api/station/draw/resolve` | draw, prizes |
 | `POST /api/station/prizes/lookup-number` | draw, prizes |
 
-**Admin:** `POST /api/admin/import/preview` and `/commit`; `GET/PATCH /api/admin/guests`, `POST …/walk-in`; `GET /api/admin/invitations.csv?outlet=`; `GET/POST /api/admin/prizes` (a body with `id` updates) and `POST …/prizes/[id]/delete`; `GET /api/admin/draws`, `POST …/[id]/void`; `GET /api/admin/redemptions`, `POST …/[id]/void`; `GET /api/admin/dashboard` (polled every 5 seconds); `GET /api/admin/reports/[name]` (returns `text/csv`; names `guests`, `check-ins`, `merchandise`, `draws`, `audit`, `rsvp-pending`); `POST /api/admin/settings/pin`, `/stage-key`, `/station-labels`, `/stage-options`; `POST /api/admin/go-live` and `/reset` (typed confirmation `GO LIVE` / `RESET`); `GET /api/admin/stage` (display key set, heartbeat age); `GET /api/admin/audit`.
+**Admin:** `POST /api/admin/import/preview` and `/commit`; `GET/PATCH /api/admin/guests`, `POST …/walk-in`; `GET /api/admin/invitations.csv?outlet=`; `GET/POST /api/admin/prizes` (a body with `id` updates) and `POST …/prizes/[id]/delete`; `GET /api/admin/draws`, `POST …/[id]/void`; `GET /api/admin/redemptions`, `POST …/[id]/void`; `GET /api/admin/dashboard` (polled every 5 seconds); `GET /api/admin/reports/[name]` (returns `text/csv`; names `guests`, `check-ins`, `merchandise`, `draws`, `audit`); `POST /api/admin/settings/pin`, `/stage-key`, `/station-labels`, `/stage-options`; `POST /api/admin/go-live` and `/reset` (typed confirmation `GO LIVE` / `RESET`); `GET /api/admin/stage` (display key set, heartbeat age); `GET /api/admin/audit`.
 
 ### 5.4 Client behaviour
 
@@ -300,7 +299,7 @@ All schema changes are numbered SQL migration files applied by the CLI. Nothing 
 
 | Gate | Date | Must be true |
 | :---- | :---- | :---- |
-| Invitation gate | before 23 Nov | Check-in, RSVP and merchandise tests pass, including concurrency. Security advisor clean. Pass page device-tested. HR has verified the import. List frozen (20 Nov proposed) |
+| Invitation gate | before 23 Nov | Check-in and merchandise tests pass, including concurrency. Security advisor clean. Pass page device-tested. HR has verified the import. List frozen (20 Nov proposed) |
 | Rehearsal 1 | 1–3 Dec | Staff on real devices with test data |
 | Rehearsal 2 | about 7 Dec | At the venue: real projector and Wi-Fi, full draw. Then `reset_rehearsal_data` |
 | Freeze | 8 Dec | No feature changes |

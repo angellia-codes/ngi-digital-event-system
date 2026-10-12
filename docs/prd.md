@@ -28,7 +28,7 @@
 | :---- | :---- | :---- |
 | Backend / database | Google Apps Script + Google Sheets | **Supabase** (Postgres, Realtime, Auth). Atomic database functions replace `LockService` |
 | Media storage | Google Drive | **Not needed.** Candid Camera is removed from this project |
-| Modules | Invitation, RSVP, check-in, door prize, merchandise, guestbook, candid camera, reports | **Invitation + RSVP, QR check-in, door prize, merchandise, admin dashboard + reports.** Guestbook cancelled. Candid Camera moved to a separate project |
+| Modules | Invitation, RSVP, check-in, door prize, merchandise, guestbook, candid camera, reports | **Invitation, QR check-in, door prize, merchandise, admin dashboard + reports.** RSVP removed (attendance is mandatory). Guestbook cancelled. Candid Camera moved to a separate project |
 | Guests | "Guests" (undefined) | **Employees only.** Admin bulk-imports the list. Nobody registers themselves |
 | Invitations | Not specified | **WhatsApp**, semi-manual from an exported CSV |
 | Merchandise code | 1D barcode (open decision) | **QR code**, visually distinct from the check-in QR |
@@ -43,11 +43,11 @@
 
 ## 1. Product Overview
 
-NourishFest 2026 Digital Event Experience is a standalone web application that runs the digital side of the event: personal invitation and RSVP, QR check-in, automatic Door Prize number allocation, one-time merchandise redemption, the Door Prize draw with a live stage display, and reporting.
+NourishFest 2026 Digital Event Experience is a standalone web application that runs the digital side of the event: personal invitation, QR check-in, automatic Door Prize number allocation, one-time merchandise redemption, the Door Prize draw with a live stage display, and reporting.
 
 The application is independent of NourishOS. It has its own frontend, database, deployment and admin interface.
 
-**Guests never register, log in, or fill in forms** other than a one-tap RSVP. HR imports the employee list; each employee receives a personal link on WhatsApp.
+**Guests never register, log in, or fill in forms.** Attendance is mandatory, so there is no RSVP. HR imports the employee list; each employee receives a personal link on WhatsApp.
 
 ### 1.1 Objectives
 
@@ -65,13 +65,13 @@ The application is independent of NourishOS. It has its own frontend, database, 
 - Zero duplicate successful merchandise redemptions.
 - 100% of draws, redraws and voids recorded in history.
 - Event reports available by the next working day.
-- RSVP response rate and attendance rate reported by outlet (no target set; for planning only).
+- Attendance rate reported by outlet (no target set; for planning only).
 
 ### 1.3 Scope
 
 **In scope**
 - Employee list import and guest management
-- Personal invitation / pass page with RSVP
+- Personal invitation / pass page
 - QR check-in (scan and manual lookup) and walk-in handling
 - Door Prize number allocation, prize setup, draw, no-show handling, prize verification
 - Merchandise redemption (QR, once per guest)
@@ -126,7 +126,7 @@ Guest or staff browser → Next.js on Vercel (UI + server routes) → Supabase P
 | Route | Audience | Purpose |
 | :---- | :---- | :---- |
 | `/` | Public | Minimal event landing page (no personal data) |
-| `/pass/[token]` | Guest (token link, no login) | Personal invitation, RSVP, QR pass. After check-in shows Door Prize number and merchandise QR, with "Save as image" |
+| `/pass/[token]` | Guest (token link, no login) | Personal invitation, QR pass. After check-in shows Door Prize number and merchandise QR, with "Save as image" |
 | `/station` | Staff | PIN entry. Redirects to the station for that PIN's role |
 | `/station/check-in` | Check-in Officer | Camera scan, manual search, result screen |
 | `/station/merchandise` | Merchandise Officer | Camera scan, result screen, "Hand over" confirmation, running count |
@@ -135,7 +135,7 @@ Guest or staff browser → Next.js on Vercel (UI + server routes) → Supabase P
 | `/stage` | Projector laptop | Read-only display. Shows the prize and winning number first, and the winner's name only after the MC confirms. Protected by a display key (exchanged for a cookie) |
 | `/admin/login` | Admin | Google sign-in |
 | `/admin/dashboard` | Admin | Live counters |
-| `/admin/guests` | Admin | CSV import, guest list, RSVP view, walk-in add, invitation-link export, eligibility overrides |
+| `/admin/guests` | Admin | CSV import, guest list, walk-in add, invitation-link export, eligibility overrides |
 | `/admin/prizes` | Admin | Prize list setup (name, tier, order, quantity) |
 | `/admin/draws` | Admin | Draw history, redraws, voids |
 | `/admin/merchandise` | Admin | Redemption list, void a redemption |
@@ -165,7 +165,7 @@ Routes are proposed and may be grouped differently during implementation. Admins
 | Merchandise Officer | Role PIN | Scan merchandise QR, confirm hand-over, see status |
 | MC / Draw Operator | Role PIN | Choose prize, run draws, see results, confirm a winner (reveals the name on the stage), mark no-show |
 | Prize Verification Officer | Role PIN | Backup for confirm / no-show, check hand-over, enter a number manually |
-| Guest | None (personal link) | See own pass, RSVP, see own Door Prize number and merchandise QR after check-in |
+| Guest | None (personal link) | See own pass, see own Door Prize number and merchandise QR after check-in |
 
 Rules:
 - Permissions are enforced on the server. Hiding a button is never the only control.
@@ -205,11 +205,9 @@ Rules:
 **Privacy**
 - Public pages show only the guest's own name, outlet, department and position. Phone numbers and Employee IDs are never shown on a public page.
 
-### 4.3 RSVP
+### 4.3 RSVP (removed)
 
-- On the pass page the guest taps **"I'm in"** or **"Can't make it"**. One tap, with a short confirmation line. The guest can change their answer until the event.
-- RSVP **never blocks check-in**. Anyone on the list can check in regardless of RSVP status.
-- Admin sees RSVP counts overall and by outlet (yes / no / no answer) for catering and merchandise planning, and can export the non-responders.
+- Attendance is mandatory for every employee, so there is no RSVP. The pass page shows only the check-in QR.
 
 ### 4.4 QR Check-In
 
@@ -298,9 +296,9 @@ Rules:
 
 ### 4.8 Admin Dashboard and Reports
 
-**Live counters:** invited, link opened, RSVP yes / no / no answer, checked in and attendance rate (overall and by outlet), Door Prize numbers issued, merchandise claimed vs checked-in (outstanding), prizes drawn / confirmed / void by prize, last 20 audit events, error count.
+**Live counters:** invited, link opened, checked in and attendance rate (overall and by outlet), Door Prize numbers issued, merchandise claimed vs checked-in (outstanding), prizes drawn / confirmed / void by prize, last 20 audit events, error count.
 
-**Exports (CSV):** guests with RSVP and check-in status, check-ins, merchandise redemptions, draw history, audit log, RSVP non-responders, invitation links.
+**Exports (CSV):** guests with check-in status, check-ins, merchandise redemptions, draw history, audit log, invitation links.
 
 Dashboard figures refresh automatically (every few seconds). Reports are available the next working day. Reports are visible to admins only.
 
@@ -315,7 +313,7 @@ All tables have `event_id`. Timestamps are UTC, displayed in Asia/Makassar (WITA
 | `events` | Event record and config | `id`, `name`, `event_date`, `venue`, `start_time`, `next_prize_number`, `display_key_hash`, `mode` (`rehearsal` / `live`), `config` (jsonb) |
 | `admins` | Admin allowlist | `event_id`, `email`, `name` |
 | `station_pins` | Role PINs | `event_id`, `role`, `pin_hash`, `active`, `session_version`. PINs are 4 digits, stored hashed, unique across roles |
-| `guests` | Master guest list | `id`, `employee_id`, `full_name`, `outlet`, `department`, `position`, `phone`, `category`, `invite_token`, `merch_token`, `rsvp_status`, `rsvp_at`, `first_opened_at`, `is_walk_in`, `active`. Unique `(event_id, employee_id)`, unique tokens |
+| `guests` | Master guest list | `id`, `employee_id`, `full_name`, `outlet`, `department`, `position`, `phone`, `category`, `invite_token`, `merch_token`, `first_opened_at`, `is_walk_in`, `active`. Unique `(event_id, employee_id)`, unique tokens |
 | `check_ins` | One row per checked-in guest, including the Door Prize number | `guest_id` unique, `checked_in_at`, `method` (scan / manual), `station_label`, `actor`, `prize_number` (not null). Unique `(event_id, prize_number)` |
 | `merchandise_redemptions` | Claims | `guest_id`, `status` (redeemed / voided), `redeemed_at`, `station`, `actor`, `void_reason`. **Partial unique index on `guest_id` where `status = 'redeemed'`** |
 | `prizes` | Prize list | `name`, `tier`, `sort_order`, `quantity`, `status` |
@@ -327,7 +325,7 @@ All tables have `event_id`. Timestamps are UTC, displayed in Asia/Makassar (WITA
 | `attempt_log` | Failed and rejected scans | `type`, `token_prefix`, `result`, `at`, `actor` |
 | `audit_log` | Admin and station actions | `at`, `actor_type`, `actor`, `action`, `entity`, `entity_id`, `details` (jsonb) |
 
-**Functions (all transactional and idempotent):** `verify_pin`, `get_pass`, `set_rsvp`, `find_guests`, `import_preview`, `import_guests`, `check_in`, `redeem_lookup`, `redeem_merchandise`, `draw_prize`, `resolve_draw`, `set_stage`, `add_walk_in`, `void_redemption`, `admin_void_draw`, `set_station_pin`, `go_live`, `reset_rehearsal_data`. See the Technical Design Spec for behaviour and status values.
+**Functions (all transactional and idempotent):** `verify_pin`, `get_pass`, `find_guests`, `import_preview`, `import_guests`, `check_in`, `redeem_lookup`, `redeem_merchandise`, `draw_prize`, `resolve_draw`, `set_stage`, `add_walk_in`, `void_redemption`, `admin_void_draw`, `set_station_pin`, `go_live`, `reset_rehearsal_data`. See the Technical Design Spec for behaviour and status values.
 
 **Tokens:** 128-bit random, URL-safe. QR payloads carry a short prefix (`NF:CI:` for check-in, `NF:MR:` for merchandise) so scanners can reject the wrong type.
 
@@ -393,9 +391,6 @@ All tables have `event_id`. Timestamps are UTC, displayed in Asia/Makassar (WITA
 - Each guest has a working personal link and QR. Invitation-link CSV export works by outlet.
 - Pass page works without login and shows only that guest's data.
 
-**RSVP**
-- Guest can set and change RSVP with one tap. RSVP never blocks check-in.
-
 **Check-in and Door Prize numbers**
 - Staff can check in by scan or manual search. Result states are clear and distinct.
 - Each checked-in guest receives one unique number. Repeat scans return the original number.
@@ -431,7 +426,7 @@ Today is 10 October 2026 and the event is on 10 December 2026 (61 days).
 | Phase | Scope | Target |
 | :---- | :---- | :---- |
 | 1. Foundation | Next.js project, Supabase project, schema, RLS, admin Google sign-in, station PIN sessions, audit log, design tokens and i18n file | 24 Oct |
-| 2. Guest journey | CSV import, tokens, pass page, RSVP, invitation-link export, check-in station, number allocation, walk-ins | 14 Nov |
+| 2. Guest journey | CSV import, tokens, pass page, invitation-link export, check-in station, number allocation, walk-ins | 14 Nov |
 | 3. Merchandise | Merchandise QR, booth station, "Hand over" confirmation, void | 21 Nov |
 | **Invitations out** | Send WhatsApp invitations (staggered by outlet) once phase 2 has passed load and permission tests | 23–27 Nov |
 | 4. Door prize | Prize setup, draw, verification and no-show flow, MC operator screen, stage display | 28 Nov |
@@ -440,7 +435,7 @@ Today is 10 October 2026 and the event is on 10 December 2026 (61 days).
 | Code freeze | No feature changes after this | 8 Dec |
 | Event | NourishFest 2026 | 10 Dec |
 
-If the schedule slips, drop in this order: stage display animation polish, projector-safe mode, per-outlet RSVP reporting. Do not cut the audit log, concurrency tests, or the rehearsal.
+If the schedule slips, drop in this order: stage display animation polish, projector-safe mode. Do not cut the audit log, concurrency tests, or the rehearsal.
 
 ---
 
@@ -469,12 +464,12 @@ Resolved on 10 October 2026:
 
 | # | Decision |
 | :---- | :---- |
-| 1 | Scope is invitation / RSVP, check-in, door prize, merchandise, dashboard. Guestbook cancelled. Candid Camera is a separate project |
+| 1 | Scope is invitation, check-in, door prize, merchandise, dashboard. Guestbook cancelled. Candid Camera is a separate project |
 | 2 | Backend is Supabase (Postgres, Realtime, Auth) with Next.js on Vercel. No Apps Script, Sheets or Drive |
 | 3 | Guests are employees only. Admin bulk-imports; nobody registers |
 | 4 | Invitations go out on WhatsApp, semi-manual from an exported CSV |
 | 5 | The pass page needs no login; it shows the QR, then the Door Prize number and merchandise QR after check-in |
-| 6 | RSVP is a one-tap Yes / No and never blocks check-in |
+| 6 | No RSVP: attendance is mandatory for every employee |
 | 7 | Merchandise code is a QR, visually and technically separate from the check-in QR; one claim per person; requires check-in |
 | 8 | Door prize: one prize per person; winner must be present; 60-second window; no-show voids the draw and stays eligible |
 | 9 | Auth: Google sign-in for 2–3 admins; role PINs for station staff |
@@ -514,7 +509,7 @@ The application is ready for NourishFest 2026 when:
 
 - It is deployed, accessible on the event URL, and independent of NourishOS.
 - Admin can import the employee list and export WhatsApp invitation links by outlet.
-- Guests can open their personal link, RSVP, and show a QR pass that checks them in.
+- Guests can open their personal link and show a QR pass that checks them in.
 - Each checked-in guest receives one unique Door Prize number and one merchandise QR.
 - Merchandise can be redeemed once only, including under simultaneous scans.
 - Prizes can be set up, drawn on the server with one prize per person, verified, voided for no-shows and redrawn, with full history.
