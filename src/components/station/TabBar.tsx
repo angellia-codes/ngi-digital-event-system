@@ -6,10 +6,10 @@ export type Tab = 'scan' | 'manual';
 export function TabBar({ tab, onTab, counter }: { tab: Tab; onTab: (t: Tab) => void; counter: string }) {
   const { t } = useI18n();
   return (
-    <nav className="tabs" role="tablist">
-      <button type="button" role="tab" className="tabs__item" aria-selected={tab === 'scan'} onClick={() => onTab('scan')}>{t('staff.tab_scan')}</button>
-      <button type="button" role="tab" className="tabs__item" aria-selected={tab === 'manual'} onClick={() => onTab('manual')}>{t('staff.manual')}</button>
-      <div className="tabs__item" aria-live="polite">{counter}</div>
+    <nav className="tabs" aria-label="Mode">
+      <button type="button" className="tabs__item" aria-pressed={tab === 'scan'} onClick={() => onTab('scan')}>{t('staff.tab_scan')}</button>
+      <button type="button" className="tabs__item" aria-pressed={tab === 'manual'} onClick={() => onTab('manual')}>{t('staff.manual')}</button>
+      <div className="tabs__item" role="status">{counter}</div>
     </nav>
   );
 }

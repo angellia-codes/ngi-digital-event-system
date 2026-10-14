@@ -2,7 +2,11 @@ import { db, rpc } from './db';
 import { isToken } from './qr';
 
 export type PassData = {
-  event: { name: string; date: string; starts_at: string | null; venue: string | null };
+  event: {
+    name: string; date: string; doors_at: string | null; starts_at: string | null; ends_at: string | null;
+    venue: string | null; maps_url: string | null;
+  };
+  server_now: string;
   guest: { full_name: string; outlet: string; department: string | null; position: string | null };
   invite_token: string;
   checked_in: boolean;

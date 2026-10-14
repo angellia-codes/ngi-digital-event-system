@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useI18n } from '@/lib/i18n';
 import { panelFor, type Context, type Icon } from '@/lib/result-panel';
 import { formatTimeWita } from '@/lib/time';
@@ -40,6 +40,14 @@ export function ResultPanel({ context, result, busy, onNext, onHandOver }: {
   useEffect(() => { if (panel.vibrate.length) navigator.vibrate?.(panel.vibrate); }, [result, panel.vibrate]);
 
   const g = result.guest;
+  // A live region announces reliably only if it exists empty first, then gets its text.
+  const [said, setSaid] = useState('');
+  const spoken = `${t(panel.titleKey)}${g ? `. ${g.full_name}` : ''}`;
+  useEffect(() => {
+    const id = setTimeout(() => setSaid(spoken), 100);
+    return () => { clearTimeout(id); setSaid(''); };
+  }, [spoken, result]);
+
   const meta = [g?.outlet, g?.department, g?.position].filter(Boolean).join(' · ');
   const note =
     result.status === 'ALREADY_CHECKED_IN' && result.checked_in_at
@@ -50,7 +58,8 @@ export function ResultPanel({ context, result, busy, onNext, onHandOver }: {
   const ready = context === 'merchandise' && result.status === 'READY';
 
   return (
-    <section className={`panel panel--${panel.tone}`} role="status" aria-live="assertive">
+    <section className={`panel panel--${panel.tone}`}>
+      <div className="sr-only" role="status">{said}</div>
       <div className="panel__head">
         <PanelIcon icon={panel.icon} />
         <span className="panel__title">{t(panel.titleKey)}</span>

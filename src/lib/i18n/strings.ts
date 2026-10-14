@@ -1,4 +1,5 @@
 import { DRAW_EN, DRAW_ID } from './draw-strings';
+import { INVITE_EN, INVITE_ID } from './invite-strings';
 
 export type Lang = 'id' | 'en';
 
@@ -52,6 +53,15 @@ const id = {
   'staff.camera_hint': 'KAMERA AKTIF · ARAHKAN KE QR TAMU',
   'staff.search_placeholder': 'Cari nama atau ID karyawan',
   'staff.search_empty': 'Tidak ada hasil',
+  'staff.camera_retry': 'COBA LAGI',
+  'staff.camera_help': 'Buka pengaturan izin situs di browser, izinkan kamera, lalu coba lagi.',
+  'staff.to_manual': 'CARI MANUAL',
+  'staff.searching': 'Mencari…',
+  'staff.search_error': 'Pencarian gagal. Periksa koneksi lalu ketik ulang.',
+  'staff.search_count': '{n} hasil',
+  'lang.id': 'Bahasa Indonesia',
+  'lang.en': 'English',
+  'lang.label': 'Bahasa',
   'staff.already_in': 'sudah check-in',
 
   'login.title': 'MASUK STAF',
@@ -77,6 +87,7 @@ const id = {
   'hub.admin': 'Admin',
   'hub.admin_sub': 'Tamu, hadiah & laporan',
   ...DRAW_ID,
+  ...INVITE_ID,
 } as const;
 
 export type StringKey = keyof typeof id;
@@ -131,6 +142,15 @@ const en: Record<StringKey, string> = {
   'staff.camera_hint': 'CAMERA ON · POINT AT THE GUEST QR',
   'staff.search_placeholder': 'Search name or employee ID',
   'staff.search_empty': 'No results',
+  'staff.camera_retry': 'TRY AGAIN',
+  'staff.camera_help': 'Open the browser site permissions, allow the camera, then try again.',
+  'staff.to_manual': 'MANUAL SEARCH',
+  'staff.searching': 'Searching…',
+  'staff.search_error': 'Search failed. Check the connection and retype.',
+  'staff.search_count': '{n} results',
+  'lang.id': 'Bahasa Indonesia',
+  'lang.en': 'English',
+  'lang.label': 'Language',
   'staff.already_in': 'already checked in',
 
   'login.title': 'STAFF LOGIN',
@@ -156,6 +176,7 @@ const en: Record<StringKey, string> = {
   'hub.admin': 'Admin',
   'hub.admin_sub': 'Guests, prizes & reports',
   ...DRAW_EN,
+  ...INVITE_EN,
 };
 
 export const STRINGS: Record<Lang, Record<StringKey, string>> = { id, en };

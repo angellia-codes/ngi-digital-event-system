@@ -5,10 +5,11 @@ import { useI18n } from '@/lib/i18n';
 declare global { interface Window { __nfInjectCode?: (text: string) => void } }
 
 /** Camera strip. The camera starts only after an explanatory screen and a tap (also required by iOS Safari). */
-export function Scanner({ onCode, paused, problem }: { onCode: (text: string) => void; paused: boolean; problem?: boolean }) {
+export function Scanner({ onCode, paused, problem, onManual }: { onCode: (text: string) => void; paused: boolean; problem?: boolean; onManual?: () => void }) {
   const { t } = useI18n();
   const [started, setStarted] = useState(false);
   const [denied, setDenied] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const handler = useRef(onCode);
   const isPaused = useRef(paused);
   const last = useRef({ text: '', at: 0 });
@@ -52,13 +53,22 @@ export function Scanner({ onCode, paused, problem }: { onCode: (text: string) =>
       const s = scanner;
       if (s?.isScanning) s.stop().then(() => s.clear()).catch(() => {});
     };
-  }, [started]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [started, attempt]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!started || denied) {
     return (
       <div className="scanner">
         <div className="scanner__gate">
-          {denied ? <p role="alert">{t('staff.camera_denied')}</p> : (
+          {denied ? (
+            <>
+              <p role="alert">{t('staff.camera_denied')}</p>
+              <p className="scanner__help">{t('staff.camera_help')}</p>
+              <div className="scanner__actions">
+                <button type="button" className="btn--staff" onClick={() => { setDenied(false); setAttempt((a) => a + 1); }}>{t('staff.camera_retry')}</button>
+                {onManual && <button type="button" className="btn--staff btn--staff-dark" onClick={onManual}>{t('staff.to_manual')}</button>}
+              </div>
+            </>
+          ) : (
             <>
               <p><b>{t('staff.camera_title')}</b></p>
               <p>{t('staff.camera_body')}</p>

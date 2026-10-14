@@ -39,7 +39,7 @@ export default function CheckInStation() {
   const problem = result ? panelFor('checkin', result.status).tone !== 'green' : false;
   return (
     <StationShell title="CHECK-IN" me={me}>
-      {tab === 'scan' && <Scanner onCode={(code) => submit({ code })} paused={busy || !!result} problem={problem} />}
+      {tab === 'scan' && <Scanner onCode={(code) => submit({ code })} paused={busy || !!result} problem={problem} onManual={() => { setResult(null); setTab('manual'); }} />}
       {result ? (
         <ResultPanel context="checkin" result={result} busy={busy} onNext={() => setResult(null)} />
       ) : tab === 'manual' ? (

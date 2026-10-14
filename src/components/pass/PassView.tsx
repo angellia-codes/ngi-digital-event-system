@@ -1,10 +1,13 @@
 'use client';
+import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import { LangToggle } from '@/components/LangToggle';
 import { Wordmark } from '@/components/Wordmark';
 import { api } from '@/lib/client';
 import { useI18n } from '@/lib/i18n';
 import type { PassData } from '@/lib/pass';
+import { decideStart, readSeen } from '@/lib/invite/play';
+import { witaDate } from '@/lib/invite/time';
 import { formatDateLong, formatTimeWita } from '@/lib/time';
 import { MerchCard } from './MerchCard';
 import { PrizeNumber } from './PrizeNumber';
@@ -12,12 +15,27 @@ import { SaveImage } from './SaveImage';
 import { TicketCard } from './TicketCard';
 import '@/styles/pass.css';
 
+// Own chunk: only downloaded when the invitation actually plays.
+const Invitation = dynamic(() => import('@/components/invite/Invitation').then((m) => m.Invitation), { ssr: false });
+
 export function PassView({ token, initial }: { token: string; initial: PassData }) {
   const { t, lang } = useI18n();
   const [data, setData] = useState(initial);
   const [reveal, setReveal] = useState(false);
   const wasChecked = useRef(initial.checked_in);
   const flag = `nf_seen_${token.slice(0, 8)}`;
+  // 'wait' = plain black frame until the client decides; then the invitation or the pass.
+  const [view, setView] = useState<'wait' | 'invitation' | 'pass'>('wait');
+  const [replay, setReplay] = useState(false);
+
+  useEffect(() => {
+    const { seen, storageOk } = readSeen(token);
+    const serverNow = Date.parse(initial.server_now);
+    setView(decideStart({
+      checkedIn: initial.checked_in, todayWita: witaDate(Number.isNaN(serverNow) ? Date.now() : serverNow),
+      eventDate: initial.event.date, seen, storageOk,
+    }));
+  }, [token, initial]);
 
   // First view after check-in plays the reveal once.
   useEffect(() => {
@@ -55,6 +73,11 @@ export function PassView({ token, initial }: { token: string; initial: PassData 
 
   const when = [formatDateLong(data.event.date, lang), data.event.venue].filter(Boolean).join(' · ');
 
+  if (view === 'wait') return <div className="inv-black" />;
+  if (view === 'invitation') {
+    return <Invitation data={data} token={token} replay={replay} onDone={() => { setReplay(false); setView('pass'); }} />;
+  }
+
   return (
     <div className={data.checked_in ? 'pass-bg pass-bg--after' : 'pass-bg'}>
     <main className="pass">
@@ -78,6 +101,7 @@ export function PassView({ token, initial }: { token: string; initial: PassData 
           {data.prize_number !== null && <SaveImage name={data.guest.full_name} outlet={data.guest.outlet} n={data.prize_number} />}
         </>
       )}
+      <button type="button" className="pass__replay" onClick={() => { setReplay(true); setView('invitation'); }}>{t('invite.replay')}</button>
     </main>
     </div>
   );

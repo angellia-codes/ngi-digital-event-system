@@ -50,7 +50,7 @@ export default function MerchandiseStation() {
   const problem = result ? !['green', 'neutral'].includes(panelFor('merchandise', result.status).tone) : false;
   return (
     <StationShell title="MERCHANDISE" me={me}>
-      {tab === 'scan' && <Scanner onCode={(code) => doLookup({ code })} paused={busy || !!result} problem={problem} />}
+      {tab === 'scan' && <Scanner onCode={(code) => doLookup({ code })} paused={busy || !!result} problem={problem} onManual={() => { setResult(null); setTab('manual'); }} />}
       {result ? (
         <ResultPanel context="merchandise" result={result} busy={busy} onNext={() => setResult(null)} onHandOver={handOver} />
       ) : tab === 'manual' ? (
