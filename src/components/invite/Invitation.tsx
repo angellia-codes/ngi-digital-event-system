@@ -96,7 +96,7 @@ export function Invitation({ data, token, replay, onDone }: { data: PassData; to
   if (phase === 'gate') {
     return (
       <div className="inv inv--gate">
-        <Cassette label={t('invite.gate_label', { name: label })} />
+        <Cassette label={t('invite.gate_label', { name: label })} spin />
         <button type="button" className="inv-btn inv-btn--pink" onClick={play}>{t('invite.press_play')}</button>
         <p className="inv-hint">{t('invite.sound_hint')}</p>
         <button type="button" className="inv-skip inv-skip--gate" onClick={finish}>{t('invite.skip')}</button>
@@ -230,7 +230,7 @@ export function Invitation({ data, token, replay, onDone }: { data: PassData; to
           </Scene>
 
           <Scene id="outro" className="scene--outro">
-            <Cassette label={t('invite.gate_label', { name: label })} />
+            <Cassette label={t('invite.gate_label', { name: label })} spin />
             <p className="big">{t('invite.outro')}</p>
             <button type="button" className="inv-btn inv-btn--pink" onClick={finish}>{t('invite.view_pass')}</button>
           </Scene>
