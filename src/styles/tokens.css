@@ -12,6 +12,7 @@
   --nf-line:       #2A2A28;
   --nf-line-dash:  #3A3A36;
   --nf-white:      #FFFFFF; /* QR tiles only */
+  --nf-paper:      #F4F1E8; /* Polaroid frame */
 
   --nf-font-display: var(--font-bungee), Impact, sans-serif;
   --nf-font-heading: var(--font-anton), Impact, 'Arial Narrow', sans-serif;

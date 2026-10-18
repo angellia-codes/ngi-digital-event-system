@@ -55,6 +55,10 @@ export const INVITE_ID = {
   'invite.dont3': 'Atur transportasi pulangmu',
   'invite.dont4': 'Jangan pakai kostum yang mengejek budaya atau agama',
   'invite.dont5': 'Jangan tinggalkan barang berharga tanpa pengawasan',
+  'invite.track': 'TRACK {n}',
+  'invite.side_end': 'SIDE A · END',
+  'invite.do_hd': 'BOLEH',
+  'invite.dont_hd': 'JANGAN',
 } as const;
 
 export const INVITE_EN: Record<keyof typeof INVITE_ID, string> = {
@@ -113,4 +117,8 @@ export const INVITE_EN: Record<keyof typeof INVITE_ID, string> = {
   'invite.dont3': 'Arrange your ride home',
   'invite.dont4': 'No costumes that mock a culture or religion',
   'invite.dont5': "Don't leave valuables unattended",
+  'invite.track': 'TRACK {n}',
+  'invite.side_end': 'SIDE A · END',
+  'invite.do_hd': 'DO',
+  'invite.dont_hd': "DON'T",
 };
