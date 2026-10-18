@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react';
 
 /** Original inline SVG art for the invitation. Brand colours only (see tokens.css). Motion lives in invite.css. */
 
-export function Cassette({ label }: { label: string; spin?: boolean }) {
+export function Cassette({ label }: { label: string }) {
   const reel = (cx: number) => (
     <g transform={`translate(${cx} 74)`}>
       <g className="art-reel">
@@ -25,7 +25,7 @@ export function Cassette({ label }: { label: string; spin?: boolean }) {
   );
 }
 
-export function Boombox(_: { playing?: boolean } = {}) {
+export function Boombox() {
   const speaker = (cx: number) => (
     <g transform={`translate(${cx} 92)`}>
       <circle r="34" fill="#0D0D0D" stroke="#D4AF37" strokeWidth="4" />
@@ -57,14 +57,6 @@ export function Boombox(_: { playing?: boolean } = {}) {
   );
 }
 
-/** Removed in Task 8 together with the old opening markup. */
-export function Equalizer() {
-  return (
-    <div className="eq" aria-hidden="true">
-      {Array.from({ length: 12 }, (_, i) => <i key={i} style={{ animationDelay: `${(i * 97) % 600}ms` }} />)}
-    </div>
-  );
-}
 
 export function MapPin({ className = 'art-pin', style }: { className?: string; style?: CSSProperties }) {
   return (
