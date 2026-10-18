@@ -38,7 +38,7 @@ Theme: a personal mixtape. Only scene 1 plays by itself; everything after it scr
 |:--|:--|:--|:--|
 | 0 | Gate | Cassette labelled `MIXTAPE UNTUK {name}`, PRESS PLAY button, sound hint | Slow idle float |
 | 1 | Opening (≈8 s, auto) | Tape slides into a boombox, reels spin, equalizer bounces, VHS tracking glitch, wordmark slams in with hard pink shadow and the "MOVE IN UNITY." sticker | The only auto-played sequence |
-| 2 | You're invited | "Yo, {firstname}!", Polaroid with name and outlet | Polaroid develops grey → colour |
+| 2 | You're invited | "Yo, {firstname}!", Polaroid with name and outlet | Polaroid is tossed in, shaken, then develops dark → colour with one glare sweep |
 | 3 | About | 2–3 lines and the tagline | Type-on |
 | 4 | Save the date | December 2026 calendar, 10th circled; LCD countdown DD:HH:MM; Google Calendar and iPhone (.ics) buttons | Circle draws on, digits tick |
 | 5 | Time | `GATE DIBUKA 17:00 WITA`; optional `Acara mulai {start}` | Flip-clock digits |

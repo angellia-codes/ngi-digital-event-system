@@ -295,7 +295,7 @@ The system is **flat print plus neon glow**, with two equal depth layers and no 
 - **Prize number lit** (`text-shadow: 5px 5px 0 var(--nf-pink), 0 0 40px rgba(212,175,55,0.45)`): the pass Door Prize number.
 - **Stage number lit** (`text-shadow: 10px 10px 0 var(--nf-pink), 0 0 80px rgba(212,175,55,.5)`): the landed stage number. The revealed version is 7 px with a 60 px glow.
 - **Sticker button** (`box-shadow: 4px 4px 0 var(--nf-gold)`): the invitation's pink PRESS PLAY button.
-- **Polaroid drop** (`box-shadow: 6px 6px 0 var(--nf-pink)`): the invitation Polaroid.
+- **Polaroid drop** (6 px × 6 px solid pink offset, drawn as a `::before` layer so it can settle on its own): the invitation Polaroid.
 - **Background glows** (radial gradients, 14–38% opacity, in pink, green and gold): page-wide on the pass, invitation and stage only.
 
 ### Named Rules
@@ -361,7 +361,7 @@ A full-width panel fills everything below the camera area: green for success, pi
 The 1280 × 720 board has a Blacktop ground with gold, pink and green glows and an 18 px halftone grid. The header reads "NOURISHFEST 2026 · DOOR PRIZE" with the LIVE badge. A pink prize-banner sticker sits at −1.5°. The number lands at 300 px under a gold "WINNING NUMBER" label, then shrinks to 180 px when the name (Anton 100 px), outlet and department (Oswald 34 px, gold) slide in. The footer shows "MOVE IN UNITY." in pink Anton 28 px and the slot counter in Ash. Batch prizes use a grid of tiles with 4 px gold borders that flip to names (green border) or show a struck-through number (pink border, void). The idle screen adds the 120 px wordmark, a tilted pink tagline sticker and equalizer bars.
 
 ### Motion
-- **Block Party motion:** the pass reveal (the number rises over 600 ms, and the merchandise card follows 200 ms later), the stage number roll (about 5 s, decelerating), the winner reveal (a short flash, the name sliding up over 300 ms), batch reveals 1.5–2 s apart, and looping equalizer bars. The invitation adds cassette, VHS-glitch, Polaroid-swing and LCD-glow scenes, animating `transform` and `opacity` only. The glitch flashes at most 2 times per second and never as a full-screen white flash.
+- **Block Party motion:** the pass reveal (the number rises over 600 ms, and the merchandise card follows 200 ms later), the stage number roll (about 5 s, decelerating), the winner reveal (a short flash, the name sliding up over 300 ms), batch reveals 1.5–2 s apart, and looping equalizer bars. The invitation adds cassette, VHS-glitch, Polaroid toss-shake-develop and LCD-glow scenes, animating `transform` and `opacity` only. The glitch flashes at most 2 times per second and never as a full-screen white flash.
 - **Ops motion:** result transitions only.
 - **Reduced motion:** `prefers-reduced-motion` switches off every animation and transition. The stage also has a reduced-effects mode that cuts it to fades. The draw result is saved before any animation runs, so an animation can never change the outcome.
 
