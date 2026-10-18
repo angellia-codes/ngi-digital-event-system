@@ -29,6 +29,7 @@ export function PassView({ token, initial, mayInvite }: { token: string; initial
   const [view, setView] = useState<'pass' | 'invitation'>('pass');
   const [decided, setDecided] = useState(!mayInvite);
   const [replay, setReplay] = useState(false);
+  const [entered, setEntered] = useState(false);
   const [reveal, setReveal] = useState<Reveal>('static');
   const [riseMerch, setRiseMerch] = useState(false);
   const [offline, setOffline] = useState(false);
@@ -119,14 +120,14 @@ export function PassView({ token, initial, mayInvite }: { token: string; initial
   }, []);
 
   if (view === 'invitation') {
-    return <Invitation data={data} token={token} replay={replay} onDone={() => { setReplay(false); setView('pass'); }} />;
+    return <Invitation data={data} token={token} replay={replay} onDone={() => { setReplay(false); setView('pass'); setEntered(true); }} />;
   }
 
   const ev = data.event;
   const maps = ev.maps_url && isMapsUrl(ev.maps_url) ? ev.maps_url : null;
   return (
     <div className={data.checked_in ? 'pass-bg pass-bg--after' : 'pass-bg'}>
-    <main className="pass">
+    <main className={entered && reveal !== 'reveal' ? 'pass pass--enter' : 'pass'}>
       <header className="pass__top"><span className="label">NOURISH GROUP INDONESIA</span><LangToggle /></header>
       {offline && (
         <p className="pass__offline" role="status">
