@@ -3,7 +3,7 @@ export const INVITE_ID = {
   'invite.gate_label': 'MIXTAPE UNTUK {name}',
   'invite.press_play': 'PRESS PLAY',
   'invite.sound_hint': 'Nyalakan suaramu 🔊',
-  'invite.yo': 'Yo, {firstname}! Kamu resmi diundang ke…',
+  'invite.yo': 'Yo, {firstname}! Kamu diundang ke…',
   'invite.about': 'Satu malam buat kita semua. Dari semua outlet, satu panggung, satu irama: rayain kerja keras setahun bareng keluarga Nourish.',
   'invite.save_date': 'SAVE THE DATE',
   'invite.cd_days': 'HARI',

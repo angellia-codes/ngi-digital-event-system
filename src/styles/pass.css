@@ -1,7 +1,11 @@
 .pass-bg { min-height: 100dvh; background-color: var(--nf-black); background-size: auto, auto, 14px 14px;
   background-image: radial-gradient(circle at 15% 0%, rgba(255,27,107,0.38), transparent 45%), radial-gradient(circle at 100% 32%, rgba(57,255,20,0.14), transparent 40%), radial-gradient(rgba(212,175,55,0.2) 1.2px, transparent 1.5px); }
 .pass-bg--after { background-image: radial-gradient(circle at 50% 22%, rgba(212,175,55,0.28), transparent 50%), radial-gradient(circle at 0% 100%, rgba(255,27,107,0.3), transparent 45%), radial-gradient(rgba(212,175,55,0.2) 1.2px, transparent 1.5px); }
-.pass { max-width: 480px; margin: 0 auto; padding: 14px var(--nf-gutter) 48px; display: flex; flex-direction: column; gap: 18px; }
+/* Set by the inline preflight in the pass page while the invitation is about to cover the pass. */
+[data-nf-inv] .pass-bg { visibility: hidden; }
+.inv-cover { position: fixed; inset: 0; z-index: 50; background: var(--nf-black); }
+/* Budget at 360 × ~650: the check-in QR must end above the fold so a plain screenshot holds the whole code. */
+.pass { max-width: 480px; margin: 0 auto; padding: 10px var(--nf-gutter) 48px; display: flex; flex-direction: column; gap: 14px; }
 .pass__top { display: flex; align-items: center; justify-content: space-between; min-height: 48px; }
 .pass__top .label { font-size: 12px; letter-spacing: 0.2em; }
 .label { font-family: var(--nf-font-label); font-weight: 600; font-size: 14px; letter-spacing: 0.28em; color: var(--nf-gold); text-transform: uppercase; }
@@ -12,59 +16,81 @@
 .caption--warn { color: var(--nf-pink); font-weight: 600; font-size: 13px; }
 .error { color: var(--nf-pink); margin: 0; }
 
+.pass__offline { margin: 0; display: flex; align-items: center; gap: 10px; padding: 10px 14px; border: 2px solid var(--nf-gold); border-radius: var(--nf-radius-btn); background: var(--nf-card); color: var(--nf-gold); font-weight: 600; }
+.pass__offline svg { flex: none; }
 
-.pass__hero { padding: 20px 0 8px; text-align: center; }
+.pass__hero { text-align: center; }
 .wordmark { margin: 0; display: flex; flex-direction: column; font-family: var(--nf-font-display); font-weight: 400; font-size: 50px; line-height: 0.95; color: var(--nf-gold); text-shadow: 3px 3px 0 var(--nf-pink); }
 .wordmark span:first-child { color: var(--nf-text); }
+/* On the pass the wordmark is a header, not a hero: the ticket and its QR come first. */
+.pass .wordmark { font-size: 34px; text-shadow: 2px 2px 0 var(--nf-pink); }
 .sticker { display: inline-block; margin: 14px 0 6px; padding: 4px 16px; background: var(--nf-pink); color: var(--nf-black); font-family: var(--nf-font-heading); font-size: 22px; letter-spacing: 0.06em; transform: rotate(-2deg); }
-.pass__when { margin: 6px 0 0; color: var(--nf-gold); font-family: var(--nf-font-label); font-size: 13px; letter-spacing: 0.12em; }
+.pass__when { margin: 4px 0 0; color: var(--nf-gold); font-family: var(--nf-font-label); font-weight: 600; font-size: 13px; letter-spacing: 0.14em; }
 
-.ticket { background: var(--nf-card); border: 5px solid var(--nf-gold); border-radius: var(--nf-radius-card); padding: 16px; }
+.ticket { container-type: inline-size; background: var(--nf-card); border: 5px solid var(--nf-gold); border-radius: var(--nf-radius-card); padding: 16px; }
 .ticket__top { display: flex; flex-direction: column; gap: 4px; }
 .ticket__top .label { color: var(--nf-text-muted); font-size: 13px; letter-spacing: 0.14em; }
-.ticket__name { margin: 0; font-family: var(--nf-font-heading); font-size: 38px; line-height: 1.05; text-transform: uppercase; overflow-wrap: anywhere; }
+.ticket__top .chip { align-self: flex-start; margin-top: 6px; }
+.ticket__name { margin: 0; font-family: var(--nf-font-heading); font-weight: 400; font-size: 34px; line-height: 1.05; text-transform: uppercase; overflow-wrap: anywhere; text-wrap: balance; }
 .ticket__meta { margin: 0; font-family: var(--nf-font-label); font-weight: 600; font-size: 14px; letter-spacing: 0.1em; color: var(--nf-gold); }
-.ticket__divider { margin: 12px -16px; border-top: 2px dashed var(--nf-line-dash); }
-.ticket__bottom { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.ticket__divider { margin: 10px -16px; border-top: 2px dashed var(--nf-line-dash); }
+.ticket__bottom { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.ticket__hint { margin-top: 4px; color: var(--nf-text); font-weight: 600; }
+.ticket__toggle { min-height: 48px; padding: 0 20px; border: 2px solid var(--nf-gold); border-radius: var(--nf-radius-pill); background: transparent; color: var(--nf-gold); font-family: var(--nf-font-label); font-weight: 600; font-size: 14px; letter-spacing: 0.14em; transition: background-color .15s; }
+.ticket__toggle:hover { background: rgba(212, 175, 55, 0.14); }
+.ticket__fold { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.ticket__fold[hidden] { display: none; }
 
 .qr-frame { display: inline-block; border-radius: var(--nf-radius-card); overflow: hidden; line-height: 0; background: var(--nf-white); border-style: solid; }
 .qr-frame--gold { border-width: 8px; border-color: var(--nf-gold); }
 .qr-frame--pink { border-width: 8px; border-color: var(--nf-pink); }
 .qr-frame svg { display: block; max-width: 100%; height: auto; }
-.ticket .qr-frame, .merch .qr-frame { width: min(100%, 300px); }
-.ticket .qr-frame svg, .merch .qr-frame svg { width: 100%; }
+/* Whole pixels per module (Design Guide 8.2): 7 px fits a 37-module code in the 360 px ticket, 8 px from 400 px. */
+.ticket .qr-frame svg, .merch .qr-frame svg { --qr-ppm: 7; width: calc(var(--qr-mods, 37) * var(--qr-ppm) * 1px); }
+@media (min-width: 400px) { .ticket .qr-frame svg, .merch .qr-frame svg { --qr-ppm: 8; } }
 
 .btn { min-height: 52px; padding: 0 20px; border-radius: var(--nf-radius-btn); border: 2px solid transparent; font-family: var(--nf-font-heading); font-size: 18px; letter-spacing: 0.04em; }
 .btn--primary { background: var(--nf-pink); color: var(--nf-black); }
 .btn--primary:focus-visible, .chip--ok:focus-visible { outline-color: var(--nf-gold); }
 .btn--secondary { background: transparent; border-color: var(--nf-text); color: var(--nf-text); }
-.btn--outline { background: transparent; border-color: var(--nf-gold); color: var(--nf-gold); letter-spacing: 0.08em; border-radius: 15px; }
+.btn--outline { background: transparent; border-color: var(--nf-gold); color: var(--nf-gold); letter-spacing: 0.08em; border-radius: 15px; transition: background-color .15s; }
+.btn--outline:hover:not([disabled]) { background: rgba(212, 175, 55, 0.14); }
 .btn[disabled] { opacity: 0.4; }
-.link { background: none; border: 0; color: var(--nf-gold); text-decoration: underline; min-height: 48px; padding: 0; }
+.link { background: none; border: 0; color: var(--nf-gold); text-decoration: underline; text-underline-offset: 3px; min-height: 48px; padding: 0; display: inline-flex; align-items: center; }
 
-.pass__who { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; justify-content: space-between; }
-.pass__name { margin: 0; font-family: var(--nf-font-heading); font-size: 24px; text-transform: uppercase; overflow-wrap: anywhere; }
 .chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; font-size: 13px; white-space: nowrap; border-radius: var(--nf-radius-pill); font-family: var(--nf-font-label); font-weight: 600; letter-spacing: 0.1em; }
 .chip--ok { background: var(--nf-green); color: var(--nf-black); }
 
-.prize { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px 0 0; }
-.prize .label { font-size: 16px; letter-spacing: 0.32em; }
-.prize .helper { font-size: 13px; }
-.prize__number { margin: 0; font-family: var(--nf-font-display); font-size: 150px; line-height: 0.95; color: var(--nf-gold); text-shadow: 5px 5px 0 var(--nf-pink), 0 0 40px rgba(212,175,55,0.45); }
+/* The Door Prize number now lives on the ticket's B-side; it sizes to the ticket, not the viewport. */
+.prize { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 4px 0 2px; }
+.prize__label { margin: 0; font-size: 16px; letter-spacing: 0.32em; }
+.prize .helper { font-size: 13px; max-width: 32ch; }
+.prize__number { margin: 0; font-family: var(--nf-font-display); font-size: 110px; font-size: min(150px, 42cqi); line-height: 0.95; color: var(--nf-gold); text-shadow: 5px 5px 0 var(--nf-pink), 0 0 40px rgba(212,175,55,0.45); font-variant-numeric: tabular-nums; }
+.prize__seal { display: grid; place-items: center; width: 100%; min-height: 104px; min-height: min(143px, 40cqi); padding: 0; border: 0; background: transparent; cursor: pointer; }
+.prize__seal span { padding: 6px 22px; background: var(--nf-pink); color: var(--nf-black); font-family: var(--nf-font-heading); font-size: 28px; letter-spacing: 0.06em; transform: rotate(-2deg); }
 
-.merch { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 20px 16px; background: var(--nf-card); border: 3px solid var(--nf-pink); border-radius: var(--nf-radius-card); overflow: hidden; }
-.merch__banner { align-self: stretch; margin: 0 -20px 4px; padding: 3px 0; text-align: center; background: var(--nf-pink); color: var(--nf-black); font-family: var(--nf-font-heading); font-size: 26px; letter-spacing: 0.1em; }
+.merch { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 16px 16px; background: var(--nf-card); border: 3px solid var(--nf-pink); border-radius: var(--nf-radius-card); overflow: hidden; }
+.merch__banner { align-self: stretch; margin: 0 -16px 4px; padding: 3px 0; display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--nf-pink); color: var(--nf-black); font-family: var(--nf-font-heading); font-weight: 400; font-size: 26px; line-height: 1.2; letter-spacing: 0.1em; }
 .merch .pill--pink { background: none; color: var(--nf-pink); padding: 0; font-size: 15px; letter-spacing: 0.1em; }
 .merch .helper { color: var(--nf-text); }
 .merch .caption--warn { color: var(--nf-text-muted); font-weight: 400; font-size: 12px; }
 .merch__banner--muted { background: var(--nf-line-dash); color: var(--nf-text); }
 .merch--claimed { padding-bottom: 12px; }
 
-.notice { background: var(--nf-card); border-radius: var(--nf-radius-card); padding: 20px; }
-.notice h2 { margin: 0 0 8px; font-family: var(--nf-font-heading); color: var(--nf-gold); }
+.save { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+
+/* Event details sit on a card, never on the halftone (Clean Ground). */
+.pass__details { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 14px 16px; text-align: center; background: var(--nf-card); border-radius: var(--nf-radius-card); }
+.pass__gates { margin: 0; font-family: var(--nf-font-label); font-weight: 600; font-size: 14px; letter-spacing: 0.14em; color: var(--nf-gold); }
+.pass__venue { margin: 0; color: var(--nf-text); }
+
+.notice { background: var(--nf-card); border-radius: var(--nf-radius-card); padding: 20px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.notice h1, .notice h2 { margin: 0; font-family: var(--nf-font-heading); font-weight: 400; font-size: 26px; line-height: 1.1; color: var(--nf-gold); }
+.notice p { margin: 0; }
+.notice .btn { margin-top: 6px; }
 
 @keyframes nf-rise { from { opacity: 0; transform: translateY(16px) scale(0.96); } to { opacity: 1; transform: none; } }
-.prize--reveal { animation: nf-rise 600ms ease-out both; }
-.merch--reveal { animation: nf-rise 500ms 200ms ease-out both; }
+.prize--reveal { animation: nf-rise 600ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+.merch--reveal { animation: nf-rise 500ms 200ms cubic-bezier(0.16, 1, 0.3, 1) both; }
 
-.pass__replay { align-self: center; min-height: 48px; padding: 0 16px; background: none; border: 0; color: var(--nf-text-soft); font-family: var(--nf-font-label); font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: underline; }
+.pass__replay { align-self: center; min-height: 48px; padding: 0 16px; background: none; border: 0; color: var(--nf-text-soft); font-family: var(--nf-font-label); font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 3px; }

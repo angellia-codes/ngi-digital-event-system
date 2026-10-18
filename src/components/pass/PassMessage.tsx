@@ -9,7 +9,14 @@ export function PassMessage({ kind }: { kind: 'INVALID' | 'RATE_LIMITED' }) {
     <div className="pass-bg"><main className="pass">
       <header className="pass__top"><span className="label">NOURISH GROUP INDONESIA</span><LangToggle /></header>
       <section className="notice">
-        {kind === 'INVALID' ? (<><h2>{t('pass.invalid_title')}</h2><p>{t('pass.invalid_body')}</p></>) : <p>{t('pass.rate_limited')}</p>}
+        {kind === 'INVALID' ? (
+          <><h1>{t('pass.invalid_title')}</h1><p>{t('pass.invalid_body')}</p></>
+        ) : (
+          <>
+            <p>{t('pass.rate_limited')}</p>
+            <button type="button" className="btn btn--primary" onClick={() => window.location.reload()}>{t('pass.retry')}</button>
+          </>
+        )}
       </section>
     </main></div>
   );

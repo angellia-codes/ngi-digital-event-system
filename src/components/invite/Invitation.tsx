@@ -96,6 +96,7 @@ export function Invitation({ data, token, replay, onDone }: { data: PassData; to
   if (phase === 'gate') {
     return (
       <div className="inv inv--gate">
+        <div className="inv-gate__bar"><LangToggle /></div>
         <Cassette label={t('invite.gate_label', { name: label })} spin />
         <button type="button" className="inv-btn inv-btn--pink" onClick={play}>{t('invite.press_play')}</button>
         <p className="inv-hint">{t('invite.sound_hint')}</p>
@@ -114,6 +115,7 @@ export function Invitation({ data, token, replay, onDone }: { data: PassData; to
         )}
         <LangToggle />
         <button type="button" className="inv-ctl" onClick={finish}>{t('invite.skip')}</button>
+        <i className="inv-progress" aria-hidden="true" />
       </div>
 
       {phase === 'opening' && (

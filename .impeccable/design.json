@@ -1,0 +1,522 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-18T17:20:49.701Z",
+  "title": "Design System: NourishFest 2026",
+  "extensions": {
+    "colorMeta": {
+      "blacktop": {
+        "role": "neutral",
+        "displayName": "Blacktop",
+        "canonical": "#0D0D0D",
+        "oklch": "oklch(15.9% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
+        ]
+      },
+      "trophy-gold": {
+        "role": "primary",
+        "displayName": "Trophy Gold",
+        "canonical": "#D4AF37",
+        "oklch": "oklch(76.7% 0.139 91.1)",
+        "tonalRamp": [
+          "#120A00",
+          "#2F2400",
+          "#524000",
+          "#765E06",
+          "#9E7E02",
+          "#C5A122",
+          "#EBC551",
+          "#FEEEBE"
+        ]
+      },
+      "spray-can-pink": {
+        "role": "secondary",
+        "displayName": "Spray-Can Pink",
+        "canonical": "#FF1B6B",
+        "oklch": "oklch(64.6% 0.249 9.9)",
+        "tonalRamp": [
+          "#210005",
+          "#4C0019",
+          "#7D0330",
+          "#B30748",
+          "#ED0D61",
+          "#FF6D8C",
+          "#FDB1BC",
+          "#FEE8EB"
+        ]
+      },
+      "lightstick-green": {
+        "role": "tertiary",
+        "displayName": "Lightstick Green",
+        "canonical": "#39FF14",
+        "oklch": "oklch(87.1% 0.286 141.5)",
+        "tonalRamp": [
+          "#001100",
+          "#012F00",
+          "#095100",
+          "#167606",
+          "#1D9D03",
+          "#24C700",
+          "#33F10B",
+          "#CDFFC6"
+        ]
+      },
+      "chalk": {
+        "role": "neutral",
+        "displayName": "Chalk",
+        "canonical": "#F5F5F0",
+        "oklch": "oklch(96.9% 0.007 106.5)",
+        "tonalRamp": [
+          "#0B0B08",
+          "#252522",
+          "#42423E",
+          "#61615D",
+          "#83837E",
+          "#A5A5A1",
+          "#C9C9C5",
+          "#EFEFEA"
+        ]
+      },
+      "smoke": {
+        "role": "neutral",
+        "displayName": "Smoke",
+        "canonical": "#BDBDB6",
+        "oklch": "oklch(79.6% 0.010 106.6)",
+        "tonalRamp": [
+          "#0C0B07",
+          "#252520",
+          "#42423D",
+          "#62625B",
+          "#83837C",
+          "#A5A59F",
+          "#CACAC3",
+          "#EFEFE8"
+        ]
+      },
+      "ash": {
+        "role": "neutral",
+        "displayName": "Ash",
+        "canonical": "#9A9A94",
+        "oklch": "oklch(68.4% 0.009 106.6)",
+        "tonalRamp": [
+          "#0B0B07",
+          "#252521",
+          "#42423D",
+          "#62625C",
+          "#83837D",
+          "#A5A59F",
+          "#CACAC3",
+          "#EFEFE8"
+        ]
+      },
+      "tarmac-card": {
+        "role": "neutral",
+        "displayName": "Tarmac Card",
+        "canonical": "#141414",
+        "oklch": "oklch(19.1% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
+        ]
+      },
+      "asphalt-surface": {
+        "role": "neutral",
+        "displayName": "Asphalt Surface",
+        "canonical": "#1B1B1B",
+        "oklch": "oklch(22.2% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
+        ]
+      },
+      "seam": {
+        "role": "neutral",
+        "displayName": "Seam",
+        "canonical": "#2A2A28",
+        "oklch": "oklch(28.4% 0.004 106.6)",
+        "tonalRamp": [
+          "#0B0B0A",
+          "#252523",
+          "#424240",
+          "#61615F",
+          "#828280",
+          "#A5A5A3",
+          "#C9C9C7",
+          "#EFEFEC"
+        ]
+      },
+      "perforation": {
+        "role": "neutral",
+        "displayName": "Perforation",
+        "canonical": "#3A3A36",
+        "oklch": "oklch(34.7% 0.007 106.7)",
+        "tonalRamp": [
+          "#0B0B08",
+          "#252522",
+          "#42423E",
+          "#61615D",
+          "#83837E",
+          "#A5A5A1",
+          "#C9C9C4",
+          "#EFEFEA"
+        ]
+      },
+      "qr-white": {
+        "role": "neutral",
+        "displayName": "QR White",
+        "canonical": "#FFFFFF",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
+        ]
+      },
+      "stage-black": {
+        "role": "neutral",
+        "displayName": "Stage Black",
+        "canonical": "#000000",
+        "oklch": "oklch(0.0% 0.000 0.0)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display (Bungee)",
+        "purpose": "Door Prize numbers and digits only; 96 px staff, 150 px pass, 180–300 px stage."
+      },
+      "wordmark": {
+        "displayName": "Wordmark (Bungee)",
+        "purpose": "Two-tone NOURISH / FEST 2026 mark with 3 px pink hard shadow; 120 px on the idle stage."
+      },
+      "headline": {
+        "displayName": "Headline (Anton)",
+        "purpose": "Guest names, uppercase; 38 px ticket, 40 px staff, 100 px stage. Wraps, never truncates on staff screens."
+      },
+      "title": {
+        "displayName": "Title (Anton)",
+        "purpose": "Status titles on staff result panels; invitation scene titles."
+      },
+      "button": {
+        "displayName": "Button (Anton)",
+        "purpose": "Guest buttons, 52 px tall."
+      },
+      "button-staff": {
+        "displayName": "Staff Button (Anton)",
+        "purpose": "Station buttons, 64 px tall."
+      },
+      "label": {
+        "displayName": "Label (Oswald 600)",
+        "purpose": "Tracked uppercase labels, pills, chips, tabs, language toggle."
+      },
+      "label-admin": {
+        "displayName": "Admin Label (Oswald 400)",
+        "purpose": "Denser admin nav, table headers and buttons."
+      },
+      "body": {
+        "displayName": "Body (Archivo)",
+        "purpose": "Sentences, rules and helper text in both languages."
+      },
+      "caption": {
+        "displayName": "Caption (Archivo)",
+        "purpose": "The 12 px floor; never smaller."
+      }
+    },
+    "shadows": [
+      {
+        "name": "offset-wordmark",
+        "value": "text-shadow: 3px 3px 0 var(--nf-pink)",
+        "purpose": "Pass wordmark and invitation marks."
+      },
+      {
+        "name": "offset-mid",
+        "value": "text-shadow: 4px 4px 0 var(--nf-pink)",
+        "purpose": "96 px staff and MC numbers, stage tiles."
+      },
+      {
+        "name": "prize-number-lit",
+        "value": "text-shadow: 5px 5px 0 var(--nf-pink), 0 0 40px rgba(212,175,55,0.45)",
+        "purpose": "Pass Door Prize number."
+      },
+      {
+        "name": "stage-number-lit",
+        "value": "text-shadow: 10px 10px 0 var(--nf-pink), 0 0 80px rgba(212,175,55,.5)",
+        "purpose": "Landed stage number (revealed: 7px offset, 60px glow)."
+      },
+      {
+        "name": "sticker-button",
+        "value": "box-shadow: 4px 4px 0 var(--nf-gold)",
+        "purpose": "Invitation PRESS PLAY button."
+      },
+      {
+        "name": "polaroid-drop",
+        "value": "box-shadow: 6px 6px 0 var(--nf-pink)",
+        "purpose": "Invitation Polaroid."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 3px solid var(--nf-gold); outline-offset: 2px",
+        "purpose": "Every interactive element; black on gold, pink and green surfaces."
+      }
+    ],
+    "motion": [
+      {
+        "name": "pass-reveal",
+        "value": "nf-rise 600ms ease-out; merch card +200ms delay",
+        "purpose": "Door Prize number and merchandise card after check-in."
+      },
+      {
+        "name": "result-wipe",
+        "value": "~150ms",
+        "purpose": "Staff scan result colour wipe; the only motion on Ops screens."
+      },
+      {
+        "name": "stage-roll",
+        "value": "~5s decelerating",
+        "purpose": "Stage number roll before landing."
+      },
+      {
+        "name": "winner-reveal",
+        "value": "nf-in .45s ease-out; name slide 300ms",
+        "purpose": "Stage reveal after MC confirm."
+      },
+      {
+        "name": "batch-step",
+        "value": "1.5–2s per winner",
+        "purpose": "Batch tile flips."
+      },
+      {
+        "name": "ui-hover",
+        "value": ".15s",
+        "purpose": "Background/colour transitions on toggles, hub cards; invitation buttons lift 2px, press scale .96."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: all animation and transition off; stage reduced-effects = fades only",
+        "purpose": "Accessibility; animation never changes the draw outcome."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "min",
+        "value": "360px"
+      },
+      {
+        "name": "pass-max",
+        "value": "480px"
+      },
+      {
+        "name": "station-max",
+        "value": "520px"
+      },
+      {
+        "name": "hub-max",
+        "value": "760px"
+      },
+      {
+        "name": "admin-max",
+        "value": "1100px"
+      },
+      {
+        "name": "stage-artboard",
+        "value": "1280x720"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Guest Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main guest action on the pass; pink fill, black Anton.",
+      "html": "<button class=\"ds-btn-primary\">SAVE AS IMAGE</button>",
+      "css": ".ds-btn-primary { min-height: 52px; padding: 0 20px; border-radius: 12px; border: 2px solid transparent; background: var(--nf-pink, #FF1B6B); color: var(--nf-black, #0D0D0D); font-family: var(--font-anton), Anton, Impact, 'Arial Narrow', sans-serif; font-size: 18px; letter-spacing: 0.04em; cursor: pointer; transition: transform .15s ease-out; } .ds-btn-primary:hover { transform: translateY(-2px); } .ds-btn-primary:active { transform: scale(0.96); } .ds-btn-primary:focus-visible { outline: 3px solid var(--nf-gold, #D4AF37); outline-offset: 2px; }"
+    },
+    {
+      "name": "Gold Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline-gold",
+      "description": "Accent outline used for \"Save as image\" on the pass.",
+      "html": "<button class=\"ds-btn-outline\">SAVE AS IMAGE</button>",
+      "css": ".ds-btn-outline { min-height: 52px; padding: 0 20px; border-radius: 15px; border: 2px solid var(--nf-gold, #D4AF37); background: transparent; color: var(--nf-gold, #D4AF37); font-family: var(--font-anton), Anton, Impact, sans-serif; font-size: 18px; letter-spacing: 0.08em; cursor: pointer; transition: background-color .15s; } .ds-btn-outline:hover { background: rgba(212,175,55,0.14); } .ds-btn-outline:focus-visible { outline: 3px solid var(--nf-gold, #D4AF37); outline-offset: 2px; }"
+    },
+    {
+      "name": "Staff Primary Button",
+      "kind": "button",
+      "refersTo": "button-staff",
+      "description": "Full-width 64 px gold button on station screens; dark variant sits on coloured result panels.",
+      "html": "<div class=\"ds-staff-wrap\"><button class=\"ds-btn-staff\">LOG IN</button><button class=\"ds-btn-staff ds-btn-staff--dark\">SCAN NEXT</button></div>",
+      "css": ".ds-staff-wrap { display: grid; gap: 10px; padding: 16px; background: var(--nf-green, #39FF14); max-width: 360px; } .ds-btn-staff { min-height: 64px; width: 100%; border: 0; border-radius: 14px; background: var(--nf-gold, #D4AF37); color: var(--nf-black, #0D0D0D); font-family: var(--font-anton), Anton, Impact, sans-serif; font-size: 24px; letter-spacing: 0.08em; cursor: pointer; } .ds-btn-staff--dark { background: var(--nf-black, #0D0D0D); color: var(--nf-text, #F5F5F0); } .ds-btn-staff:focus-visible { outline: 3px solid var(--nf-black, #0D0D0D); outline-offset: 2px; } .ds-btn-staff:disabled { opacity: .4; }"
+    },
+    {
+      "name": "Confirm / No-show Pair",
+      "kind": "button",
+      "refersTo": "button-confirm",
+      "description": "MC operator decision buttons: green Confirm reveals the name on stage, pink No-show voids the draw.",
+      "html": "<div class=\"ds-actions\"><button class=\"ds-btn-confirm\">CONFIRM</button><button class=\"ds-btn-noshow\">NO-SHOW</button></div>",
+      "css": ".ds-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 400px; } .ds-btn-confirm, .ds-btn-noshow { min-height: 64px; border: 0; border-radius: 14px; color: #000; font-family: var(--font-anton), Anton, Impact, sans-serif; font-size: 22px; letter-spacing: .04em; cursor: pointer; } .ds-btn-confirm { background: var(--nf-green, #39FF14); } .ds-btn-noshow { background: var(--nf-pink, #FF1B6B); } .ds-btn-confirm:focus-visible, .ds-btn-noshow:focus-visible { outline: 3px solid var(--nf-gold, #D4AF37); outline-offset: 2px; }"
+    },
+    {
+      "name": "PIN Field",
+      "kind": "input",
+      "refersTo": "input-pin",
+      "description": "Station login PIN entry; 64 px, wide-tracked centred digits.",
+      "html": "<label class=\"ds-pin\"><span>STATION PIN</span><input class=\"ds-pin__field\" inputmode=\"numeric\" maxlength=\"4\" value=\"1234\" aria-label=\"Station PIN\"></label>",
+      "css": ".ds-pin { display: grid; gap: 8px; max-width: 360px; } .ds-pin span { font-family: var(--font-oswald), Oswald, 'Arial Narrow', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: .28em; color: var(--nf-gold, #D4AF37); } .ds-pin__field { width: 100%; min-height: 64px; border-radius: 12px; border: 2px solid var(--nf-line-dash, #3A3A36); background: var(--nf-card, #141414); color: var(--nf-text, #F5F5F0); font-size: 28px; letter-spacing: 0.4em; text-align: center; } .ds-pin__field:focus-visible { outline: 3px solid var(--nf-gold, #D4AF37); outline-offset: 2px; }"
+    },
+    {
+      "name": "Staff Tab Bar",
+      "kind": "nav",
+      "refersTo": "tab-bar",
+      "description": "Station bottom navigation: SCAN, MANUAL SEARCH and a live counter; active tab is gold with a top rule.",
+      "html": "<nav class=\"ds-tabs\"><button class=\"ds-tabs__item\" aria-pressed=\"true\">SCAN</button><button class=\"ds-tabs__item\" aria-pressed=\"false\">MANUAL</button><button class=\"ds-tabs__item\" aria-pressed=\"false\">128 / 215</button></nav>",
+      "css": ".ds-tabs { display: flex; height: 64px; border-top: 2px solid var(--nf-line, #2A2A28); background: var(--nf-black, #0D0D0D); max-width: 420px; } .ds-tabs__item { flex: 1; border: 0; border-top: 3px solid transparent; background: transparent; color: var(--nf-text-muted, #9A9A94); font-family: var(--font-oswald), Oswald, 'Arial Narrow', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: .14em; cursor: pointer; } .ds-tabs__item:hover { color: var(--nf-text, #F5F5F0); } .ds-tabs__item[aria-pressed='true'] { color: var(--nf-gold, #D4AF37); border-top-color: var(--nf-gold, #D4AF37); } .ds-tabs__item:focus-visible { outline: 3px solid var(--nf-gold, #D4AF37); outline-offset: -4px; }"
+    },
+    {
+      "name": "Language Toggle",
+      "kind": "nav",
+      "refersTo": "lang-toggle-on",
+      "description": "ID / EN two-segment pill on the pass and staff headers.",
+      "html": "<div class=\"ds-lang\"><button class=\"ds-lang__btn\">ID</button><button class=\"ds-lang__btn ds-lang__btn--on\">EN</button></div>",
+      "css": ".ds-lang { display: inline-flex; border: 2px solid var(--nf-gold, #D4AF37); border-radius: 999px; overflow: hidden; background: var(--nf-card, #141414); } .ds-lang__btn { min-width: 48px; min-height: 48px; border: 0; background: transparent; color: var(--nf-gold, #D4AF37); font-family: var(--font-oswald), Oswald, 'Arial Narrow', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.14em; cursor: pointer; transition: background-color .15s, color .15s; } .ds-lang__btn:hover:not(.ds-lang__btn--on) { background: rgba(212,175,55,0.14); } .ds-lang__btn--on { background: var(--nf-gold, #D4AF37); color: var(--nf-black, #0D0D0D); } .ds-lang__btn:focus-visible { outline: 3px solid var(--nf-gold, #D4AF37); outline-offset: -4px; }"
+    },
+    {
+      "name": "Status Chips",
+      "kind": "chip",
+      "refersTo": "chip-checked-in",
+      "description": "Green checked-in chip with time, gold label pill, and the stage LIVE outline badge.",
+      "html": "<div class=\"ds-chips\"><span class=\"ds-chip\"><svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>CHECK-IN 17:42</span><span class=\"ds-pill\">PASS CHECK-IN</span><span class=\"ds-live\"><i></i>LIVE</span></div>",
+      "css": ".ds-chips { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; } .ds-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; font-size: 13px; border-radius: 999px; background: var(--nf-green, #39FF14); color: var(--nf-black, #0D0D0D); font-family: var(--font-oswald), Oswald, sans-serif; font-weight: 600; letter-spacing: 0.1em; } .ds-pill { font-family: var(--font-oswald), Oswald, sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.2em; color: var(--nf-black, #0D0D0D); background: var(--nf-gold, #D4AF37); padding: 4px 14px; border-radius: 999px; } .ds-live { display: inline-flex; align-items: center; gap: 8px; padding: 2px 12px; border: 2px solid var(--nf-green, #39FF14); border-radius: 999px; color: var(--nf-green, #39FF14); font-family: var(--font-oswald), Oswald, sans-serif; font-weight: 600; font-size: 14px; letter-spacing: .2em; } .ds-live i { width: 10px; height: 10px; border-radius: 50%; background: var(--nf-green, #39FF14); animation: ds-pulse 1.4s ease-in-out infinite; } @keyframes ds-pulse { 50% { opacity: .35; } } @media (prefers-reduced-motion: reduce) { .ds-live i { animation: none; } }"
+    },
+    {
+      "name": "Ticket Card",
+      "kind": "card",
+      "refersTo": "ticket-card",
+      "description": "The signature pass container: gold-bordered ticket, perforated tear line, white-tiled QR in a gold frame.",
+      "html": "<article class=\"ds-ticket\"><div class=\"ds-ticket__top\"><span class=\"ds-ticket__hi\">HI,</span><h2 class=\"ds-ticket__name\">Kadek Ayu Lestari</h2><p class=\"ds-ticket__meta\">OUTLET SEMINYAK · HR · STAFF</p></div><div class=\"ds-ticket__tear\"></div><div class=\"ds-ticket__bottom\"><span class=\"ds-ticket__pill\">PASS CHECK-IN</span><div class=\"ds-qr\"><svg viewBox=\"0 0 29 29\" shape-rendering=\"crispEdges\" aria-label=\"QR check-in\"><rect width=\"29\" height=\"29\" fill=\"#fff\"/><path d=\"M4 4h7v7H4zM18 4h7v7h-7zM4 18h7v7H4z\" fill=\"none\" stroke=\"#000\" stroke-width=\"1\"/><path d=\"M6 6h3v3H6zM20 6h3v3h-3zM6 20h3v3H6zM13 5h2v2h-2zM14 9h1v3h-1zM12 13h3v1h-3zM17 13h2v2h-2zM20 14h3v1h-3zM13 17h1v4h-1zM16 18h3v3h-3zM21 20h2v3h-2zM15 22h2v2h-2z\" fill=\"#000\"/></svg></div><p class=\"ds-ticket__help\">Show this QR at the check-in desk.</p></div></article>",
+      "css": ".ds-ticket { max-width: 340px; background: var(--nf-card, #141414); border: 5px solid var(--nf-gold, #D4AF37); border-radius: 18px; padding: 16px; color: var(--nf-text, #F5F5F0); } .ds-ticket__top { display: flex; flex-direction: column; gap: 4px; } .ds-ticket__hi { font-family: var(--font-oswald), Oswald, sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.14em; color: var(--nf-text-muted, #9A9A94); } .ds-ticket__name { margin: 0; font-family: var(--font-anton), Anton, Impact, sans-serif; font-weight: 400; font-size: 38px; line-height: 1.05; text-transform: uppercase; overflow-wrap: anywhere; } .ds-ticket__meta { margin: 0; font-family: var(--font-oswald), Oswald, sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.1em; color: var(--nf-gold, #D4AF37); } .ds-ticket__tear { margin: 12px -16px; border-top: 2px dashed var(--nf-line-dash, #3A3A36); } .ds-ticket__bottom { display: flex; flex-direction: column; align-items: center; gap: 12px; } .ds-ticket__pill { font-family: var(--font-oswald), Oswald, sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.2em; color: var(--nf-black, #0D0D0D); background: var(--nf-gold, #D4AF37); padding: 4px 14px; border-radius: 999px; } .ds-qr { width: 200px; border: 8px solid var(--nf-gold, #D4AF37); border-radius: 18px; overflow: hidden; line-height: 0; background: #fff; } .ds-qr svg { width: 100%; display: block; } .ds-ticket__help { margin: 0; text-align: center; color: var(--nf-text-soft, #BDBDB6); font-size: 14px; }"
+    },
+    {
+      "name": "Scan Result Panel",
+      "kind": "custom",
+      "refersTo": "result-panel-success",
+      "description": "Ops-mode station result: full-colour panel, icon circle, status title, name, Door Prize number card, dark next button.",
+      "html": "<section class=\"ds-panel\"><div class=\"ds-panel__head\"><span class=\"ds-panel__icon\"><svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\" fill=\"none\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></span><span class=\"ds-panel__title\">CHECKED IN</span></div><div class=\"ds-panel__name\">Kadek Ayu Lestari</div><div class=\"ds-panel__meta\">OUTLET SEMINYAK · HR · STAFF</div><div class=\"ds-panel__prize\"><b>DOOR PRIZE</b><span>042</span></div><button class=\"ds-panel__next\">SCAN NEXT</button></section>",
+      "css": ".ds-panel { max-width: 380px; padding: 18px 20px 16px; display: flex; flex-direction: column; gap: 8px; background: var(--nf-green, #39FF14); color: var(--nf-black, #0D0D0D); } .ds-panel__head { display: flex; align-items: center; gap: 12px; } .ds-panel__icon { width: 52px; height: 52px; border-radius: 999px; background: var(--nf-black, #0D0D0D); display: flex; align-items: center; justify-content: center; } .ds-panel__icon svg { stroke: var(--nf-green, #39FF14); } .ds-panel__title { font-family: var(--font-anton), Anton, Impact, sans-serif; font-size: 30px; letter-spacing: 0.04em; line-height: 1.05; } .ds-panel__name { font-family: var(--font-anton), Anton, Impact, sans-serif; font-size: 40px; line-height: 1.02; text-transform: uppercase; margin-top: 6px; overflow-wrap: anywhere; } .ds-panel__meta { font-family: var(--font-oswald), Oswald, sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.08em; } .ds-panel__prize { margin-top: 10px; background: var(--nf-black, #0D0D0D); border-radius: 16px; padding: 10px 8px 4px; display: flex; flex-direction: column; align-items: center; } .ds-panel__prize b { font-family: var(--font-oswald), Oswald, sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.3em; color: var(--nf-gold, #D4AF37); } .ds-panel__prize span { font-family: var(--font-bungee), Bungee, Impact, sans-serif; font-size: 96px; line-height: 1.05; color: var(--nf-gold, #D4AF37); text-shadow: 4px 4px 0 var(--nf-pink, #FF1B6B); } .ds-panel__next { margin-top: 12px; min-height: 64px; border: 0; border-radius: 14px; background: var(--nf-black, #0D0D0D); color: var(--nf-text, #F5F5F0); font-family: var(--font-anton), Anton, Impact, sans-serif; font-size: 24px; letter-spacing: 0.08em; cursor: pointer; } .ds-panel__next:focus-visible { outline: 3px solid var(--nf-black, #0D0D0D); outline-offset: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Mixtape Pass",
+    "overview": "Every employee gets a personal mixtape: a handmade, old-school artifact with their name on the label, passed along on WhatsApp and kept in their pocket until the night. The system is built around that object. The guest pass is a ticket stub on a jet-black ground, stamped with a Bungee wordmark and framed QR codes. The invitation plays like a cassette: boombox, VHS glitch, Polaroid, LCD countdown. The stage display is the same tape played on the big speakers, with numbers 300 px tall and hard pink shadows. All imagery is drawn from scratch in CSS and inline SVG. Nothing is borrowed from real album art, logos or characters.\n\nThe mood is **loud and unapologetic, old-school and handmade, warm and inclusive**. It is loud in type and colour: four saturated brand colours on near-black, display type with hard offset shadows, sticker tags tilted a couple of degrees. It is handmade in its motifs: halftone dots, perforated ticket seams, equalizer bars. It is warm in who it speaks to: 215 colleagues in a respectful, street-smart voice, never a club that someone is left out of.\n\nThe tape has a B-side. Staff screens (check-in, merchandise, MC operator, prize verification, admin) run in **Ops mode**: the same colours and fonts, but flat black, huge touch targets and no decoration. The brand shows in colour and headings, never in layout. The pass and stage are where people feel the party. The stations are where staff need certainty in under a second, at arm's length, in a dim, loud room.",
+    "keyCharacteristics": [
+      "Dark only. Blacktop ground everywhere; there is no light theme.",
+      "Four voices: Bungee for digits and the wordmark, Anton for names and buttons, Oswald for tracked labels, Archivo for sentences.",
+      "Black text on every gold, pink and green fill.",
+      "Ticket-stub components: thick borders, dashed perforations, stamped pill labels, white-tiled QR codes in coloured frames.",
+      "Two depth layers: hard, blur-free pink offsets on type, and neon glows behind the content.",
+      "Block Party mode (pass, invitation, stage) versus Ops mode (stations, admin)."
+    ],
+    "rules": [
+      {
+        "name": "The Black-on-Neon Rule",
+        "body": "Text on a gold, pink or green fill is always black. White or off-white on pink measures 3.4–3.7:1 and is forbidden.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Job Per Colour Rule",
+        "body": "Green means success or live. Pink means act, or that something is blocked or already done. Gold means attention, or that this is yours. A state is never signalled by colour alone: every one pairs colour with an icon and words.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Job Per Code Rule",
+        "body": "The check-in QR always has a gold frame and the merchandise QR always has a pink frame with a \"MERCHANDISE\" banner. The two must never look alike.",
+        "section": "colors"
+      },
+      {
+        "name": "The Four Voices Rule",
+        "body": "Bungee only for digits and the wordmark, Anton for names, titles and buttons, Oswald for tracked labels, Archivo for anything longer than a line. Archivo Black is not loaded. Headings are uppercase, and body copy is sentence case.",
+        "section": "typography"
+      },
+      {
+        "name": "The Room-to-Grow Rule",
+        "body": "Indonesian runs about 20% longer than English, and names can be long. Never fix a text box's width tightly. Text must scale to 130% without breaking. Test every screen in both languages.",
+        "section": "typography"
+      },
+      {
+        "name": "The Clean Ground Rule",
+        "body": "Halftone and glows sit under cards, never behind a QR code, a scan result, or running text. In Ops mode there is no decoration behind results at all.",
+        "section": "layout"
+      },
+      {
+        "name": "The Hard Offset Rule",
+        "body": "Offset shadows have zero blur, always. The only blurred light in the system is a glow: the gold number glow and the page-wide colour glows.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Ops Mode Is Flat Rule",
+        "body": "Station and admin screens have no glows, no halftone and no offset shadows except on the Door Prize number itself.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Projector-Safe Rule",
+        "body": "On the stage's projector-safe variant, glows and halftone switch off. Numbers and names lose their shadows, gain a 2 px black stroke, names go pure white, and tile borders thicken to 6 px.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use Blacktop (#0D0D0D) as the ground on every screen. There is no light theme.",
+      "Do set black text on every Trophy Gold, Spray-Can Pink and Lightstick Green fill.",
+      "Do put every QR code on a solid white tile with a 4-module quiet zone, inside an 8 px gold (check-in) or pink (merchandise) frame.",
+      "Do show every state as colour, icon and words together (plus vibration on staff devices where supported).",
+      "Do keep Ops screens flat and big: 56 px or larger touch targets, 64 px primary buttons, results readable from arm's length.",
+      "Do keep offset shadows hard (0 blur, pink, 3 / 4 / 5 / 10 px by size), and reserve blurred light for glows.",
+      "Do draw every hip-hop motif from scratch in CSS or inline SVG (cassette, boombox, vinyl, spray tag, halftone, equalizer).",
+      "Do let names and Indonesian strings wrap. Test both languages on every screen and at 130% text size.",
+      "Do keep the 3 px gold focus ring visible on every interactive element, turning black on coloured surfaces."
+    ],
+    "donts": [
+      "Don't put white or off-white text on Spray-Can Pink.",
+      "Don't put a QR code on black or colour, invert it, or place a logo in its centre.",
+      "Don't put halftone, glows or graffiti behind a QR code, a scan result or running text.",
+      "Don't animate staff screens beyond the result transition.",
+      "Don't rely on colour alone for any state.",
+      "Don't copy logos, album art, real cassette or boombox brands, or known characters.",
+      "Don't set any text below 12 px, or fix text-box widths tightly.",
+      "Don't add a light theme, a blurred drop shadow on cards, or a fifth brand colour.",
+      "Don't use congratulations wording on any screen, including the stage reveal."
+    ]
+  }
+}
