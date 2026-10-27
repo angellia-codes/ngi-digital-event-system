@@ -10,7 +10,7 @@ type Preview = {
 };
 type Done = { inserted: number; updated: number; flagged_missing: number };
 
-const TEMPLATE = 'employee_id,full_name,outlet,department,position,phone,category\nE001,Kadek Ayu,Outlet Ubud,Service,Barista,0812-3456-7890,\n';
+const TEMPLATE = 'employee_id,full_name,nickname,outlet,department,position,phone,category\nE001,Kadek Ayu,Ayu,Outlet Ubud,Service,Barista,0812-3456-7890,\n';
 
 function downloadTemplate() {
   const url = URL.createObjectURL(new Blob([TEMPLATE], { type: 'text/csv' }));
@@ -74,7 +74,7 @@ export function ImportPanel({ onDone }: { onDone: () => void }) {
         <button className="btn" onClick={() => input.current?.click()} disabled={busy}>Choose file</button>{' '}
         <button className="btn" onClick={downloadTemplate}>Download template</button>
         <input ref={input} type="file" accept=".csv,text/csv" hidden onChange={(e) => { pick(e.target.files?.[0]); e.target.value = ''; }} />
-        <p className="adm-muted">Required columns: employee_id, full_name, outlet. Optional: department, position, phone, category. Uploading the same employee_id again updates that person.</p>
+        <p className="adm-muted">Required columns: employee_id, full_name, outlet. Optional: nickname (used to greet them in the WhatsApp invite), department, position, phone, category. Uploading the same employee_id again updates that person.</p>
       </div>
 
       {busy && <p className="adm-muted">Working…</p>}

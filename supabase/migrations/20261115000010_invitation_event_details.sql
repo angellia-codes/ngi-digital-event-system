@@ -1,8 +1,9 @@
 -- Interactive invitation: editable event details + wider pass payload.
+-- "if not exists": these columns were added by hand on the hosted database before this migration ran there.
 alter table public.events
-  add column doors_at timestamptz,
-  add column ends_at  timestamptz,
-  add column maps_url text;
+  add column if not exists doors_at timestamptz,
+  add column if not exists ends_at  timestamptz,
+  add column if not exists maps_url text;
 
 create or replace function public.get_pass(p_token text)
 returns jsonb

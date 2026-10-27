@@ -10,10 +10,11 @@ export type GuestRow = {
   position?: string;
   phone?: string;
   category?: string;
+  nickname?: string;
 };
 export type RowError = { row: number; field: string; code: string };
 
-type Field = 'employee_id' | 'full_name' | 'outlet' | 'department' | 'position' | 'phone' | 'category';
+type Field = 'employee_id' | 'full_name' | 'outlet' | 'department' | 'position' | 'phone' | 'category' | 'nickname';
 const REQUIRED: Field[] = ['employee_id', 'full_name', 'outlet'];
 
 const norm = (h: string) => h.replace(/^﻿/, '').trim().toLowerCase().replace(/[_\-.]+/g, ' ').replace(/\s+/g, ' ');
@@ -25,6 +26,7 @@ const ALIASES: Record<string, Field> = {
   position: 'position', jabatan: 'position',
   phone: 'phone', hp: 'phone', 'no hp': 'phone', whatsapp: 'phone', wa: 'phone', 'phone number': 'phone',
   category: 'category', kategori: 'category',
+  nickname: 'nickname', 'nick name': 'nickname', panggilan: 'nickname', 'nama panggilan': 'nickname',
 };
 const canonical = (h: string): string => ALIASES[norm(h)] ?? norm(h).replace(/ /g, '_');
 
@@ -43,7 +45,7 @@ export function parseGuestCsv(text: string): { rows: GuestRow[]; errors: RowErro
     const line = i + 2; // header is line 1
     const get = (f: Field) => (raw[f] ?? '').toString().trim();
     const row: GuestRow = { row_no: line, employee_id: get('employee_id'), full_name: get('full_name'), outlet: get('outlet') };
-    for (const f of ['department', 'position', 'category'] as const) if (get(f)) row[f] = get(f);
+    for (const f of ['department', 'position', 'category', 'nickname'] as const) if (get(f)) row[f] = get(f);
     const phone = normalisePhone(get('phone'));
     if (!phone.ok) errors.push({ row: line, field: 'phone', code: 'INVALID_PHONE' });
     else if (phone.value) row.phone = phone.value;

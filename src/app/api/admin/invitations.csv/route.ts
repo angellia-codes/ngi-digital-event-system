@@ -7,7 +7,7 @@ export const GET = adminGet(async ({ req, actor }) => {
   const outlet = (new URL(req.url).searchParams.get('outlet') ?? '').slice(0, 120);
   let query = db()
     .from('guests')
-    .select('employee_id, full_name, outlet, phone, invite_token')
+    .select('employee_id, full_name, nickname, outlet, phone, invite_token')
     .eq('event_id', env().EVENT_ID).eq('active', true).eq('is_walk_in', false);
   if (outlet) query = query.eq('outlet', outlet);
   const { data, error } = await query.order('full_name');

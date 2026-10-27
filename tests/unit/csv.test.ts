@@ -12,6 +12,12 @@ describe('parseGuestCsv', () => {
       { row_no: 3, employee_id: 'E2', full_name: 'Made', outlet: 'Outlet B' },
     ]);
   });
+  it('reads an optional nickname column under its aliases and omits blanks', () => {
+    const r = parseGuestCsv('employee_id,full_name,Nama Panggilan,outlet\nE1,Kadek Ayu, Ayu ,B\nE2,Made,,B');
+    expect(r.rows[0].nickname).toBe('Ayu');
+    expect(r.rows[1]).not.toHaveProperty('nickname');
+    expect(parseGuestCsv('employee_id,full_name,nickname,outlet\nE1,A,Al,B').rows[0].nickname).toBe('Al');
+  });
   it('keeps leading zeros in employee ids', () => {
     expect(parseGuestCsv('employee_id,full_name,outlet\n007,A,B').rows[0].employee_id).toBe('007');
   });
