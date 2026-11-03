@@ -41,7 +41,7 @@ Success means:
 - **Merchandise booth.** Staff scan a separate merchandise QR (pink frame, "MERCHANDISE" label). The redemption is recorded only after a deliberate "Hand over" tap. The booth shows a running count.
 - **Door Prize draw.** The MC draws from the operator screen and sees number, name and outlet at once. The winner has 60 seconds to come forward. The MC then taps Confirm (the name appears on stage) or No-show (the draw is voided, kept in history, and the person stays eligible for later prizes). Batch prizes show a grid of numbers that flip to names as each winner is confirmed. One prize per person.
 - **Hardware and network.** Several scanning phones, an MC device, and a projector laptop on its own connection (hotspot or cable). The stage display is tested on the real projector at rehearsal.
-- **Rehearsals.** Full dry runs with test data in rehearsal mode, then a reset and go-live. Code freeze is 8 December. Runbooks live in `docs/runbooks/`.
+- **Rehearsals.** Full dry runs with test data in rehearsal mode, then a reset and go-live. Code freeze is 6 December. Runbooks live in `docs/runbooks/`.
 
 ## Capabilities and Constraints
 

@@ -1,13 +1,13 @@
-# Day before — 9 December
+# Day before — 7 December
 
 Nothing new is deployed today. If a critical fix is needed, it runs on staging first.
 
 ## Morning
 
-- [ ] Freeze is in force since 8 December; the deployed commit is the one that passed Rehearsal 2: ____________
+- [ ] Freeze is in force since 6 December; the deployed commit is the one that passed Rehearsal 2: ____________
 - [ ] Supabase and Vercel status pages are green. Supabase daily backup is on and today's backup is listed.
 - [ ] Event is still in **rehearsal** mode and the dashboard shows zero check-ins, zero merchandise, zero draws.
-- [ ] The technical contact has confirmed they are reachable on 10 December from ______ to ______ (open decision 13).
+- [ ] The technical contact has confirmed they are reachable on 8 December from ______ to ______ (open decision 13).
 
 ## PINs and keys
 

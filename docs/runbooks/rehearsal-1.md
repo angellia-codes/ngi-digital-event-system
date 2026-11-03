@@ -2,7 +2,7 @@
 
 > The screens show **English** by default (tap ID for Indonesian). This guide uses the Indonesian button names. English: KONFIRMASI = CONFIRM, TIDAK HADIR = NOT HERE, UNDI SEKARANG = DRAW NOW, TAMPILKAN HADIAH = SHOW PRIZE, LAYAR KOSONG = BLANK SCREEN, UNDIAN BERIKUTNYA = NEXT DRAW, TERCATAT = RECORDED, KONFIRMASI SEMUA = CONFIRM ALL, CARI = LOOK UP.
 
-Goal: every person who will work on 10 December has used their own screen on a real phone, and every scenario below has been run once. Production, still in **rehearsal mode**, with test data.
+Goal: every person who will work on 8 December has used their own screen on a real phone, and every scenario below has been run once. Production, still in **rehearsal mode**, with test data.
 
 ## Before (by 27 November)
 
@@ -49,7 +49,7 @@ Goal: every person who will work on 10 December has used their own screen on a r
 
 ## After
 
-- [ ] Write every problem in the table below with an owner and a due date (before the 8 December freeze).
+- [ ] Write every problem in the table below with an owner and a due date (before the 6 December freeze).
 - [ ] Remove placeholder prizes if used (`remove-prizes`).
 - [ ] Admin, Settings: **Reset rehearsal data** (type RESET). Dashboard shows 0 checked in, 0 merchandise, 0 draws. Guests and PINs are unchanged.
 

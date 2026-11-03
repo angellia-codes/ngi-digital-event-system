@@ -4,7 +4,7 @@
 **Version:** 1.2
 **Status:** Draft for approval
 **Last updated:** 10 October 2026
-**Event date:** Thursday, 10 December 2026
+**Event date:** Tuesday, 8 December 2026
 **Target attendance:** Approximately 215 guests (employees only)
 **Product type:** Standalone web application (mobile-first)
 **Companion documents:** *NourishFest 2026 — Design Guide* (visual identity, components, screen specs); *NourishFest 2026 — Technical Design Spec* (architecture, data model, functions, API, testing and rollout)
@@ -37,7 +37,7 @@
 | Languages | English | **Bilingual EN / ID**, Indonesian default |
 | Draw display | Not specified | **Separate operator and display screens** synced through Supabase Realtime |
 | Branding | None | **HipHop theme** (see Design Guide) |
-| Phases | Undated | **Dated plan** working back from 10 December |
+| Phases | Undated | **Dated plan** working back from 8 December |
 
 ---
 
@@ -421,7 +421,7 @@ All tables have `event_id`. Timestamps are UTC, displayed in Asia/Makassar (WITA
 
 ## 9. Implementation Plan (proposed dates, to be confirmed)
 
-Today is 10 October 2026 and the event is on 10 December 2026 (61 days).
+Today is 10 October 2026 and the event is on 8 December 2026 (59 days).
 
 | Phase | Scope | Target |
 | :---- | :---- | :---- |
@@ -431,9 +431,9 @@ Today is 10 October 2026 and the event is on 10 December 2026 (61 days).
 | **Invitations out** | Send WhatsApp invitations (staggered by outlet) once phase 2 has passed load and permission tests | 23–27 Nov |
 | 4. Door prize | Prize setup, draw, verification and no-show flow, MC operator screen, stage display | 28 Nov |
 | 5. Reporting and polish | Dashboard, exports, translations review, projector-safe mode, accessibility pass | 3 Dec |
-| 6. Testing and rehearsal | Concurrency tests, device tests, full dry run on real projector and venue Wi-Fi, backup and recovery drill | 1–8 Dec |
-| Code freeze | No feature changes after this | 8 Dec |
-| Event | NourishFest 2026 | 10 Dec |
+| 6. Testing and rehearsal | Concurrency tests, device tests, full dry run on real projector and venue Wi-Fi, backup and recovery drill | 1–6 Dec |
+| Code freeze | No feature changes after this | 6 Dec |
+| Event | NourishFest 2026 | 8 Dec |
 
 If the schedule slips, drop in this order: stage display animation polish, projector-safe mode. Do not cut the audit log, concurrency tests, or the rehearsal.
 
@@ -498,7 +498,7 @@ Resolved on 10 October 2026:
 | 10 | Supabase Pro budget approval for the event month | 17 Oct |
 | 11 | Review of the Indonesian wording | 3 Dec |
 | 12 | Logo files, if a NourishFest logo exists (otherwise a text wordmark is used) | 24 Oct |
-| 13 | A named technical contact reachable on event day (10 Dec) | 28 Nov |
+| 13 | A named technical contact reachable on event day (8 Dec) | 28 Nov |
 | 14 | Supabase organisation and the billing owner for the new Pro project | 17 Oct |
 
 ---

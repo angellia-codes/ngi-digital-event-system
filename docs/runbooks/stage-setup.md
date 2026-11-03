@@ -2,7 +2,7 @@
 
 > The screens show **English** by default (tap ID for Indonesian). This guide uses the Indonesian button names. English: KONFIRMASI = CONFIRM, TIDAK HADIR = NOT HERE, UNDI SEKARANG = DRAW NOW, TAMPILKAN HADIAH = SHOW PRIZE, LAYAR KOSONG = BLANK SCREEN, UNDIAN BERIKUTNYA = NEXT DRAW, TERCATAT = RECORDED, KONFIRMASI SEMUA = CONFIRM ALL, CARI = LOOK UP.
 
-Used at Rehearsal 2 (at the venue) and on 10 December. About 15 minutes.
+Used at Rehearsal 2 (at the venue) and on 8 December. About 15 minutes.
 
 ## What you need
 

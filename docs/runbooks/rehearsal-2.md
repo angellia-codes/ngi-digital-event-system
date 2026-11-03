@@ -1,4 +1,4 @@
-# Rehearsal 2 — at the venue (about 7 December)
+# Rehearsal 2 — at the venue (about 5 December)
 
 > The screens show **English** by default (tap ID for Indonesian). This guide uses the Indonesian button names. English: KONFIRMASI = CONFIRM, TIDAK HADIR = NOT HERE, UNDI SEKARANG = DRAW NOW, TAMPILKAN HADIAH = SHOW PRIZE, LAYAR KOSONG = BLANK SCREEN, UNDIAN BERIKUTNYA = NEXT DRAW, TERCATAT = RECORDED, KONFIRMASI SEMUA = CONFIRM ALL, CARI = LOOK UP.
 
@@ -45,6 +45,6 @@ Follow `stage-setup.md` steps 1 to 7 on the real projector.
 - [ ] Remove placeholder prizes if used. Admin, Settings: **Reset rehearsal data** (type RESET). Dashboard shows zeros.
 - [ ] Confirm the PINs still work (they are rotated the day before the event, not now).
 - [ ] Record the decisions: look ____________, sound ____________, projector connection ____________, MC position ____________.
-- [ ] Write the problem list (owner, due date) and send it to the technical contact. After 8 December only critical fixes go out, each tested on staging first.
+- [ ] Write the problem list (owner, due date) and send it to the technical contact. After 6 December only critical fixes go out, each tested on staging first.
 
 Signed off by: ____________  Date: ____________

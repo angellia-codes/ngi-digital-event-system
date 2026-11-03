@@ -41,9 +41,9 @@ Record the commit hash tested and the date next to each automated line.
 
 - [ ] Four station PINs set on production and stored in the HR password manager (not in chat).
 - [ ] Station names match the real desks and booths.
-- [ ] Event is still in **rehearsal** mode (never click Go live before the morning of 10 December).
+- [ ] Event is still in **rehearsal** mode (never click Go live before the morning of 8 December).
 - [ ] Supabase Pro plan active with daily backups. Billing owner confirmed (open decision 14).
-- [ ] Named technical contact for 10 December confirmed (open decision 13, due 28 November).
+- [ ] Named technical contact for 8 December confirmed (open decision 13, due 28 November).
 - [ ] Invitation CSV downloaded once, stored in the HR drive with restricted access, and deleted from Downloads. It contains every employee’s personal link.
 
 ## 6. Sending

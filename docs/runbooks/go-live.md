@@ -4,7 +4,7 @@
 
 ## Check each line out loud (two people)
 
-- [ ] It is 10 December, and the doors are within the hour.
+- [ ] It is 8 December, and the doors are within the hour.
 - [ ] Dashboard: **0** checked in, **0** merchandise handed over, **0** draws, **0** confirmed prizes. If not, Settings, Reset rehearsal data first.
 - [ ] Admin, Prizes lists exactly the final prizes, quantities and order. No "[TEST]" prize.
 - [ ] Admin, Guests: the count matches the final HR headcount. The walk-ins list is empty or intended.

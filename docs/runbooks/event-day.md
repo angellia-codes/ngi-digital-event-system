@@ -1,4 +1,4 @@
-# Event day — 10 December
+# Event day — 8 December
 
 Times are relative to doors opening (T). Fill in the real times once the venue and start time are fixed.
 

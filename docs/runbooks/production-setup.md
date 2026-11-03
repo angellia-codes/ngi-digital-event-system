@@ -20,7 +20,7 @@ There is one Supabase project and one Vercel project: production. Rehearsals run
 3. Create the event (SQL editor or `psql`). Note the returned id: it becomes `EVENT_ID`.
    ```sql
    insert into public.events (name, event_date, venue, config)
-   values ('NourishFest 2026', '2026-12-10', null,
+   values ('NourishFest 2026', '2026-12-08', null,
            '{"station_labels": ["Meja 1", "Meja 2", "Meja 3", "Booth 1", "Booth 2"]}')
    returning id;
    ```
@@ -67,5 +67,5 @@ There is one Supabase project and one Vercel project: production. Rehearsals run
 
 ## 6. Never do early
 
-- Do not click **Go live** before the morning of 10 December. It is one-way and locks the rehearsal reset.
+- Do not click **Go live** before the morning of 8 December. It is one-way and locks the rehearsal reset.
 - Do not share the service role key. If it ever leaks, rotate it in Supabase and in Vercel, then redeploy.

@@ -46,7 +46,7 @@ Theme: a personal mixtape. Only scene 1 plays by itself; everything after it scr
 | 7 | Activities | Cassette J-card tracklist | Lines slide in |
 | 8 | Dress code | 4 outfit cards + a "skip" card | Cards fan out |
 | 9 | Do's & Don'ts | Two columns; every item has icon + words | Fade up |
-| 10 | Outro | "Sampai ketemu 10 Desember!" + LIHAT PASS-KU | Tape ejects, music fades out, pass appears |
+| 10 | Outro | "Sampai ketemu 8 Desember!" + LIHAT PASS-KU | Tape ejects, music fades out, pass appears |
 
 **Persistent controls after the gate:** mute (only when the song loaded), ID/EN toggle, Lewati (skip to pass).
 
@@ -203,7 +203,7 @@ Each scene is a pure component taking `{ data, t, active }`. The controller owns
 | invite.early | Datang lebih awal biar check-in nggak antre. | Come early to skip the check-in queue. |
 | invite.maps | Buka di Google Maps | Open in Google Maps |
 | invite.tba | Segera diumumkan | To be announced |
-| invite.outro | Sampai ketemu 10 Desember! | See you on 10 December! |
+| invite.outro | Sampai ketemu 8 Desember! | See you on 8 December! |
 | invite.view_pass | LIHAT PASS-KU | VIEW MY PASS |
 | invite.skip | Lewati | Skip |
 | invite.replay | Putar undangan | Replay invitation |

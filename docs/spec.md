@@ -295,16 +295,16 @@ Recommendation: give the projector laptop its own connection (phone hotspot or c
 | Staging | Second Supabase project and Vercel preview, seeded with 215 fake employees |
 | Production | The Pro project and Vercel production |
 
-All schema changes are numbered SQL migration files applied by the CLI. Nothing is edited by hand in the dashboard. After the 8 December freeze only critical fixes go out, each run on staging first.
+All schema changes are numbered SQL migration files applied by the CLI. Nothing is edited by hand in the dashboard. After the 6 December freeze only critical fixes go out, each run on staging first.
 
 | Gate | Date | Must be true |
 | :---- | :---- | :---- |
 | Invitation gate | before 23 Nov | Check-in and merchandise tests pass, including concurrency. Security advisor clean. Pass page device-tested. HR has verified the import. List frozen (20 Nov proposed) |
 | Rehearsal 1 | 1–3 Dec | Staff on real devices with test data |
-| Rehearsal 2 | about 7 Dec | At the venue: real projector and Wi-Fi, full draw. Then `reset_rehearsal_data` |
-| Freeze | 8 Dec | No feature changes |
-| Day before | 9 Dec | Rotate all PINs, export CSV backups of all tables, print the guest list, charge devices |
-| Event morning | 10 Dec | Final checks, then `go_live` as the last step before doors open |
+| Rehearsal 2 | about 5 Dec | At the venue: real projector and Wi-Fi, full draw. Then `reset_rehearsal_data` |
+| Freeze | 6 Dec | No feature changes |
+| Day before | 7 Dec | Rotate all PINs, export CSV backups of all tables, print the guest list, charge devices |
+| Event morning | 8 Dec | Final checks, then `go_live` as the last step before doors open |
 
 ### Failure playbook
 
@@ -335,7 +335,7 @@ After the event: reports on the next working day, then the retention schedule.
 
 | # | Item |
 | :---- | :---- |
-| 1 | **Named technical contact** reachable on 10 December (needed by 28 Nov) |
+| 1 | **Named technical contact** reachable on 8 December (needed by 28 Nov) |
 | 2 | Open decisions 1–12 in the PRD (venue, admin emails, prize list, WhatsApp sender, retention period, and so on) |
 | 3 | Supabase organisation and billing owner for the new Pro project |
 | 4 | Indonesian wording review, including the new stage strings |
