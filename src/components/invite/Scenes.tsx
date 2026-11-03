@@ -170,7 +170,7 @@ export function Scenes({ data, token, label, root, onViewPass }: Props) {
         <Title>{t('invite.save_date')}</Title>
         <div className="persp">
           <div className="calcard glass m m-hinge" style={d(0.5)} aria-label="December 2026">
-            <p className="calcard__month">DESEMBER 2026</p>
+            <p className="calcard__month">DECEMBER 2026</p>
             <div className="calcard__grid">
               {['S', 'S', 'R', 'K', 'J', 'S', 'M'].map((day, i) => <b key={i}>{day}</b>)}
               <span />
