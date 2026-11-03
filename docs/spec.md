@@ -2,7 +2,7 @@
 
 **Date:** 10 October 2026
 **Status:** Draft for review
-**Event:** Thursday, 10 December 2026, about 215 guests (employees only)
+**Event:** Tuesday, 8 December 2026, about 215 guests (employees only)
 **Related documents:** *Digital Event Experience PRD* (v1.2) — what and why. *Design Guide* (v1.2) — how it looks. This spec — how it is built.
 
 ---

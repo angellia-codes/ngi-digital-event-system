@@ -101,6 +101,7 @@ export function Scenes({ data, token, label, root, onViewPass }: Props) {
   const serverNow = now + offset.current;
   const isToday = witaDate(serverNow) >= ev.date;
   const cd = ev.doors_at ? countdownParts(Date.parse(ev.doors_at), serverNow) : null;
+  const dayIdx = Number(ev.date.slice(8, 10)) - 1; // ponytail: calendar grid is fixed to December 2026
 
   const cal = useMemo<CalInput | null>(() => {
     if (!ev.doors_at) return null;
@@ -175,9 +176,9 @@ export function Scenes({ data, token, label, root, onViewPass }: Props) {
               {['S', 'S', 'R', 'K', 'J', 'S', 'M'].map((day, i) => <b key={i}>{day}</b>)}
               <span />
               {Array.from({ length: 31 }, (_, i) => (
-                <span key={i} className={i === 9 ? 'is-day' : undefined}>
+                <span key={i} className={i === dayIdx ? 'is-day' : undefined}>
                   {i + 1}
-                  {i === 9 && (
+                  {i === dayIdx && (
                     <svg className="calcard__circle m m-stamp" style={d(1, { '--r': '-8deg' })} viewBox="0 0 40 40" aria-hidden="true">
                       <ellipse cx="20" cy="20" rx="17" ry="16" />
                     </svg>

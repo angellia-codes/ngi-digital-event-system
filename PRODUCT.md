@@ -8,7 +8,7 @@ web
 
 ## Users
 
-NourishFest 2026 is a single company event: Thursday 10 December 2026, gates open 17:00 WITA, about 215 Nourish Group (NGI) employees. Everything below serves that one night and the weeks leading up to it.
+NourishFest 2026 is a single company event: Tuesday 8 December 2026, gates open 17:00 WITA, about 215 Nourish Group (NGI) employees. Everything below serves that one night and the weeks leading up to it.
 
 - **Guests (employees only).** About 215 people, mostly on mid-range Android phones and iPhone Safari, often on weak venue Wi-Fi. They never register, log in or fill in forms. Each one gets a personal link on WhatsApp. Before the event they open it to see the invitation and their check-in QR. On the night they show the QR at the door, then use the same page to see their Door Prize number and merchandise QR.
 - **Station staff.** Check-in Officers, Merchandise Officers, the MC / Draw Operator and an optional Prize Verification Officer. Each signs in with a 4-digit role PIN on a phone or tablet. They work in a loud, dim, crowded venue with queues in front of them, and must read a scan result in under a second from arm's length.

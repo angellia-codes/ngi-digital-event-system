@@ -110,7 +110,7 @@ export const INVITE_EN: Record<keyof typeof INVITE_ID, string> = {
   'invite.do1': 'Bring a charged phone, your pass lives here',
   'invite.do2': 'Arrive from {doors}',
   'invite.do3': 'Follow the dress code',
-  'invite.do4': 'Minum dengan tanggung jawab. Rayakan dengan bijak dan saling menghargai.',
+  'invite.do4': 'Drink responsibly. Celebrate wisely and respect each other.',
   'invite.do5': 'Look out for each other, follow the committee',
   'invite.dont1': "Don't share your link or QR, it's yours only",
   'invite.dont2': 'No outside guests, employees only',
