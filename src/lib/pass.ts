@@ -7,7 +7,7 @@ export type PassData = {
     venue: string | null; maps_url: string | null;
   };
   server_now: string;
-  guest: { full_name: string; outlet: string; department: string | null; position: string | null };
+  guest: { full_name: string; nickname?: string | null; outlet: string; department: string | null; position: string | null };
   invite_token: string;
   checked_in: boolean;
   checked_in_at: string | null;

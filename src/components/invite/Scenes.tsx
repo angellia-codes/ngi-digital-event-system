@@ -95,7 +95,7 @@ export function Scenes({ data, token, label, root, onViewPass }: Props) {
     return () => clearInterval(id);
   }, []);
 
-  const first = data.guest.full_name.trim().split(/\s+/)[0] ?? '';
+  const first = data.guest.nickname?.trim() || (data.guest.full_name.trim().split(/\s+/)[0] ?? '');
   const doors = ev.doors_at ? formatTimeWita(ev.doors_at) : null;
   const starts = ev.starts_at ? formatTimeWita(ev.starts_at) : null;
   const serverNow = now + offset.current;
@@ -173,7 +173,7 @@ export function Scenes({ data, token, label, root, onViewPass }: Props) {
           <div className="calcard glass m m-hinge" style={d(0.5)} aria-label="December 2026">
             <p className="calcard__month">DECEMBER 2026</p>
             <div className="calcard__grid">
-              {['S', 'S', 'R', 'K', 'J', 'S', 'M'].map((day, i) => <b key={i}>{day}</b>)}
+              {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, i) => <b key={i}>{day}</b>)}
               <span />
               {Array.from({ length: 31 }, (_, i) => (
                 <span key={i} className={i === dayIdx ? 'is-day' : undefined}>
