@@ -11,8 +11,6 @@ import { Cassette, Crowd, MapPin, MapStreets } from './art';
 
 const k = (s: string) => s as StringKey;
 
-// ponytail: venue map is fixed in code (Jimbaran Bay Beach Resort & Spa). Move to an events column if the venue can change.
-const VENUE_MAP_EMBED = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3075.496424883051!2d115.16773727501538!3d-8.766544691284604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd2446667a4b4bd%3A0xb7a44c266f034787!2sJimbaran%20Bay%20Beach%20Resort%20%26%20Spa!5e1!3m2!1sen!2sid!4v1793863045351!5m2!1sen!2sid';
 const pad = (n: number) => String(n).padStart(2, '0');
 /** Motion delay in beats plus any extra custom properties (`--r`, `--i`, `--n`, `--dur`, `--accent`). */
 const d = (beats: number, extra: Record<string, string | number> = {}) => ({ '--d': beats, ...extra }) as CSSProperties;
@@ -233,19 +231,12 @@ export function Scenes({ data, token, label, root, onViewPass }: Props) {
       <Scene root={root}>
         <Chip n={5} />
         <Title>{t('invite.where_title')}</Title>
-        {ev.venue ? (
-          <div className="mapcard mapcard--live m m-settle" style={d(0.5)}>
-            {/* Static preview: taps go to the Maps button, so the iframe can't trap the page scroll. */}
-            <iframe src={VENUE_MAP_EMBED} title={ev.venue} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" tabIndex={-1} />
-          </div>
-        ) : (
         <div className="mapcard m m-settle" style={d(0.5)}>
           <MapStreets />
           <i className="mapcard__ripple m m-ripple" style={d(1.6)} aria-hidden="true" />
           <i className="mapcard__shadow m m-shadow" style={d(1.15)} aria-hidden="true" />
           <MapPin className="mapcard__pin m m-drop" style={d(1)} />
         </div>
-        )}
         {ev.venue ? <p className="big m m-settle" style={d(1.75)}>{ev.venue}</p> : tba(1.75)}
         {ev.maps_url && (
           <a className="inv-btn inv-btn--green m m-settle" style={d(2)} href={ev.maps_url} target="_blank" rel="noopener noreferrer">{t('invite.maps')}</a>

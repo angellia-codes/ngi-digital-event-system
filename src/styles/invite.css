@@ -96,10 +96,11 @@
 
 /* Scene 2: Polaroid */
 .yo { margin: 0; font-family: var(--nf-font-heading); font-size: 32px; line-height: 1.1; text-transform: uppercase; text-wrap: balance; }
-.cam { position: relative; width: 100%; height: 370px; }
+.cam { position: relative; width: 100%; }
 .cam__slot { position: absolute; left: 50%; top: 0; z-index: 2; width: 260px; height: 30px; margin-left: -130px; background: var(--nf-surface); border: 2px solid var(--nf-gold); border-radius: 8px; opacity: 0; }
 .cam__slot::after { content: ""; position: absolute; left: 14px; right: 14px; top: 10px; height: 6px; background: var(--nf-black); border-radius: 3px; }
-.cam__clip { position: absolute; left: calc(-1 * var(--nf-gutter)); right: calc(-1 * var(--nf-gutter)); top: 30px; bottom: 0; overflow: hidden; }
+/* In flow so the clip grows with a 2-line name; bottom padding keeps the tilt + pink shadow visible. */
+.cam__clip { position: relative; margin: 30px calc(-1 * var(--nf-gutter)) 0; padding-bottom: 18px; overflow: hidden; }
 .cam__flash { position: absolute; inset: 0; z-index: 3; background: var(--nf-gold); opacity: 0; pointer-events: none; }
 .polaroid { width: 232px; margin: 10px auto 0; padding: 12px 12px 0; background: var(--nf-paper); color: var(--nf-black); box-shadow: 6px 6px 0 var(--nf-pink); transform-origin: 50% 0; transform: translateY(3px) rotate(-3deg); }
 .polaroid__photo { position: relative; aspect-ratio: 1; overflow: hidden; }
@@ -145,8 +146,6 @@
 /* Scene 6: Where */
 .mapcard { position: relative; width: 100%; height: 160px; overflow: hidden; background: var(--nf-surface); border: 2px solid var(--nf-line); border-radius: 14px; }
 .mapcard .art-streets { display: block; width: 100%; height: 100%; }
-.mapcard--live { height: 220px; }
-.mapcard--live iframe { display: block; width: 100%; height: 100%; border: 0; pointer-events: none; }
 .mapcard__pin { position: absolute; left: 50%; top: 30px; z-index: 2; width: 44px; margin-left: -22px; }
 .mapcard__shadow { position: absolute; left: 50%; top: 80px; width: 32px; height: 9px; margin-left: -16px; border-radius: 50%; background: #000; opacity: 0.5; }
 .mapcard__ripple { position: absolute; left: 50%; top: 67px; width: 52px; height: 34px; margin-left: -26px; border: 2px solid var(--nf-pink); border-radius: 50%; opacity: 0; }
