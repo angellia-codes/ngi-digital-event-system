@@ -57,7 +57,6 @@
 .stage-wm__b { display: block; color: var(--nf-gold); text-shadow: 4px 4px 0 var(--nf-pink); }
 .stage-wm span span { display: inline-block; }
 .stage-stk { position: absolute; left: 50%; top: 480px; margin: 0; padding: 4px 16px; background: var(--nf-pink); color: var(--nf-black); font-family: var(--nf-font-heading); font-size: 22px; white-space: nowrap; transform: translateX(-50%) rotate(-4deg); }
-.stage-theme { position: absolute; left: 0; right: 0; top: 528px; margin: 0; text-align: center; font-family: var(--nf-font-label); font-weight: 600; font-size: 14px; letter-spacing: 0.08em; color: var(--nf-gold); white-space: nowrap; }
 .stage-vcr { position: absolute; left: 24px; top: 100px; margin: 0; display: grid; font-family: var(--nf-font-label); font-weight: 600; font-size: 18px; letter-spacing: 0.14em; color: var(--nf-green); }
 .stage-vcr span { grid-area: 1 / 1; opacity: 0; }
 .stage-band { position: absolute; left: -20px; right: -20px; top: -40px; height: 26px; background: rgba(255,27,107,0.35); border-top: 2px solid rgba(57,255,20,0.6); opacity: 0; pointer-events: none; }
@@ -65,7 +64,7 @@
 .art-reel, .art-wr, .art-sp { transform-box: fill-box; transform-origin: center; }
 /* Gate: only the cassette and the buttons show. */
 .inv--gate .stage-bb { transform: translateY(560px); }
-.inv--gate .stage-eq, .inv--gate .stage-wm, .inv--gate .stage-stk, .inv--gate .stage-theme { opacity: 0; }
+.inv--gate .stage-eq, .inv--gate .stage-wm, .inv--gate .stage-stk { opacity: 0; }
 /* Opening: the buttons are gone and the tape ends hidden inside the boombox. */
 .inv--opening .stage-cta { opacity: 0; pointer-events: none; }
 .inv--opening .stage-tape { opacity: 0; }
@@ -207,7 +206,6 @@
   .inv--opening .stage-wm__b span { animation: inv-slam var(--beat) var(--ease-slam) calc(var(--beat) * 6 + var(--i) * 55ms) backwards; }
   .inv--opening .stage-wm { animation: inv-glitch calc(var(--beat) * 0.35) steps(1) calc(var(--beat) * 7.25); }
   .inv--opening .stage-stk { animation: inv-drop-x var(--beat) var(--ease-slam) calc(var(--beat) * 7.5) backwards; }
-  .inv--opening .stage-theme { animation: inv-settle var(--half) var(--ease-out) calc(var(--beat) * 8.25) backwards; }
   /* VCR labels (re-label spec §3): REWIND for beats 3.5–5, then PLAY until the stage fades */
   .inv--opening .stage-vcr__rw { animation: inv-show calc(var(--beat) * 1.5) steps(1) calc(var(--beat) * 3.5); }
   .inv--opening .stage-vcr__play { animation: inv-show 1ms linear calc(var(--beat) * 5) forwards; }
