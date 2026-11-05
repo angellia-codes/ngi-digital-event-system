@@ -4,7 +4,7 @@
 
 /* ---------- Root, tokens, controls ---------- */
 .inv {
-  --beat: 571ms; /* 105 BPM. Keep in step with BEAT_MS in src/lib/invite/motion.ts */
+  --beat: 577ms; /* 104 BPM. Keep in step with BEAT_MS in src/lib/invite/motion.ts */
   --half: calc(var(--beat) / 2);
   --qtr: calc(var(--beat) / 4);
   --ease-slam: cubic-bezier(.34, 1.56, .64, 1);

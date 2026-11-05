@@ -6,10 +6,10 @@ import {
 } from '@/lib/invite/motion';
 
 describe('tempo', () => {
-  it('is 105 BPM and the beat is 60000 / BPM rounded', () => {
-    expect(BPM).toBe(105);
+  it('is 104 BPM and the beat is 60000 / BPM rounded', () => {
+    expect(BPM).toBe(104);
     expect(BEAT_MS).toBe(Math.round(60000 / BPM));
-    expect(BEAT_MS).toBe(571);
+    expect(BEAT_MS).toBe(577);
   });
   it('drops the music on beat 2 and settles glass after 3 beats', () => {
     expect(DROP_BEATS).toBe(2);

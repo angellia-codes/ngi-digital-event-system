@@ -1,6 +1,6 @@
 # NourishFest 2026 — Invitation Motion: Design Spec
 
-**Status:** Approved in brainstorming on 19 October 2026, awaiting written-spec review. Tempo changed from 90 to 105 BPM on 19 Oct; all choreography stays in beats
+**Status:** Approved in brainstorming on 19 October 2026, awaiting written-spec review. Tempo changed from 90 to 105 BPM on 19 Oct; all choreography stays in beats. Tempo set to 104 BPM (1 beat = 577 ms) on 6 Nov 2026 to match the delivered theme track.
 **Owner:** HR (Angel)
 **Builds on:** Invitation Design Spec (14 Oct 2026), Design Guide v1.2, and the current `ngi-digital-event-system` repo at `c285110` ("Server-render the pass, add check-in reveal and invitation theme song")
 **Replaces:** the *Motion* column of §2 and all of §7 *Visual and motion rules* in the 14 Oct spec. Everything else in that spec still applies.

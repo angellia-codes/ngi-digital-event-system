@@ -2,8 +2,8 @@
  * Invitation motion timing (motion spec 2026-10-19 §3–§4). Everything is counted in beats.
  * BEAT_MS must match `--beat` in src/styles/invite.css.
  */
-export const BPM = 105;
-export const BEAT_MS = 571; // Math.round(60000 / BPM)
+export const BPM = 104;
+export const BEAT_MS = 577; // Math.round(60000 / BPM)
 /** The tape clicks into the boombox on beat 2 of the opening; the music drops there. */
 export const DROP_BEATS = 2;
 /** Glass blur switches on this many beats after a scene starts, once its cards have stopped moving. */
