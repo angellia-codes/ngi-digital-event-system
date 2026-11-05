@@ -1,10 +1,11 @@
 # NourishFest 2026 — Design Guide
 
-**Version:** 1.3
+**Version:** 1.4
 **Status:** Draft for approval
-**Last updated:** 11 October 2026
+**Last updated:** 5 November 2026
 **Applies to:** NourishFest 2026 Digital Event Experience (see PRD v1.2 and the Technical Design Spec)
 **Visual reference:** "NourishFest 2026 Mockups" canvas (six screens: pass before check-in, pass after check-in, staff scan success, staff scan duplicate, stage display with the winning number, stage display with the winner revealed)
+**Changes in 1.4 (5 Nov, theme re-label):** theme is now RETRO REWIND: BACK TO THE 90s, written in English in both languages; brief, motifs and voice say 90s instead of hip-hop; tagline, colours, fonts, modes (including the internal name Block Party) and motion are unchanged. See `docs/2026-11-05-nourishfest-retro-rewind-relabel-design.md` (sections 1, 2, 13, 14).
 **Changes in 1.3 (11 Oct, synced to the current mockups):** pass header shows the company name; no tagline sticker on the pass (the tagline lives on the stage and idle screen); wordmark is two-tone (NOURISH off-white, FEST 2026 gold) at 50 px; date line is gold; pass backgrounds are page-wide with a different glow before and after check-in; the staff result type scale is 30 / 40 / 16 px; the stage LIVE badge is an outline pill; stage footer shows the tagline in pink Anton and the slot counter in muted Oswald; stage number shadows are 10 px (landed) and 7 px (revealed) with a gold glow; merchandise card text is stacked (QR, "1X PER ORANG" as pink text, helper, muted warning) (sections 5.2, 7, 8.8, 9.1, 9.2, 9.7, 14.3).
 **Changes in 1.2 (10 Oct, synced to the updated mockups):** no congratulations wording anywhere, and the revealed stage shows name, outlet and department; the slot counter means slot n of the prize's total slots; the merchandise card is stacked with a larger QR and the helper text below it; QR frames are 8 px and the pass card border is 5 px; date line shows placeholders until HR supplies time and venue (sections 8.2, 8.3, 8.6, 8.8, 9.1, 14.3).
 **Changes in 1.1:** the stage display now shows the prize and number first and reveals the winner after the MC confirms (sections 8.8, 9.5–9.7, 11, 13.1).
@@ -16,9 +17,9 @@
 | Item | Value |
 | :---- | :---- |
 | Event | NourishFest 2026 |
-| Theme | HipHop |
+| Theme | RETRO REWIND: BACK TO THE 90s |
 | Tagline | **MOVE IN UNITY.** Together, We Make a Difference |
-| Vibe | Urban street culture and block-party energy. Graffiti art, bomboxes, old-school swagger. High energy, bold, unapologetic |
+| Vibe | 90s throwback with block-party energy. Cassettes, boomboxes, VHS and Polaroids, denim and colour pop. High energy, bold, unapologetic |
 | Audience | About 215 Nourish Group employees, mostly on mid-range phones, in a loud, dim, crowded venue |
 | Languages | English (default) and Indonesian |
 
@@ -32,7 +33,7 @@
 4. **One job per code.** The check-in QR and the merchandise QR must never be confused.
 5. **Dark only.** Jet black ground everywhere. There is no light theme.
 6. **Fast on weak Wi-Fi.** CSS and SVG textures, few font weights, no heavy images.
-7. **Original imagery only.** Hip-hop motifs are drawn from scratch (boombox, vinyl, spray tags, brick). No copied logos, album art or known characters.
+7. **Original imagery only.** 90s motifs are drawn from scratch (boombox, vinyl, spray tags, brick). No copied logos, album art or known characters.
 
 ---
 
@@ -394,7 +395,7 @@ Rules: respect `prefers-reduced-motion`; no motion on staff screens other than r
 
 ## 13. Content and Voice
 
-- **Tone:** upbeat, short, street-smart, respectful. Headlines are punchy; helper text is plain.
+- **Tone:** upbeat, short, playful 90s throwback, respectful. The theme line RETRO REWIND: BACK TO THE 90s stays in English in both languages. Headlines are punchy; helper text is plain.
 - **Avoid:** slang that excludes people, jokes about names or outlets, anything that sounds like a loan or prize scam.
 - **English by default, Indonesian one tap away.** Indonesian uses casual "aku/kamu" on guest screens and neutral wording on staff and admin screens.
 - All strings come from one translation file. Indonesian wording is drafted here and must be reviewed by HR before launch.
@@ -520,7 +521,7 @@ Keep the theme in one file so the logo, colours and fonts can be swapped without
 | Keep Ops screens flat and big | Put graffiti behind scan results |
 | Test Indonesian strings on every screen | Fix text box widths tightly |
 | Respect reduced motion | Animate staff screens |
-| Draw original hip-hop imagery | Copy logos, album art or characters |
+| Draw original 90s imagery | Copy logos, album art or characters |
 
 ---
 

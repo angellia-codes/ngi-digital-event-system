@@ -6,6 +6,7 @@ export type Lang = 'id' | 'en';
 const id = {
   'brand.tagline': 'MOVE IN UNITY.',
   'brand.tagline2': 'Together, We Make a Difference',
+  'brand.theme': 'RETRO REWIND: BACK TO THE 90s',
   'common.retry_hint': 'Koneksi bermasalah. Coba lagi.',
   'common.logout': 'KELUAR',
 
@@ -110,6 +111,7 @@ export type StringKey = keyof typeof id;
 const en: Record<StringKey, string> = {
   'brand.tagline': 'MOVE IN UNITY.',
   'brand.tagline2': 'Together, We Make a Difference',
+  'brand.theme': 'RETRO REWIND: BACK TO THE 90s',
   'common.retry_hint': 'Connection problem. Try again.',
   'common.logout': 'LOG OUT',
 

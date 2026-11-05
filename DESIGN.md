@@ -1,6 +1,6 @@
 ---
 name: NourishFest 2026
-description: "MOVE IN UNITY. An old-school hip-hop event pass in your pocket, with a flat, certain toolkit for the staff behind the desk."
+description: "MOVE IN UNITY. A 90s throwback event pass in your pocket, with a flat, certain toolkit for the staff behind the desk."
 colors:
   blacktop: "#0D0D0D"
   trophy-gold: "#D4AF37"
@@ -374,7 +374,7 @@ The 1280 × 720 board has a Blacktop ground with gold, pink and green glows and 
 - **Do** show every state as colour, icon and words together (plus vibration on staff devices where supported).
 - **Do** keep Ops screens flat and big: 56 px or larger touch targets, 64 px primary buttons, results readable from arm's length.
 - **Do** keep offset shadows hard (0 blur, pink, 3 / 4 / 5 / 10 px by size), and reserve blurred light for glows.
-- **Do** draw every hip-hop motif from scratch in CSS or inline SVG (cassette, boombox, vinyl, spray tag, halftone, equalizer).
+- **Do** draw every 90s motif from scratch in CSS or inline SVG (cassette, boombox, vinyl, spray tag, halftone, equalizer).
 - **Do** let names and Indonesian strings wrap. Test both languages on every screen and at 130% text size.
 - **Do** keep the 3 px gold focus ring visible on every interactive element, turning black on coloured surfaces.
 

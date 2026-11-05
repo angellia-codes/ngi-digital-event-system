@@ -74,6 +74,11 @@ export function Stage({ phase, label, onPlay, onSkip, onEnd }: Props) {
             <span className="stage-wm__b" aria-hidden="true">{letters('FEST')}</span>
           </h1>
           <p className="stage-stk">{t('brand.tagline')}</p>
+          <p className="stage-theme">{t('brand.theme')}</p>
+          <p className="stage-vcr" aria-hidden="true">
+            <span className="stage-vcr__rw">{t('invite.osd_rewind')}</span>
+            <span className="stage-vcr__play">{t('invite.osd_play')}</span>
+          </p>
           <i className="stage-band" aria-hidden="true" />
         </div>
         <div className="stage-cta">

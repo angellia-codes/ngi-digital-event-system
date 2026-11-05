@@ -13,6 +13,10 @@
 
 ## 0. Changes from earlier versions
 
+### Theme re-label (5 Nov 2026)
+
+- **Theme:** HipHop becomes **RETRO REWIND: BACK TO THE 90s**. Look, tagline and scope are unchanged; dress code widens to 90s Throwback. See `docs/2026-11-05-nourishfest-retro-rewind-relabel-design.md`.
+
 ### v1.2 (aligned with the Technical Design Spec)
 
 - **Stage reveal flow:** the projector shows only the prize name and the winning number until the MC confirms. Confirming reveals the winner's name, outlet, department and prize (no congratulations wording).
@@ -36,7 +40,7 @@
 | Roles | 9 roles, Google sign-in | **2–3 admins with Google sign-in + 4 station roles with PINs** |
 | Languages | English | **Bilingual EN / ID**, Indonesian default |
 | Draw display | Not specified | **Separate operator and display screens** synced through Supabase Realtime |
-| Branding | None | **HipHop theme** (see Design Guide) |
+| Branding | None | **Retro Rewind: Back to the 90s theme** (see Design Guide) |
 | Phases | Undated | **Dated plan** working back from 8 December |
 
 ---
@@ -476,7 +480,7 @@ Resolved on 10 October 2026:
 | 10 | Draw display uses separate operator and display screens synced by Supabase Realtime |
 | 11 | Prizes are set up in advance with tier and order; small prizes can be drawn as batches |
 | 12 | Interface is bilingual EN / ID with a toggle, Indonesian default |
-| 13 | Brand is HipHop theme with Bungee / Anton / Oswald / Archivo and the four brand colours (Design Guide) |
+| 13 | Brand is the Retro Rewind: Back to the 90s theme (HipHop until 5 Nov 2026) with Bungee / Anton / Oswald / Archivo and the four brand colours (Design Guide) |
 | 14 | Business rules live in Postgres functions called only from Next.js route handlers (Technical Design Spec) |
 | 15 | The projector shows the prize and number first; the name, outlet and department appear after the MC confirms. The MC confirms and marks no-shows; Prize Verification is the backup |
 

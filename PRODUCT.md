@@ -60,16 +60,16 @@ Success means:
 
 ## Brand Commitments
 
-- **Name:** NourishFest 2026. **Theme:** HipHop. **Tagline:** "MOVE IN UNITY. Together, We Make a Difference". The pass header shows the company name.
-- **Visual authority:** `docs/design-guide.md` (v1.3) holds the binding identity: the HipHop theme with Bungee / Anton / Oswald / Archivo and the four brand colours (PRD decision 13), dark only, and the two modes ("Block Party" for the pass and stage, "Ops" for staff and admin screens). The invitation layer follows `docs/2026-10-14-nourishfest-invitation-design.md`: old-school 80s/90s hip-hop inside the same brand, animated with CSS and SVG only.
-- **Original imagery only.** Hip-hop motifs are drawn from scratch. No copied logos, album art or known characters. No NourishFest logo file exists yet, so a text wordmark is used.
+- **Name:** NourishFest 2026. **Theme:** RETRO REWIND: BACK TO THE 90s (re-labelled from HipHop on 5 Nov 2026, see `docs/2026-11-05-nourishfest-retro-rewind-relabel-design.md`). **Tagline:** "MOVE IN UNITY. Together, We Make a Difference". The pass header shows the company name.
+- **Visual authority:** `docs/design-guide.md` (v1.4) holds the binding identity: the Retro Rewind theme with Bungee / Anton / Oswald / Archivo and the four brand colours (PRD decision 13), dark only, and the two modes ("Block Party" for the pass and stage, "Ops" for staff and admin screens). The invitation layer follows `docs/2026-10-14-nourishfest-invitation-design.md`: a 90s throwback (cassette, boombox, VHS, Polaroid) inside the same brand, animated with CSS and SVG only.
+- **Original imagery only.** 90s motifs are drawn from scratch. No copied logos, album art or known characters. No NourishFest logo file exists yet, so a text wordmark is used.
 - **Voice:** upbeat, short, street-smart, respectful. Headlines are punchy, and helper text is plain. Indonesian uses casual "aku/kamu" on guest screens and neutral wording on staff and admin screens. Avoid slang that excludes people, jokes about names or outlets, and anything that sounds like a loan or prize scam.
 - **No congratulations wording anywhere,** including the winner reveal on stage.
 - **Music:** a fixed NGI-owned track at `public/audio/nourishfest-theme.mp3`, still to be supplied along with the producer's written permission.
 
 ## Evidence on Hand
 
-- Product docs: `docs/prd.md` (v1.2), `docs/spec.md`, `docs/design-guide.md` (v1.3), `docs/2026-10-14-nourishfest-invitation-design.md`, `docs/plans/`, `docs/runbooks/`.
+- Product docs: `docs/prd.md` (v1.2), `docs/spec.md`, `docs/design-guide.md` (v1.4), `docs/2026-10-14-nourishfest-invitation-design.md`, `docs/2026-11-05-nourishfest-retro-rewind-relabel-design.md`, `docs/plans/`, `docs/runbooks/`.
 - A "NourishFest 2026 Mockups" canvas is referenced by the Design Guide (six screens). It is not in the repo.
 - **Absent, so never fabricate:** a logo file, the music file, venue and times, the final prize list, real employee data (use clearly fake test data only), testimonials, attendance figures.
 

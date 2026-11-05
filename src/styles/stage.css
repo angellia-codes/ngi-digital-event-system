@@ -34,6 +34,7 @@ html:has(.stage), body:has(.stage) { overflow: hidden; background: #000; }
 .idle__mark { margin: 0; display: flex; flex-direction: column; font-family: var(--nf-font-display); font-weight: 400; font-size: 120px; line-height: .95; color: var(--nf-gold); text-shadow: 6px 6px 0 var(--nf-pink); }
 .idle__mark span:first-child { color: var(--nf-text); }
 .idle__tag { padding: 4px 22px; background: var(--nf-pink); color: #000; font-family: var(--nf-font-heading); font-size: 34px; letter-spacing: .06em; transform: rotate(-2deg); }
+.idle__theme { font-family: var(--nf-font-label); font-weight: 600; font-size: 36px; letter-spacing: .2em; color: var(--nf-gold); }
 .idle__text { margin-top: 12px; font-family: var(--nf-font-label); font-weight: 600; font-size: 32px; letter-spacing: .3em; color: var(--nf-text); }
 
 .eq { display: flex; align-items: flex-end; gap: 8px; height: 60px; }

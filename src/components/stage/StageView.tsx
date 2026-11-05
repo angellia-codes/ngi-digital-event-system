@@ -52,6 +52,7 @@ export function StageView({ row, views, delays }: { row: StageRow; views: SlotVi
       <>
         <h1 className="idle__mark" aria-label="NourishFest 2026"><span>NOURISH</span><span>FEST 2026</span></h1>
         <span className="idle__tag">{t('brand.tagline')}</span>
+        <span className="idle__theme">{t('brand.theme')}</span>
         <Bars />
         <p className="idle__text">{t('stage.idle')}</p>
       </>

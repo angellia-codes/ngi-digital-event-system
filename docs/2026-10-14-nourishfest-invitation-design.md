@@ -5,6 +5,8 @@
 **Builds on:** PRD v1.2, Design Guide v1.2, Technical Design Spec, Plan 1 and Plan 2, and the current `ngi-digital-event-system` repository (which already dropped RSVP in `20261115000009_drop_rsvp.sql`)
 **Deadline:** live before the invitations go out (invitation gate, 23 Nov 2026; guest list freeze about 20 Nov)
 
+**Amended 5 Nov 2026:** the theme is re-labelled to RETRO REWIND: BACK TO THE 90s. Hip-hop wording below is historical; copy, dress code and the opening's rewind labels follow `docs/2026-11-05-nourishfest-retro-rewind-relabel-design.md`.
+
 ---
 
 ## 1. Summary

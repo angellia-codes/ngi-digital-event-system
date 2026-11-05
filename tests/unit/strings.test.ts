@@ -17,6 +17,12 @@ describe('strings', () => {
   it('uses the same placeholders in both languages', () => {
     for (const k of keys) expect(placeholders(STRINGS.en[k]), k).toEqual(placeholders(STRINGS.id[k]));
   });
+  it('names the Retro Rewind theme and drops hip-hop from guest copy', () => {
+    for (const lang of ['id', 'en'] as const) {
+      expect(STRINGS[lang]['brand.theme']).toBe('RETRO REWIND: BACK TO THE 90s');
+      for (const k of keys) expect(STRINGS[lang][k], `${lang} ${k}`).not.toMatch(/hip.?hop/i);
+    }
+  });
   it('fills placeholders', () => {
     expect(translate('id', 'pass.checked_in_at', { time: '17:42' })).toBe('CHECK-IN 17:42');
     expect(translate('en', 'pass.checked_in_at', { time: '17:42' })).toBe('CHECKED IN 17:42');

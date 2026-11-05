@@ -48,7 +48,7 @@ describe('splitLines', () => {
     expect(splitLines(INVITE_EN['invite.about'])).toEqual([
       'One night for all of us.',
       'Every outlet, one stage, one beat:',
-      'celebrating a year of hard work with the Nourish family.',
+      'rewinding to the 90s and celebrating a year of hard work with the Nourish family.',
     ]);
   });
   it('splits the about copy into three lines in Indonesian', () => {

@@ -6,6 +6,8 @@
 **Replaces:** the *Motion* column of §2 and all of §7 *Visual and motion rules* in the 14 Oct spec. Everything else in that spec still applies.
 **Prototype:** "NourishFest Invitation Prototype" artifact (private, `https://claude.ai/artifact/4e68RcAVkQBKGAgeYJKJjx`). Where the prototype and this spec differ, this spec wins.
 
+**Amended 5 Nov 2026:** the theme is re-labelled to RETRO REWIND: BACK TO THE 90s. Hip-hop wording below is historical; copy, dress code and the opening's rewind labels follow `docs/2026-11-05-nourishfest-retro-rewind-relabel-design.md`.
+
 ---
 
 ## 1. Summary
