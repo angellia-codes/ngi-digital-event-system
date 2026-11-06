@@ -10,7 +10,7 @@ describe('witaStamp', () => {
 });
 
 describe('isReportName', () => {
-  it.each(['guests', 'check-ins', 'merchandise', 'draws', 'audit'])('knows %s', (n) => expect(isReportName(n)).toBe(true));
+  it.each(['guests', 'check-ins', 'merchandise', 'beverages', 'beverage-pending', 'draws', 'audit'])('knows %s', (n) => expect(isReportName(n)).toBe(true));
   it.each(['rsvp-pending', 'invitations', '../etc', 'toString', '__proto__', ''])('rejects %s', (n) => expect(isReportName(n)).toBe(false));
 });
 
@@ -35,6 +35,17 @@ describe('buildReportCsv', () => {
     ]);
     expect(parse(g).data[0].Time).toBe('2026-12-10 09:30:00');
     expect(parse(g).data[0]['Door Prize no.']).toBe('7');
+  });
+  it('writes the beverage reports with the spec columns', () => {
+    expect(REPORTS.beverages.cols.map((c) => c.header)).toEqual([
+      'Employee ID', 'Name', 'Outlet', 'Department', 'Drink', 'Source', 'Chosen at', 'Redeemed at', 'Bar', 'Staff', 'Status', 'Void reason',
+    ]);
+    expect(REPORTS['beverage-pending'].cols.map((c) => c.header)).toEqual(['Employee ID', 'Name', 'Outlet', 'Department', 'Phone']);
+    const row = parse(buildReportCsv('beverages', [
+      { employee_id: 'E1', full_name: 'Ayu', outlet: 'A', beverage: 'beer', source: 'auto', redeemed_at: '2026-12-08T10:00:00Z', status: 'redeemed' },
+    ])).data[0];
+    expect(row.Drink).toBe('beer');
+    expect(row['Redeemed at']).toBe('2026-12-08 18:00:00');
   });
   it('neutralises spreadsheet formulas in every text cell', () => {
     const csv = buildReportCsv('guests', [

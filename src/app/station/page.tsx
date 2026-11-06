@@ -11,6 +11,7 @@ const HOME: Record<string, string | undefined> = {
   merchandise: '/station/merchandise',
   draw: '/station/draw',
   prizes: '/station/prizes',
+  bar: '/station/bar',
   admin: '/admin',
 };
 

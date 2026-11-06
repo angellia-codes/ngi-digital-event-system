@@ -11,6 +11,10 @@ type Dash = {
   prizes: PrizeRow[];
   draw: { confirmed: number; pending: number; no_shows: number; admin_voids: number; eligible: number };
   stage: { phase: string; rev: number; heartbeat_age: number | null };
+  beverage?: {
+    beer: number; soft_drink: number; no_choice: number; total: number;
+    redeemed_beer: number; redeemed_soft_drink: number; deadline: string | null; final: boolean;
+  };
   recent: { at: string; actor: string; action: string }[];
 };
 
@@ -45,6 +49,36 @@ export default function Dashboard() {
           </div>
         ))}
       </div>
+
+      {data.beverage && (() => {
+        const b = data.beverage;
+        const bev: [string, number | string][] = [
+          ['Beer', b.beer], ['Soft Drink', b.soft_drink], ['No choice yet', b.no_choice], ['Total', b.total],
+          ['Beer handed over', `${b.redeemed_beer} / ${b.beer}`], ['Soft Drink handed over', `${b.redeemed_soft_drink} / ${b.soft_drink}`],
+        ];
+        return (
+          <>
+            <h2 className="adm-sub">
+              Drinks to buy{' '}
+              <span className={`adm-badge ${b.final ? 'adm-badge--green' : 'adm-badge--gold'}`}>{b.final ? 'FINAL' : 'live'}</span>
+            </h2>
+            <p className="adm-muted">
+              {b.deadline
+                ? `Deadline ${new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Makassar', dateStyle: 'medium', timeStyle: 'short' }).format(new Date(b.deadline))} WITA. `
+                : 'No deadline set (Settings). '}
+              Active guests only. Walk-ins and late additions after the deadline still raise these numbers, so keep a buffer.
+            </p>
+            <div className="adm-grid">
+              {bev.map(([label, n]) => (
+                <div className="adm-stat" key={label}>
+                  <div className="adm-stat__n">{n}</div>
+                  <div className="adm-stat__l">{label}</div>
+                </div>
+              ))}
+            </div>
+          </>
+        );
+      })()}
 
       <h2 className="adm-sub">Door prize</h2>
       <div className="adm-grid">

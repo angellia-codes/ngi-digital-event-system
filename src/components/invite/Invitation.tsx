@@ -19,7 +19,9 @@ const prefersReduced = () => typeof window !== 'undefined' && !!window.matchMedi
  * Controller for the invitation layer (motion spec 2026-10-19): gate → opening → scroll scenes → exit to the pass.
  * The exit animates the whole layer and calls onDone on its `inv-leave` animationend.
  */
-export function Invitation({ data, token, replay, onDone }: { data: PassData; token: string; replay: boolean; onDone: () => void }) {
+export function Invitation({ data, token, replay, onBeverage, onDone }: {
+  data: PassData; token: string; replay: boolean; onBeverage: (d: PassData) => void; onDone: () => void;
+}) {
   const { t } = useI18n();
   const music = useMusic();
   const [phase, setPhase] = useState<Phase>('gate');
@@ -69,7 +71,7 @@ export function Invitation({ data, token, replay, onDone }: { data: PassData; to
         </div>
       )}
       {phase === 'scroll'
-        ? <Scenes data={data} token={token} label={label} root={scroller} onViewPass={() => leave('slow')} />
+        ? <Scenes data={data} token={token} label={label} root={scroller} onBeverage={onBeverage} onViewPass={() => leave('slow')} />
         : <Stage phase={phase} label={label} onPlay={play} onSkip={skipFromGate} onEnd={() => setPhase('scroll')} />}
     </div>
   );

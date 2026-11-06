@@ -44,10 +44,11 @@
 .qr-frame { display: inline-block; border-radius: var(--nf-radius-card); overflow: hidden; line-height: 0; background: var(--nf-white); border-style: solid; }
 .qr-frame--gold { border-width: 8px; border-color: var(--nf-gold); }
 .qr-frame--pink { border-width: 8px; border-color: var(--nf-pink); }
+.qr-frame--green { border-width: 8px; border-color: var(--nf-green); }
 .qr-frame svg { display: block; max-width: 100%; height: auto; }
 /* Whole pixels per module (Design Guide 8.2): 7 px fits a 37-module code in the 360 px ticket, 8 px from 400 px. */
-.ticket .qr-frame svg, .merch .qr-frame svg { --qr-ppm: 7; width: calc(var(--qr-mods, 37) * var(--qr-ppm) * 1px); }
-@media (min-width: 400px) { .ticket .qr-frame svg, .merch .qr-frame svg { --qr-ppm: 8; } }
+.ticket .qr-frame svg, .merch .qr-frame svg, .bev .qr-frame svg { --qr-ppm: 7; width: calc(var(--qr-mods, 37) * var(--qr-ppm) * 1px); }
+@media (min-width: 400px) { .ticket .qr-frame svg, .merch .qr-frame svg, .bev .qr-frame svg { --qr-ppm: 8; } }
 
 .btn { min-height: 52px; padding: 0 20px; border-radius: var(--nf-radius-btn); border: 2px solid transparent; font-family: var(--nf-font-heading); font-size: 18px; letter-spacing: 0.04em; }
 .btn--primary { background: var(--nf-pink); color: var(--nf-black); }
@@ -76,6 +77,21 @@
 .merch .caption--warn { color: var(--nf-text-muted); font-weight: 400; font-size: 12px; }
 .merch__banner--muted { background: var(--nf-line-dash); color: var(--nf-text); }
 .merch--claimed { padding-bottom: 12px; }
+
+/* Beverage card (spec 2026-11-06 §2.3): same shape as merchandise, green frame, black text on green. */
+.bev { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 16px 16px; background: var(--nf-card); border: 3px solid var(--nf-green); border-radius: var(--nf-radius-card); overflow: hidden; }
+.bev__banner { align-self: stretch; margin: 0 -16px 4px; padding: 3px 0; display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--nf-green); color: var(--nf-black); font-family: var(--nf-font-heading); font-weight: 400; font-size: 26px; line-height: 1.2; letter-spacing: 0.1em; }
+.bev__banner--muted { background: var(--nf-line-dash); color: var(--nf-text); }
+.bev--claimed { padding-bottom: 12px; }
+.bev .helper { color: var(--nf-text); }
+.bev__once { font-family: var(--nf-font-label); font-weight: 600; font-size: 15px; letter-spacing: 0.1em; color: var(--nf-green); }
+.bev__drink { margin: 0; font-family: var(--nf-font-heading); font-size: 22px; letter-spacing: 0.08em; color: var(--nf-text); }
+.bev__confirm { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+.bev__q { margin: 0; text-align: center; font-weight: 600; color: var(--nf-text); }
+.bev__btns { display: flex; gap: 10px; width: 100%; }
+.bev__btn { flex: 1; min-height: 52px; padding: 0 12px; border: 2px solid var(--nf-green); border-radius: var(--nf-radius-btn); background: var(--nf-green); color: var(--nf-black); font-family: var(--nf-font-heading); font-size: 20px; letter-spacing: 0.06em; cursor: pointer; }
+.bev__btn--ghost { background: transparent; color: var(--nf-green); }
+.bev__btn:disabled { opacity: 0.6; cursor: default; }
 
 .save { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 

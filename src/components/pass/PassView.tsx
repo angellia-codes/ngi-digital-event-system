@@ -10,6 +10,7 @@ import { isMapsUrl } from '@/lib/invite/maps';
 import { decideStart, readSeen } from '@/lib/invite/play';
 import { witaDate } from '@/lib/invite/time';
 import { formatDateShort, formatTimeWita } from '@/lib/time';
+import { BeverageChoice } from './BeverageChoice';
 import { MerchCard } from './MerchCard';
 import { PrizeNumber, padPrize } from './PrizeNumber';
 import { SaveImage } from './SaveImage';
@@ -78,8 +79,9 @@ export function PassView({ token, initial, mayInvite }: { token: string; initial
     };
   }, [reveal]);
 
+  const bevDone = !data.beverage || data.beverage.redeemed;
   // Poll so the pass flips by itself at the door. Check-in can't happen before event day outside rehearsals, so it
-  // polls slowly then; after check-in only the merchandise state can change, and once claimed nothing can.
+  // polls slowly then; after check-in only the merchandise and drink states can change, and once both are done nothing can.
   useEffect(() => {
     let fails = 0;
     const tick = async () => {
@@ -104,10 +106,11 @@ export function PassView({ token, initial, mayInvite }: { token: string; initial
     window.addEventListener('offline', onOffline);
     window.addEventListener('online', onOnline);
     const preEvent = witaDate(Date.now() + offset.current) < data.event.date;
-    const every = !data.checked_in ? (preEvent ? 30_000 : 6_000) : data.merchandise?.claimed ? 60_000 : 15_000;
+    const settled = data.merchandise?.claimed && bevDone;
+    const every = !data.checked_in ? (preEvent ? 30_000 : 6_000) : settled ? 60_000 : 15_000;
     const id = setInterval(tick, every);
     return () => { clearInterval(id); window.removeEventListener('offline', onOffline); window.removeEventListener('online', onOnline); };
-  }, [token, data.checked_in, data.merchandise?.claimed, data.event.date, flag, t]);
+  }, [token, data.checked_in, data.merchandise?.claimed, bevDone, data.event.date, flag, t]);
 
   // Keep the screen awake at the door.
   useEffect(() => {
@@ -120,7 +123,7 @@ export function PassView({ token, initial, mayInvite }: { token: string; initial
   }, []);
 
   if (view === 'invitation') {
-    return <Invitation data={data} token={token} replay={replay} onDone={() => { setReplay(false); setView('pass'); setEntered(true); }} />;
+    return <Invitation data={data} token={token} replay={replay} onBeverage={setData} onDone={() => { setReplay(false); setView('pass'); setEntered(true); }} />;
   }
 
   const ev = data.event;
@@ -144,6 +147,7 @@ export function PassView({ token, initial, mayInvite }: { token: string; initial
         prize={data.prize_number !== null && <PrizeNumber n={data.prize_number} state={reveal} onReveal={() => setReveal('reveal')} />}
       />
       {data.checked_in && data.merchandise && <MerchCard merch={data.merchandise} name={data.guest.full_name} reveal={riseMerch} />}
+      <BeverageChoice token={token} data={data} onChange={setData} />
       {(!data.checked_in || data.prize_number !== null) && <SaveImage kind={data.checked_in ? 'number' : 'ticket'} data={data} />}
       <section className="pass__details">
         {ev.doors_at && <p className="pass__gates">{t('invite.doors', { doors: formatTimeWita(ev.doors_at) })}</p>}

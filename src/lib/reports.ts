@@ -39,6 +39,20 @@ export const REPORTS = {
       { key: 'station', header: 'Booth' }, { key: 'actor', header: 'Staff' }, { key: 'void_reason', header: 'Void reason' },
     ],
   },
+  beverages: {
+    sql: 'beverages', file: 'nourishfest-beverages.csv',
+    cols: [
+      ...person,
+      { key: 'beverage', header: 'Drink' }, { key: 'source', header: 'Source' },
+      { key: 'chosen_at', header: 'Chosen at', kind: 'time' }, { key: 'redeemed_at', header: 'Redeemed at', kind: 'time' },
+      { key: 'station', header: 'Bar' }, { key: 'actor', header: 'Staff' }, { key: 'status', header: 'Status' },
+      { key: 'void_reason', header: 'Void reason' },
+    ],
+  },
+  'beverage-pending': {
+    sql: 'beverage_pending', file: 'nourishfest-beverage-pending.csv',
+    cols: [...person, { key: 'phone', header: 'Phone' }],
+  },
   draws: {
     sql: 'draws', file: 'nourishfest-draw-history.csv',
     cols: [

@@ -1,6 +1,6 @@
 import type { StringKey } from './i18n/strings';
 
-export type Context = 'checkin' | 'merchandise';
+export type Context = 'checkin' | 'merchandise' | 'bar';
 export type Tone = 'green' | 'pink' | 'gold' | 'neutral';
 export type Icon = 'check' | 'alert' | 'cross' | 'swap' | 'refresh' | 'none';
 export type Panel = { tone: Tone; icon: Icon; titleKey: StringKey; vibrate: number[] };
@@ -30,6 +30,15 @@ const TABLE: Record<Context, Record<string, Panel>> = {
     ALREADY_REDEEMED: p('pink', 'alert', 'merch.claimed', DOUBLE),
     NOT_CHECKED_IN: p('pink', 'alert', 'merch.not_checked_in', DOUBLE),
     WRONG_CODE_TYPE: p('gold', 'swap', 'staff.wrong_merch', DOUBLE),
+  },
+  bar: {
+    ...COMMON,
+    READY: p('neutral', 'none', 'bev.ready', []),
+    REDEEMED: p('green', 'check', 'bev.recorded', SHORT),
+    ALREADY_REDEEMED: p('pink', 'alert', 'bev.claimed', DOUBLE),
+    NOT_CHECKED_IN: p('pink', 'alert', 'merch.not_checked_in', DOUBLE),
+    NO_CHOICE: p('gold', 'alert', 'bev.no_choice', DOUBLE),
+    WRONG_CODE_TYPE: p('gold', 'swap', 'bev.wrong_code', DOUBLE),
   },
 };
 

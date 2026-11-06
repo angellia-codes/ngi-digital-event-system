@@ -78,6 +78,7 @@
 .scene__bar { display: block; width: 64px; height: 4px; margin-top: -6px; background: var(--nf-pink); }
 .big { margin: 0; font-family: var(--nf-font-heading); font-size: 28px; text-transform: uppercase; overflow-wrap: anywhere; }
 .tba { margin: 0; font-family: var(--nf-font-label); font-size: 18px; letter-spacing: 0.12em; color: var(--nf-text-soft); }
+.inv-bev { width: 100%; text-align: left; }
 .btns { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
 .btns .inv-btn { width: 100%; max-width: 320px; }
 

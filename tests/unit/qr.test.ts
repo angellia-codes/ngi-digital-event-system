@@ -15,6 +15,11 @@ describe('parseCode', () => {
     'rejects %j',
     (raw) => expect(parseCode(raw)).toEqual({ kind: 'unknown' }),
   );
+  it('reads a beverage code', () => {
+    expect(parseCode('NF:BV:' + TOKEN)).toEqual({ kind: 'beverage', token: TOKEN });
+    expect(parseCode('NF:BV:' + TOKEN.slice(1))).toEqual({ kind: 'unknown' });
+    expect(parseCode(payloadFor('beverage', TOKEN))).toEqual({ kind: 'beverage', token: TOKEN });
+  });
   it('round-trips payloadFor', () => {
     expect(parseCode(payloadFor('merch', TOKEN))).toEqual({ kind: 'merch', token: TOKEN });
   });

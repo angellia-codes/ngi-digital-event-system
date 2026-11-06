@@ -11,6 +11,7 @@ export type Result = {
   checked_in_at?: string;
   redeemed_at?: string;
   station_label?: string;
+  beverage?: 'beer' | 'soft_drink';
 };
 
 const PATHS: Record<Exclude<Icon, 'none'>, string[]> = {
@@ -53,9 +54,11 @@ export function ResultPanel({ context, result, busy, onNext, onHandOver }: {
     result.status === 'ALREADY_CHECKED_IN' && result.checked_in_at
       ? t('staff.first_checkin', { time: formatTimeWita(result.checked_in_at), station: result.station_label ?? '-' })
       : result.status === 'ALREADY_REDEEMED' && result.redeemed_at
-        ? t('merch.already_detail', { time: formatTimeWita(result.redeemed_at), station: result.station_label ?? '-' })
+        ? t(context === 'bar' ? 'bev.already_detail' : 'merch.already_detail', { time: formatTimeWita(result.redeemed_at), station: result.station_label ?? '-' })
         : null;
-  const ready = context === 'merchandise' && result.status === 'READY';
+  const ready = (context === 'merchandise' || context === 'bar') && result.status === 'READY';
+  // At the bar the drink itself is the headline, in large type (spec §3).
+  const drink = context === 'bar' && result.beverage ? t(result.beverage === 'beer' ? 'bev.beer' : 'bev.soft') : null;
 
   return (
     <section className={`panel panel--${panel.tone}`}>
@@ -64,6 +67,7 @@ export function ResultPanel({ context, result, busy, onNext, onHandOver }: {
         <PanelIcon icon={panel.icon} />
         <span className="panel__title">{t(panel.titleKey)}</span>
       </div>
+      {drink && <div className="panel__drink">{drink}</div>}
       {g && <div className="panel__name">{g.full_name}</div>}
       {meta && <div className="panel__meta">{meta}</div>}
       {context === 'checkin' && result.prize_number !== undefined && (
@@ -72,7 +76,7 @@ export function ResultPanel({ context, result, busy, onNext, onHandOver }: {
       {note && <div className="panel__note">{note}</div>}
       <div className="panel__actions">
         {ready && (
-          <button type="button" className="btn--staff" disabled={busy} aria-disabled={busy} onClick={onHandOver}>{t('merch.handover')}</button>
+          <button type="button" className="btn--staff" disabled={busy} aria-disabled={busy} onClick={onHandOver}>{t(context === 'bar' ? 'bev.handover' : 'merch.handover')}</button>
         )}
         <button type="button" className="btn--staff btn--staff-dark" onClick={onNext}>{t('staff.next')}</button>
       </div>

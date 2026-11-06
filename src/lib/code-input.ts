@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { ok } from './api';
 import { logAttempt } from './db';
-import { parseCode } from './qr';
+import { parseCode, type CodeKind } from './qr';
 
 export const codeInput = z
   .object({ code: z.string().min(1).max(200).optional(), guest_id: z.string().uuid().optional() })
@@ -11,8 +11,8 @@ export type CodeInput = z.infer<typeof codeInput>;
 /** Returns the token to look up (null for a manual guest id), or a ready response for a wrong or unknown code. */
 export async function resolveCode(
   body: CodeInput,
-  expected: 'checkin' | 'merch',
-  kind: 'checkin' | 'merchandise',
+  expected: CodeKind,
+  kind: 'checkin' | 'merchandise' | 'beverage',
   actor: string,
 ): Promise<{ token: string | null } | { response: Response }> {
   if (!body.code) return { token: null };

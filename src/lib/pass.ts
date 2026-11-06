@@ -4,7 +4,7 @@ import { isToken } from './qr';
 export type PassData = {
   event: {
     name: string; date: string; doors_at: string | null; starts_at: string | null; ends_at: string | null;
-    venue: string | null; maps_url: string | null;
+    venue: string | null; maps_url: string | null; beverage_deadline?: string | null;
   };
   server_now: string;
   guest: { full_name: string; nickname?: string | null; outlet: string; department: string | null; position: string | null };
@@ -13,6 +13,13 @@ export type PassData = {
   checked_in_at: string | null;
   prize_number: number | null;
   merchandise: null | { token: string; claimed: boolean; redeemed_at: string | null };
+  /** Optional so a pass rendered before the beverage migration still type-checks; null choice = not chosen yet. */
+  beverage?: BeverageState;
+};
+export type Beverage = 'beer' | 'soft_drink';
+export type BeverageState = {
+  choice: Beverage | null; source: 'guest' | 'admin' | 'auto' | null; token: string | null;
+  redeemed: boolean; redeemed_at: string | null;
 };
 export type PassResult = { status: 'OK'; data: PassData } | { status: 'INVALID' } | { status: 'RATE_LIMITED' };
 

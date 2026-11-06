@@ -7,6 +7,7 @@ import { BEAT_MS, SETTLE_BEATS, splitLines } from '@/lib/invite/motion';
 import { countdownParts, witaDate } from '@/lib/invite/time';
 import type { PassData } from '@/lib/pass';
 import { formatTimeWita } from '@/lib/time';
+import { BeverageChoice } from '@/components/pass/BeverageChoice';
 import { Cassette, Crowd, MapPin, MapStreets } from './art';
 
 const k = (s: string) => s as StringKey;
@@ -82,9 +83,11 @@ function SlamWord({ word, start }: { word: string; start: number }) {
   );
 }
 
-type Props = { data: PassData; token: string; label: string; root: HTMLElement | null; onViewPass: () => void };
+type Props = {
+  data: PassData; token: string; label: string; root: HTMLElement | null; onBeverage: (d: PassData) => void; onViewPass: () => void;
+};
 
-export function Scenes({ data, token, label, root, onViewPass }: Props) {
+export function Scenes({ data, token, label, root, onBeverage, onViewPass }: Props) {
   const { t } = useI18n();
   const [now, setNow] = useState(() => Date.now());
   const offset = useRef(Date.parse(data.server_now) - Date.now());
@@ -306,7 +309,17 @@ export function Scenes({ data, token, label, root, onViewPass }: Props) {
         </div>
       </Scene>
 
-      {/* 10 · Outro */}
+      {/* 10 · Choose your drink (beverage spec 2026-11-06 §2.1). Never blocks scrolling or Lewati. */}
+      {data.beverage && (
+        <Scene root={root}>
+          <Chip n={9} />
+          <div className="inv-bev m m-settle" style={d(0.5)}>
+            <BeverageChoice token={token} data={data} onChange={onBeverage} />
+          </div>
+        </Scene>
+      )}
+
+      {/* 11 · Outro */}
       <Scene root={root} className="scene--outro">
         <Chip n="end" />
         <div className="outro-tape m m-eject" style={d(0.25)}><Cassette label={label} /></div>

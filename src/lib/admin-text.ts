@@ -19,6 +19,7 @@ export const ROLE_NAME: Record<Role, string> = {
   draw: 'Draw operator (MC)',
   prizes: 'Prize table',
   admin: 'Admin console',
+  bar: 'Bar',
 };
 
 /** Four random digits from the browser or Node crypto source. */

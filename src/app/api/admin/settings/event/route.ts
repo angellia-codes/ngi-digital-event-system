@@ -14,12 +14,13 @@ const Body = z.object({
   ends_at: hhmm,
   venue: z.string().max(120).nullable(),
   maps_url: z.string().max(500).nullable(),
+  beverage_deadline: z.string().regex(/^\d{4}-\d{2}-\d{2}T([01]\d|2[0-3]):[0-5]\d$/).nullable(),
 }).partial();
 
 /** Times arrive as HH:mm in WITA; combine with the event date and store with +08:00. */
 export const POST = adminPost(Body, async ({ actor, body }) => {
   if (body.maps_url && !isMapsUrl(body.maps_url)) return fail(400, 'INVALID_MAPS_URL');
-  const { event_date, doors_at, starts_at, ends_at, ...rest } = body;
+  const { event_date, doors_at, starts_at, ends_at, beverage_deadline, ...rest } = body;
   const times = { doors_at, starts_at, ends_at };
   const needsDate = Object.values(times).some((v) => v);
   if (needsDate && !event_date) return fail(400, 'BAD_INPUT'); // client always sends the date with times
@@ -28,6 +29,8 @@ export const POST = adminPost(Body, async ({ actor, body }) => {
   for (const [k, v] of Object.entries(times)) {
     if (v !== undefined) details[k] = v === null ? null : `${event_date}T${v}:00+08:00`;
   }
+  // The deadline carries its own date (WITA date and time from a datetime-local field).
+  if (beverage_deadline !== undefined) details.beverage_deadline = beverage_deadline === null ? null : `${beverage_deadline}:00+08:00`;
   const r = await rpc<{ status: string }>('set_event_details', {
     p_event: env().EVENT_ID, p_details: details, p_actor: actorId(actor),
   });
