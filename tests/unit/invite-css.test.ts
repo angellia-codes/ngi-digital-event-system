@@ -22,7 +22,7 @@ describe('invite.css motion rules', () => {
     }
   });
   it('drops the removed loops', () => {
-    for (const name of ['sway', 'wobble', 'hue', 'bob', 'lcd-glow']) {
+    for (const name of ['sway', 'wobble', 'hue', 'bob', 'lcd-glow', 'deal']) {
       expect(css).not.toMatch(new RegExp(`@keyframes\\s+(inv-)?${name}\\b`));
     }
   });

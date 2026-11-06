@@ -17,6 +17,13 @@ describe('strings', () => {
   it('uses the same placeholders in both languages', () => {
     for (const k of keys) expect(placeholders(STRINGS.en[k]), k).toEqual(placeholders(STRINGS.id[k]));
   });
+  it('keeps gender, beach and hijab wording out of the invitation (dress code illustrations spec §1.1)', () => {
+    const banned = /(pria|wanita|laki-laki|perempuan|male|female|men|women|hijab|pantai|beach)/i;
+    for (const k of keys.filter((k) => k.startsWith('invite.'))) {
+      expect(STRINGS.id[k], `id ${k}`).not.toMatch(banned);
+      expect(STRINGS.en[k], `en ${k}`).not.toMatch(banned);
+    }
+  });
   it('names the Retro Rewind theme and drops hip-hop from guest copy', () => {
     for (const lang of ['id', 'en'] as const) {
       expect(STRINGS[lang]['brand.theme']).toBe('RETRO REWIND: BACK TO THE 90s');

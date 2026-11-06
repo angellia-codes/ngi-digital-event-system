@@ -8,6 +8,8 @@
 
 **Amended 5 Nov 2026:** the theme is re-labelled to RETRO REWIND: BACK TO THE 90s. Hip-hop wording below is historical; copy, dress code and the opening's rewind labels follow `docs/2026-11-05-nourishfest-retro-rewind-relabel-design.md`.
 
+**Amended 7 Nov 2026:** the Scene 8 dress code layout and choreography are replaced by `docs/2026-11-07-nourishfest-dress-code-illustrations-design.md` (four screens of drawn outfits). The `deal` move is removed.
+
 ---
 
 ## 1. Summary
@@ -85,7 +87,7 @@ All moves animate `transform` and `opacity` only, use `animation-fill-mode: both
 | `roll` | translateY 0 → −n × digit height (digit strip 0–9) | 1 beat · out | Countdown digits |
 | `flip` | rotateX 90° → 0 (origin top) | ½ beat · out | Gate-time digits |
 | `unfold` | scaleY 0 → 1 (origin top) | ¾ beat · out | Tracklist J-card |
-| `deal` | from translateY(−i × 82 px) rotate(`--r`) → none | ½ beat · slam | Dress code cards |
+| `deal` | from translateY(−i × 82 px) rotate(`--r`) → none | ½ beat · slam | Removed 7 Nov 2026 (dress code illustrations spec) |
 | `eject` | translateY 90 → −10 → 0, opacity 0 → 1 | 1 beat · slam | Outro cassette |
 | `glitch` | translateX −7 / +6 / −3 px, skewX −6°, `steps(1)` | 0.35–0.4 beat | Opening only |
 
@@ -190,7 +192,7 @@ Each scene from 3 onward opens with a chip that `stamp`s at beat 0: `TRACK 02` (
 | 5 What time | Split-flap digits `flip`, ¼ b apart | Chip → title → digits +0.75, +1.0, +1.25, +1.5 (colon static) → "Gates open 17:00 WITA" `settle` +2 → "Come early…" +2.25 |
 | 6 Where | Pin `drop` onto a mini-map card | Chip → title → map card `settle` +0.5 → pin `drop` +1 → shadow squash (scaleX 0.3 → 1.3 → 1) +1.15 → one ripple ring (scale 0.3 → 2.4, fade out) +1.6 → venue `settle` +1.75 → Maps button +2 |
 | 7 Tracklist | J-card `unfold`, ▶ playhead steps down | Chip → title → J-card `unfold` +0.5 → lines `slide-l` from +1.25, 0.17 b apart → playhead steps down with the lines (`steps(5)`, 0.85 b) and rests on track 06 |
-| 8 Dress code | Cards `deal` from one tilted stack | Chip → title → card group `settle` +0.5 → cards `deal` +1, +1.25, +1.5, +1.75, Skip +2 (tilts −8°, 6°, −4°, 8°, −6°) → ✖ on Skip `stamp` at −12° +2.5 |
+| 8 Dress code | Replaced 7 Nov 2026, see the dress code illustrations spec §5. Was: cards `deal` from one tilted stack | Chip → title → card group `settle` +0.5 → cards `deal` +1, +1.25, +1.5, +1.75, Skip +2 (tilts −8°, 6°, −4°, 8°, −6°) → ✖ on Skip `stamp` at −12° +2.5 |
 | 9 Do's & Don'ts | Panels slide in from opposite sides | Chip → title → DO panel `slide-l` +0.5 → DON'T panel `slide-r` +0.75 → ✔ items from +1.25, ✖ items from +1.5, 0.17 b apart (icon `stamp` + text `settle` together) |
 | 10 Outro | Cassette `eject`s up | Chip → cassette `eject` +0.25, reels spin from +1.25 → "See you on 10 December!" `slam` +1 → VIEW MY PASS `drop` +1.75, then scale-only pulse from +2.75 |
 

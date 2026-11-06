@@ -158,16 +158,24 @@
 .jcard li:last-child { border-bottom: 0; }
 .jcard b { font-family: var(--nf-font-display); font-weight: 400; margin-right: 8px; }
 
-/* Scene 8: Dress code (glass) */
-.cards { display: flex; flex-direction: column; gap: 10px; width: 100%; }
-.outfit { height: 72px; padding: 9px 14px 9px 22px; overflow: hidden; border-radius: 14px; text-align: left; }
-.outfit::before, .rules__panel::before { content: ""; position: absolute; left: 0; top: 12px; bottom: 12px; width: 5px; border-radius: 0 5px 5px 0; background: var(--accent); }
-.outfit h3 { margin: 0; font-family: var(--nf-font-heading); font-weight: 400; font-size: 19px; color: var(--nf-text); text-transform: uppercase; }
-.outfit p { margin: 2px 0 0; font-size: 13px; font-weight: 500; line-height: 1.3; color: rgba(245, 245, 240, 0.85); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.outfit--skip { padding-left: 14px; border: 1.5px dashed rgba(255, 255, 255, 0.4); }
-.outfit--skip::before { display: none; }
-.outfit--skip h3, .outfit--skip p { color: rgba(245, 245, 240, 0.7); }
-.outfit__x { position: absolute; right: 14px; top: 14px; font-family: var(--nf-font-display); font-size: 26px; color: var(--nf-pink); }
+/* Scene 8: Dress code (dress code illustrations spec 2026-11-07 §3). Text on the gold, pink and green fills is black. */
+.look { width: 100%; padding: 16px; border-radius: 18px; background: var(--accent); color: var(--nf-black); text-align: left; }
+.look h3, .dress-card h3 { margin: 0; font-family: var(--nf-font-heading); font-weight: 400; font-size: 30px; line-height: 1.05; text-transform: uppercase; }
+.look p, .dress-card p { margin: 4px 0 0; font-family: var(--nf-font-body); font-weight: 600; font-size: 14px; line-height: 1.35; }
+/* Halftone sits behind the figures only, never behind the text. */
+.look__figs { display: flex; justify-content: center; align-items: flex-end; gap: 4px; margin-top: 12px; padding-top: 8px; border-radius: 12px;
+  background: radial-gradient(rgba(13, 13, 13, 0.28) 1.2px, transparent 1.5px) 0 0 / 8px 8px; }
+.look__fig { display: block; width: min(48%, 137px); height: auto; }
+.dress-card { width: 100%; padding: 14px 16px 16px; border-radius: 18px; text-align: left; }
+.dress-card--skip { border: 1.5px dashed rgba(255, 255, 255, 0.4); }
+.dress-card--skip h3, .dress-card--skip p { color: rgba(245, 245, 240, 0.7); }
+.bling { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+.sticker { display: flex; align-items: center; justify-content: center; aspect-ratio: 4 / 3; padding: 10px; border-radius: 14px; background: var(--nf-text); box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.45); }
+.sticker svg, .skip svg { display: block; width: 100%; height: 100%; }
+.skip { display: flex; justify-content: center; gap: 24px; margin-top: 12px; }
+.skip__item { position: relative; width: 96px; height: 110px; opacity: 0.85; }
+.skip__x { position: absolute; left: 50%; top: 50%; margin: -26px 0 0 -20px; font-family: var(--nf-font-display); font-size: 44px; line-height: 1; color: var(--nf-pink); }
+.rules__panel::before { content: ""; position: absolute; left: 0; top: 12px; bottom: 12px; width: 5px; border-radius: 0 5px 5px 0; background: var(--accent); }
 
 /* Scene 9: Do's & Don'ts (glass) */
 .rules { display: grid; gap: 14px; width: 100%; text-align: left; }
@@ -228,7 +236,6 @@
   .is-in .m-slide-l { animation-name: inv-slide-l; animation-duration: var(--half); animation-timing-function: var(--ease-out); }
   .is-in .m-slide-r { animation-name: inv-slide-r; animation-duration: var(--half); animation-timing-function: var(--ease-out); }
   .is-in .m-play { animation-name: inv-play; animation-duration: calc(var(--beat) * 0.85); animation-timing-function: steps(5, end); }
-  .is-in .m-deal { animation-name: inv-deal; animation-duration: var(--half); animation-timing-function: var(--ease-slam); }
   .is-in .m-eject { animation-name: inv-eject; animation-duration: var(--beat); animation-timing-function: var(--ease-slam); }
   .is-in .m-print { animation-name: inv-print; animation-duration: calc(var(--beat) * 2); animation-timing-function: var(--ease-out); }
   .is-in .m-develop { animation-name: inv-develop; animation-duration: calc(var(--beat) * var(--dur, 3)); animation-timing-function: var(--ease-in); }
@@ -280,7 +287,6 @@
 @keyframes inv-slide-l { from { opacity: 0; transform: translateX(-24px); } }
 @keyframes inv-slide-r { from { opacity: 0; transform: translateX(24px); } }
 @keyframes inv-play { from { transform: translateY(0); } }
-@keyframes inv-deal { from { opacity: 1; transform: translateY(calc(var(--i, 0) * -82px)) rotate(var(--r, 0deg)); } }
 @keyframes inv-eject { 0% { opacity: 0; transform: translateY(90px); } 60% { opacity: 1; transform: translateY(-10px); } }
 @keyframes inv-eject-up { to { opacity: 0; transform: translateY(-60px); } }
 @keyframes inv-print {

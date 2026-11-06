@@ -9,6 +9,7 @@ import type { PassData } from '@/lib/pass';
 import { formatTimeWita } from '@/lib/time';
 import { BeverageChoice } from '@/components/pass/BeverageChoice';
 import { Cassette, Crowd, MapPin, MapStreets } from './art';
+import { BlingItem, LookPair, SkipItem, type Bling } from './outfits';
 
 const k = (s: string) => s as StringKey;
 
@@ -16,8 +17,9 @@ const pad = (n: number) => String(n).padStart(2, '0');
 /** Motion delay in beats plus any extra custom properties (`--r`, `--i`, `--n`, `--dur`, `--accent`). */
 const d = (beats: number, extra: Record<string, string | number> = {}) => ({ '--d': beats, ...extra }) as CSSProperties;
 const STEP = 0.17; // beats between list items
-const TILTS = ['-8deg', '6deg', '-4deg', '8deg', '-6deg'];
-const ACCENTS = ['var(--nf-pink)', 'var(--nf-gold)', 'var(--nf-pink)', 'var(--nf-gold)'];
+const LOOK_FILL = ['var(--nf-gold)', 'var(--nf-pink)', 'var(--nf-green)'];
+const BLING: Bling[] = ['bucket', 'scrunchie', 'shades', 'chain'];
+const STICKER_TILT = ['-6deg', '5deg', '4deg', '-5deg'];
 const STRIP = Array.from({ length: 10 }, (_, i) => <i key={i}>{i}</i>);
 
 /**
@@ -260,21 +262,37 @@ export function Scenes({ data, token, label, root, onBeverage, onViewPass }: Pro
         </div>
       </Scene>
 
-      {/* 8 · Dress code (glass) */}
+      {/* 8 · Dress code: one screen per look, then Bling It On + Skip (dress code illustrations spec 2026-11-07) */}
+      {([1, 2, 3] as const).map((n) => (
+        <Scene key={n} root={root}>
+          {n === 1 && <><Chip n={7} /><Title>{t('invite.dress_title')}</Title></>}
+          <div className="look m m-settle" style={d(0.5, { '--accent': LOOK_FILL[n - 1] })}>
+            <h3>{t(k(`invite.dress${n}_t`))}</h3>
+            <p>{t(k(`invite.dress${n}`))}</p>
+            <LookPair n={n} />
+          </div>
+        </Scene>
+      ))}
       <Scene root={root}>
-        <Chip n={7} />
-        <Title>{t('invite.dress_title')}</Title>
-        <div className="cards m m-settle" style={d(0.5)}>
-          {[1, 2, 3, 4].map((n, i) => (
-            <div key={n} className="outfit glass m m-deal" style={{ ...d(1 + i * 0.25, { '--i': i, '--r': TILTS[i], '--accent': ACCENTS[i] }), zIndex: 5 - i }}>
-              <h3>{t(k(`invite.dress${n}_t`))}</h3>
-              <p>{t(k(`invite.dress${n}`))}</p>
-            </div>
-          ))}
-          <div className="outfit outfit--skip glass m m-deal" style={{ ...d(2, { '--i': 4, '--r': TILTS[4] }), zIndex: 1 }}>
-            <h3>{t('invite.dress_skip_t')}</h3>
-            <p>{t('invite.dress_skip')}</p>
-            <span className="outfit__x m m-stamp" style={d(2.5, { '--r': '-12deg' })} aria-hidden="true">✖</span>
+        <div className="dress-card glass m m-settle" style={d(0.5)}>
+          <h3>{t('invite.dress4_t')}</h3>
+          <p>{t('invite.dress4')}</p>
+          <div className="bling">
+            {BLING.map((b, i) => (
+              <span key={b} className="sticker m m-stamp" style={d(1 + i * STEP, { '--r': STICKER_TILT[i] })}><BlingItem name={b} /></span>
+            ))}
+          </div>
+        </div>
+        <div className="dress-card dress-card--skip glass m m-settle" style={d(0.75)}>
+          <h3>{t('invite.dress_skip_t')}</h3>
+          <p>{t('invite.dress_skip')}</p>
+          <div className="skip">
+            {(['apron', 'blazer'] as const).map((s) => (
+              <span key={s} className="skip__item">
+                <SkipItem name={s} />
+                <b className="skip__x m m-stamp" style={d(2.5, { '--r': '-12deg' })} aria-hidden="true">✖</b>
+              </span>
+            ))}
           </div>
         </div>
       </Scene>
