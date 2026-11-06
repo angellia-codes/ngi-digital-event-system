@@ -21,6 +21,9 @@ const LOOK_FILL = ['var(--nf-gold)', 'var(--nf-pink)', 'var(--nf-green)'];
 const BLING: Bling[] = ['bucket', 'scrunchie', 'shades', 'chain'];
 const STICKER_TILT = ['-6deg', '5deg', '4deg', '-5deg'];
 const STRIP = Array.from({ length: 10 }, (_, i) => <i key={i}>{i}</i>);
+// SVG marks instead of the check and cross characters, which some phones draw as colour emoji.
+const TICK = <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7" /></svg>;
+const CROSS = <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>;
 
 /**
  * One scroll scene. Plays once when its top crosses 80% of the scroller's height (spec §6.1), then
@@ -290,7 +293,7 @@ export function Scenes({ data, token, label, root, onBeverage, onViewPass }: Pro
             {(['apron', 'blazer'] as const).map((s) => (
               <span key={s} className="skip__item">
                 <SkipItem name={s} />
-                <b className="skip__x m m-stamp" style={d(2.5, { '--r': '-12deg' })} aria-hidden="true">✖</b>
+                <b className="skip__x m m-stamp" style={d(2.5, { '--r': '-12deg' })} aria-hidden="true">{CROSS}</b>
               </span>
             ))}
           </div>
@@ -307,7 +310,7 @@ export function Scenes({ data, token, label, root, onBeverage, onViewPass }: Pro
             <ul>
               {[1, 2, 3, 4, 5].map((n, i) => (
                 <li key={n}>
-                  <span className="rules__ic m m-stamp" style={d(1.25 + i * STEP)} aria-hidden="true">✔</span>
+                  <span className="rules__ic m m-stamp" style={d(1.25 + i * STEP)} aria-hidden="true">{TICK}</span>
                   <span className="m m-settle" style={d(1.25 + i * STEP)}>{t(k(`invite.do${n}`), { doors: doors ?? '17:00' })}</span>
                 </li>
               ))}
@@ -318,7 +321,7 @@ export function Scenes({ data, token, label, root, onBeverage, onViewPass }: Pro
             <ul>
               {[1, 2, 3, 4, 5].map((n, i) => (
                 <li key={n}>
-                  <span className="rules__ic m m-stamp" style={d(1.5 + i * STEP)} aria-hidden="true">✖</span>
+                  <span className="rules__ic m m-stamp" style={d(1.5 + i * STEP)} aria-hidden="true">{CROSS}</span>
                   <span className="m m-settle" style={d(1.5 + i * STEP)}>{t(k(`invite.dont${n}`))}</span>
                 </li>
               ))}
