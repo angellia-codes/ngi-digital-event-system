@@ -14,6 +14,7 @@ import { BeverageChoice } from './BeverageChoice';
 import { MerchCard } from './MerchCard';
 import { PrizeNumber, padPrize } from './PrizeNumber';
 import { SaveImage } from './SaveImage';
+import { SizeChoice } from './SizeChoice';
 import { TicketCard } from './TicketCard';
 import '@/styles/pass.css';
 
@@ -123,7 +124,7 @@ export function PassView({ token, initial, mayInvite }: { token: string; initial
   }, []);
 
   if (view === 'invitation') {
-    return <Invitation data={data} token={token} replay={replay} onBeverage={setData} onDone={() => { setReplay(false); setView('pass'); setEntered(true); }} />;
+    return <Invitation data={data} token={token} replay={replay} onPassUpdate={setData} onDone={() => { setReplay(false); setView('pass'); setEntered(true); }} />;
   }
 
   const ev = data.event;
@@ -146,8 +147,10 @@ export function PassView({ token, initial, mayInvite }: { token: string; initial
         data={data}
         prize={data.prize_number !== null && <PrizeNumber n={data.prize_number} state={reveal} onReveal={() => setReveal('reveal')} />}
       />
-      {data.checked_in && data.merchandise && <MerchCard merch={data.merchandise} name={data.guest.full_name} reveal={riseMerch} />}
+      {data.checked_in && data.merchandise && <MerchCard merch={data.merchandise} size={data.merch_size} name={data.guest.full_name} reveal={riseMerch} />}
       <BeverageChoice token={token} data={data} onChange={setData} />
+      {/* After check-in the size shows on the Merchandise card instead (merch size spec §3.2). */}
+      {!data.checked_in && <SizeChoice token={token} data={data} onChange={setData} />}
       {(!data.checked_in || data.prize_number !== null) && <SaveImage kind={data.checked_in ? 'number' : 'ticket'} data={data} />}
       <section className="pass__details">
         {ev.doors_at && <p className="pass__gates">{t('invite.doors', { doors: formatTimeWita(ev.doors_at) })}</p>}
