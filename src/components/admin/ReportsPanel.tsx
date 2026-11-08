@@ -4,6 +4,8 @@ const REPORTS: { href: string; title: string; text: string }[] = [
   { href: '/api/admin/reports/merchandise', title: 'Merchandise', text: 'Every hand-over and void, with booth and staff.' },
   { href: '/api/admin/reports/beverages', title: 'Beverages', text: 'Every guest with a drink: source, chosen at, hand-over, bar, voids.' },
   { href: '/api/admin/reports/beverage-pending', title: 'Beverage pending', text: 'Guests with no drink yet, with phone, for the reminder through the Fonnte sheet.' },
+  { href: '/api/admin/reports/merch-sizes', title: 'T-shirt sizes', text: 'Every guest: reserved size, source, size handed over, substitutions, booth, voids.' },
+  { href: '/api/admin/reports/merch-size-pending', title: 'T-shirt size pending', text: 'Guests with no size yet, with phone, for the reminder through the Fonnte sheet.' },
   { href: '/api/admin/reports/draws', title: 'Draw history', text: 'Every draw: prize, slot, winner, outcome, who resolved it, void reasons.' },
   { href: '/api/admin/reports/audit', title: 'Audit log', text: 'Every recorded action, oldest first.' },
   { href: '/api/admin/invitations.csv', title: 'Invitation links', text: 'Personal pass link per employee, for the WhatsApp broadcast.' },

@@ -6,6 +6,7 @@ import { useLoad } from '@/lib/use-load';
 
 type Red = {
   id: string; status: 'redeemed' | 'voided'; redeemed_at: string; station_label: string | null; void_reason: string | null;
+  reserved_size: string | null; given_size: string | null;
   guest: { employee_id: string; full_name: string; outlet: string } | null;
 };
 
@@ -27,13 +28,14 @@ export function RedemptionList() {
       {msg && <p className="adm-msg adm-msg--error">{msg}</p>}
       <div className="adm-table-wrap">
         <table className="adm-table">
-          <thead><tr><th>Time</th><th>Employee</th><th>Outlet</th><th>Booth</th><th>Status</th><th /></tr></thead>
+          <thead><tr><th>Time</th><th>Employee</th><th>Outlet</th><th>Size</th><th>Booth</th><th>Status</th><th /></tr></thead>
           <tbody>
             {rows.map((r) => (
               <tr key={r.id} className={r.status === 'voided' ? 'is-dim' : ''}>
                 <td>{formatTimeWita(r.redeemed_at)}</td>
                 <td>{r.guest ? `${r.guest.employee_id} — ${r.guest.full_name}` : '?'}</td>
                 <td>{r.guest?.outlet}</td>
+                <td>{!r.given_size ? '–' : r.reserved_size && r.reserved_size !== r.given_size ? `${r.reserved_size} → ${r.given_size}` : r.given_size}</td>
                 <td>{r.station_label}</td>
                 <td>{r.status === 'voided' ? `voided: ${r.void_reason}` : 'handed over'}</td>
                 <td>
@@ -48,7 +50,7 @@ export function RedemptionList() {
                 </td>
               </tr>
             ))}
-            {!loading && rows.length === 0 && <tr><td colSpan={6} className="adm-muted">No merchandise handed over yet.</td></tr>}
+            {!loading && rows.length === 0 && <tr><td colSpan={7} className="adm-muted">No merchandise handed over yet.</td></tr>}
           </tbody>
         </table>
       </div>

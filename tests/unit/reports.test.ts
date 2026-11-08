@@ -10,11 +10,19 @@ describe('witaStamp', () => {
 });
 
 describe('isReportName', () => {
-  it.each(['guests', 'check-ins', 'merchandise', 'beverages', 'beverage-pending', 'draws', 'audit'])('knows %s', (n) => expect(isReportName(n)).toBe(true));
+  it.each(['guests', 'check-ins', 'merchandise', 'beverages', 'beverage-pending', 'merch-sizes', 'merch-size-pending', 'draws', 'audit'])('knows %s', (n) => expect(isReportName(n)).toBe(true));
   it.each(['rsvp-pending', 'invitations', '../etc', 'toString', '__proto__', ''])('rejects %s', (n) => expect(isReportName(n)).toBe(false));
 });
 
 describe('buildReportCsv', () => {
+  it('writes the T-shirt size report with yes/no substitutions', () => {
+    const row = parse(buildReportCsv('merch-sizes', [
+      { employee_id: 'E1', full_name: 'Ayu', reserved_size: 'L', given_size: 'XL', substituted: true },
+    ])).data[0];
+    expect(row['Reserved size']).toBe('L');
+    expect(row['Given size']).toBe('XL');
+    expect(row['Substituted']).toBe('yes');
+  });
   it('starts with a BOM and writes the header row even when there are no rows', () => {
     const csv = buildReportCsv('draws', []);
     expect(csv.startsWith('\uFEFF')).toBe(true);

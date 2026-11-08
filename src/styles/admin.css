@@ -46,3 +46,4 @@
 .adm-msg--ok { border-color: var(--nf-green); color: var(--nf-green); }
 .adm-list { margin: 6px 0 0; padding-left: 18px; max-height: 220px; overflow: auto; }
 .adm-login { max-width: 420px; margin: 12vh auto 0; padding: 0 var(--nf-gutter); }
+.adm-table td.is-warn { background: var(--nf-gold); color: var(--nf-black); font-weight: 600; }

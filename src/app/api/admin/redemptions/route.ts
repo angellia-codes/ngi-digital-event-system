@@ -6,7 +6,7 @@ import { adminGet } from '@/lib/routes';
 export const GET = adminGet(async () => {
   const { data: reds, error } = await db()
     .from('merchandise_redemptions')
-    .select('id, guest_id, status, redeemed_at, station_label, void_reason')
+    .select('id, guest_id, status, redeemed_at, station_label, void_reason, reserved_size, given_size')
     .eq('event_id', env().EVENT_ID)
     .order('redeemed_at', { ascending: false })
     .limit(500);

@@ -1,15 +1,20 @@
+import { z } from 'zod';
 import { ok } from '@/lib/api';
 import { codeInput, resolveCode } from '@/lib/code-input';
 import { rpc } from '@/lib/db';
 import { env } from '@/lib/env';
 import { actorId, actorLabel, stationPost } from '@/lib/routes';
+import { SIZES } from '@/lib/sizes';
 
-export const POST = stationPost(['merchandise'], codeInput, async ({ actor, body }) => {
+/** The booth always says which size it handed over; it can differ from the reserved size (merch size spec §4.1). */
+const Body = z.intersection(codeInput, z.object({ given_size: z.enum(SIZES) }));
+
+export const POST = stationPost(['merchandise'], Body, async ({ actor, body }) => {
   const c = await resolveCode(body, 'merch', 'merchandise', actorId(actor));
   if ('response' in c) return c.response;
   const r = await rpc<{ status: string }>('redeem_merchandise', {
     p_event: env().EVENT_ID, p_token: c.token, p_guest_id: body.guest_id ?? null,
-    p_station_label: actorLabel(actor), p_actor: actorId(actor),
+    p_station_label: actorLabel(actor), p_actor: actorId(actor), p_given_size: body.given_size,
   });
   return ok(r.status, r);
 });

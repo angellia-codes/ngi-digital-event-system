@@ -93,6 +93,26 @@
 .bev__btn--ghost { background: transparent; color: var(--nf-green); }
 .bev__btn:disabled { opacity: 0.6; cursor: default; }
 
+/* T-shirt size (merch size spec 2026-11-08 §3). Pink ties it to the merchandise card; no new QR frame colour. */
+.size { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 16px 16px; background: var(--nf-card); border: 3px solid var(--nf-pink); border-radius: var(--nf-radius-card); overflow: hidden; }
+.size__banner { align-self: stretch; margin: 0 -16px 4px; padding: 3px 0; text-align: center; background: var(--nf-pink); color: var(--nf-black); font-family: var(--nf-font-heading); font-weight: 400; font-size: 24px; line-height: 1.2; letter-spacing: 0.1em; }
+.size .helper { color: var(--nf-text); text-align: center; }
+.size__big { margin: 0; font-family: var(--nf-font-display); font-size: 56px; line-height: 1; color: var(--nf-pink); }
+.size__btns { display: grid; grid-template-columns: repeat(5, minmax(44px, 1fr)); gap: 6px; width: 100%; }
+.size__row { display: flex; gap: 10px; width: 100%; }
+.size__btn { flex: 1; min-height: 52px; padding: 0 4px; border: 2px solid var(--nf-pink); border-radius: var(--nf-radius-btn); background: var(--nf-pink); color: var(--nf-black); font-family: var(--nf-font-heading); font-size: 20px; letter-spacing: 0.04em; cursor: pointer; }
+.size__btn--ghost { background: transparent; color: var(--nf-pink); }
+.size__btn:disabled { opacity: 0.6; cursor: default; }
+.size__confirm { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+.size__q { margin: 0; text-align: center; font-weight: 600; color: var(--nf-text); }
+.size__guide-btn { min-height: 44px; padding: 0 12px; border: 0; background: none; color: var(--nf-pink); font-family: var(--nf-font-label); font-weight: 600; font-size: 15px; letter-spacing: 0.08em; text-decoration: underline; cursor: pointer; }
+.size-guide { width: 100%; }
+.size-guide table { width: 100%; border-collapse: collapse; font-size: 14px; color: var(--nf-text); }
+.size-guide th, .size-guide td { padding: 6px 2px; text-align: center; border-bottom: 1px solid var(--nf-line-dash); }
+.size-guide thead th { font-family: var(--nf-font-label); font-weight: 600; font-size: 12px; letter-spacing: 0.04em; }
+.size-guide .caption { margin: 6px 0 0; text-align: center; }
+.merch__size { margin: 0; font-family: var(--nf-font-heading); font-size: 28px; letter-spacing: 0.08em; color: var(--nf-text); }
+
 .save { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 
 /* Event details sit on a card, never on the halftone (Clean Ground). */

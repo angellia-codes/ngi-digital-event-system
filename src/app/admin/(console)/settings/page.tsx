@@ -1,6 +1,7 @@
 'use client';
 import { EventDetails, type EventInfo } from '@/components/admin/EventDetails';
 import { RehearsalPanel } from '@/components/admin/RehearsalPanel';
+import { SizeChartEditor } from '@/components/admin/SizeChartEditor';
 import { StagePanel } from '@/components/admin/StagePanel';
 import { StationSettings, type PinRow } from '@/components/admin/StationSettings';
 import { useLoad } from '@/lib/use-load';
@@ -16,6 +17,10 @@ export default function SettingsPage() {
       <h1 className="adm-title">Settings</h1>
       <p className="adm-muted">{data.event.name} · {data.event.event_date}</p>
       <EventDetails key={JSON.stringify(data.event)} info={data.event} reload={reload} />
+      <SizeChartEditor
+        key={JSON.stringify([data.event.merch_size_chart, data.event.merch_fit_note])}
+        chart={data.event.merch_size_chart} fitNote={data.event.merch_fit_note} reload={reload}
+      />
       <StationSettings key={data.station_labels.join('|')} pins={data.pins} labels={data.station_labels} reload={reload} />
       <StagePanel />
       <RehearsalPanel mode={data.mode} reload={reload} />

@@ -3,6 +3,7 @@ import { OutletTable, type OutletRow } from '@/components/admin/OutletTable';
 import { stageLinkText } from '@/lib/admin-draw-text';
 import { heartbeatState } from '@/lib/draw-ui';
 import type { PrizeRow } from '@/lib/prizes';
+import type { SizeSummary } from '@/lib/sizes';
 import { useLoad } from '@/lib/use-load';
 
 type Dash = {
@@ -15,6 +16,7 @@ type Dash = {
     beer: number; soft_drink: number; no_choice: number; total: number;
     redeemed_beer: number; redeemed_soft_drink: number; deadline: string | null; final: boolean;
   };
+  merch_size?: SizeSummary;
   recent: { at: string; actor: string; action: string }[];
 };
 
@@ -70,6 +72,35 @@ export default function Dashboard() {
             </p>
             <div className="adm-grid">
               {bev.map(([label, n]) => (
+                <div className="adm-stat" key={label}>
+                  <div className="adm-stat__n">{n}</div>
+                  <div className="adm-stat__l">{label}</div>
+                </div>
+              ))}
+            </div>
+          </>
+        );
+      })()}
+
+      {data.merch_size && (() => {
+        const m = data.merch_size;
+        const tiles: [string, number | string][] = [
+          ...m.sizes.map((r): [string, number] => [r.size, r.reserved]), ['No size yet', m.no_size], ['Total', m.total],
+        ];
+        return (
+          <>
+            <h2 className="adm-sub">
+              T-shirts to order{' '}
+              <span className={`adm-badge ${m.final ? 'adm-badge--green' : 'adm-badge--gold'}`}>{m.final ? 'FINAL' : 'live'}</span>
+            </h2>
+            <p className="adm-muted">
+              {m.deadline
+                ? `Size deadline ${new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Makassar', dateStyle: 'medium', timeStyle: 'short' }).format(new Date(m.deadline))} WITA; after it, guests without a size count as ${m.default_size}. `
+                : 'No size deadline set (Settings). '}
+              Active guests only. Walk-ins and late additions after the deadline still raise these numbers, so keep a buffer. Stock and hand-overs are on the Merchandise page.
+            </p>
+            <div className="adm-grid">
+              {tiles.map(([label, n]) => (
                 <div className="adm-stat" key={label}>
                   <div className="adm-stat__n">{n}</div>
                   <div className="adm-stat__l">{label}</div>

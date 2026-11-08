@@ -53,6 +53,21 @@ export const REPORTS = {
     sql: 'beverage_pending', file: 'nourishfest-beverage-pending.csv',
     cols: [...person, { key: 'phone', header: 'Phone' }],
   },
+  'merch-sizes': {
+    sql: 'merch_sizes', file: 'nourishfest-merch-sizes.csv',
+    cols: [
+      ...person,
+      { key: 'reserved_size', header: 'Reserved size' }, { key: 'source', header: 'Source' },
+      { key: 'chosen_at', header: 'Chosen at', kind: 'time' }, { key: 'given_size', header: 'Given size' },
+      { key: 'substituted', header: 'Substituted', kind: 'bool' }, { key: 'redeemed_at', header: 'Redeemed at', kind: 'time' },
+      { key: 'station', header: 'Booth' }, { key: 'actor', header: 'Staff' }, { key: 'status', header: 'Status' },
+      { key: 'void_reason', header: 'Void reason' },
+    ],
+  },
+  'merch-size-pending': {
+    sql: 'merch_size_pending', file: 'nourishfest-merch-size-pending.csv',
+    cols: [...person, { key: 'phone', header: 'Phone' }],
+  },
   draws: {
     sql: 'draws', file: 'nourishfest-draw-history.csv',
     cols: [

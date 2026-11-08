@@ -1,7 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { useI18n } from '@/lib/i18n';
 import { panelFor, type Context, type Icon } from '@/lib/result-panel';
+import type { Size } from '@/lib/sizes';
 import { formatTimeWita } from '@/lib/time';
 
 export type Result = {
@@ -12,6 +13,10 @@ export type Result = {
   redeemed_at?: string;
   station_label?: string;
   beverage?: 'beer' | 'soft_drink';
+  /** Merchandise: reserved size (null = none yet) and, after a hand-over, the size given. */
+  size?: Size | null;
+  size_source?: 'guest' | 'admin' | 'auto' | null;
+  given_size?: Size | null;
 };
 
 const PATHS: Record<Exclude<Icon, 'none'>, string[]> = {
@@ -33,8 +38,9 @@ function PanelIcon({ icon }: { icon: Icon }) {
   );
 }
 
-export function ResultPanel({ context, result, busy, onNext, onHandOver }: {
-  context: Context; result: Result; busy?: boolean; onNext: () => void; onHandOver?: () => void;
+/** `extra` replaces the default hand-over button (the merchandise booth puts its size controls there). */
+export function ResultPanel({ context, result, busy, onNext, onHandOver, extra }: {
+  context: Context; result: Result; busy?: boolean; onNext: () => void; onHandOver?: () => void; extra?: ReactNode;
 }) {
   const { t } = useI18n();
   const panel = panelFor(context, result.status);
@@ -59,6 +65,9 @@ export function ResultPanel({ context, result, busy, onNext, onHandOver }: {
   const ready = (context === 'merchandise' || context === 'bar') && result.status === 'READY';
   // At the bar the drink itself is the headline, in large type (spec §3).
   const drink = context === 'bar' && result.beverage ? t(result.beverage === 'beer' ? 'bev.beer' : 'bev.soft') : null;
+  // At the booth the size is the headline: what was handed over, else what was reserved (merch size spec §4.1).
+  const shirtSize = context === 'merchandise' ? (result.given_size ?? result.size ?? null) : null;
+  const headline = drink ?? (shirtSize ? t('size.label', { size: shirtSize }) : null);
 
   return (
     <section className={`panel panel--${panel.tone}`}>
@@ -67,15 +76,16 @@ export function ResultPanel({ context, result, busy, onNext, onHandOver }: {
         <PanelIcon icon={panel.icon} />
         <span className="panel__title">{t(panel.titleKey)}</span>
       </div>
-      {drink && <div className="panel__drink">{drink}</div>}
+      {headline && <div className="panel__drink">{headline}</div>}
       {g && <div className="panel__name">{g.full_name}</div>}
       {meta && <div className="panel__meta">{meta}</div>}
       {context === 'checkin' && result.prize_number !== undefined && (
         <div className="panel__prize"><b>{t('staff.prize_label')}</b><span>{String(result.prize_number).padStart(3, '0')}</span></div>
       )}
       {note && <div className="panel__note">{note}</div>}
+      {extra}
       <div className="panel__actions">
-        {ready && (
+        {ready && !extra && (
           <button type="button" className="btn--staff" disabled={busy} aria-disabled={busy} onClick={onHandOver}>{t(context === 'bar' ? 'bev.handover' : 'merch.handover')}</button>
         )}
         <button type="button" className="btn--staff btn--staff-dark" onClick={onNext}>{t('staff.next')}</button>
