@@ -8,6 +8,7 @@ import { countdownParts, witaDate } from '@/lib/invite/time';
 import type { PassData } from '@/lib/pass';
 import { formatTimeWita } from '@/lib/time';
 import { BeverageChoice } from '@/components/pass/BeverageChoice';
+import { SizeChoice } from '@/components/pass/SizeChoice';
 import { Cassette, Crowd, MapPin, MapStreets } from './art';
 import { BlingItem, LookPair, SkipItem, type Bling } from './outfits';
 
@@ -89,10 +90,10 @@ function SlamWord({ word, start }: { word: string; start: number }) {
 }
 
 type Props = {
-  data: PassData; token: string; label: string; root: HTMLElement | null; onBeverage: (d: PassData) => void; onViewPass: () => void;
+  data: PassData; token: string; label: string; root: HTMLElement | null; onPassUpdate: (d: PassData) => void; onViewPass: () => void;
 };
 
-export function Scenes({ data, token, label, root, onBeverage, onViewPass }: Props) {
+export function Scenes({ data, token, label, root, onPassUpdate, onViewPass }: Props) {
   const { t } = useI18n();
   const [now, setNow] = useState(() => Date.now());
   const offset = useRef(Date.parse(data.server_now) - Date.now());
@@ -335,12 +336,22 @@ export function Scenes({ data, token, label, root, onBeverage, onViewPass }: Pro
         <Scene root={root}>
           <Chip n={9} />
           <div className="inv-bev m m-settle" style={d(0.5)}>
-            <BeverageChoice token={token} data={data} onChange={onBeverage} />
+            <BeverageChoice token={token} data={data} onChange={onPassUpdate} />
           </div>
         </Scene>
       )}
 
-      {/* 11 · Outro */}
+      {/* 11 · Choose your T-shirt size (merch size spec 2026-11-08 §3.1). Never blocks scrolling or Lewati. */}
+      {data.merch_size && (
+        <Scene root={root}>
+          <Chip n={10} />
+          <div className="inv-size m m-settle" style={d(0.5)}>
+            <SizeChoice token={token} data={data} onChange={onPassUpdate} />
+          </div>
+        </Scene>
+      )}
+
+      {/* 12 · Outro */}
       <Scene root={root} className="scene--outro">
         <Chip n="end" />
         <div className="outro-tape m m-eject" style={d(0.25)}><Cassette label={label} /></div>
