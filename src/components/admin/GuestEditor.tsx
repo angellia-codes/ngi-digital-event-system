@@ -9,6 +9,7 @@ export type AdminGuest = {
   checked_in_at: string | null; prize_number: number | null; merch: string;
   beverage?: 'beer' | 'soft_drink' | null; beverage_source?: string | null; beverage_redeemed?: boolean;
   merch_size?: Size | null; merch_size_source?: string | null; merch_given_size?: Size | null;
+  vip_tier?: 'BOD' | 'HOD' | null; vip_title?: string | null; protocol_order?: number | null; phonetic?: string | null;
 };
 
 const DRINK = { beer: 'Beer', soft_drink: 'Soft Drink' } as const;
@@ -80,6 +81,43 @@ function SizeControl({ guest, onSaved }: { guest: AdminGuest; onSaved: () => voi
   );
 }
 
+/** BOD/HOD tag for the MC's VIP list: title, protocol order (lower is read first) and how to say the name. */
+function VipControl({ guest, onSaved }: { guest: AdminGuest; onSaved: () => void }) {
+  const [tier, setTier] = useState<'' | 'BOD' | 'HOD'>(guest.vip_tier ?? '');
+  const [title, setTitle] = useState(guest.vip_title ?? '');
+  const [order, setOrder] = useState(guest.protocol_order === null || guest.protocol_order === undefined ? '' : String(guest.protocol_order));
+  const [phonetic, setPhonetic] = useState(guest.phonetic ?? '');
+  const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
+
+  async function save() {
+    const n = order.trim() === '' ? null : Number(order);
+    if (n !== null && (!Number.isInteger(n) || n < 0 || n > 999)) return setMsg({ ok: false, text: 'Protocol order is a whole number from 0 to 999.' });
+    const r = await api(`/api/admin/guests/${guest.id}/vip`, {
+      vip_tier: tier || null, vip_title: title.trim() || null, protocol_order: n, phonetic: phonetic.trim() || null,
+    });
+    if (r.status === 'OK') { setMsg({ ok: true, text: tier ? `Tagged ${tier}.` : 'VIP tag removed.' }); onSaved(); }
+    else setMsg({ ok: false, text: 'Could not save. Check the lengths (title 30, pronunciation 80) and try again.' });
+  }
+
+  return (
+    <div className="adm-field">
+      <span>MC VIP list</span>
+      <span className="adm-row" style={{ margin: 0 }}>
+        <select className="adm-select" value={tier} onChange={(e) => setTier(e.target.value as '' | 'BOD' | 'HOD')} aria-label="VIP tier">
+          <option value="">Not a VIP</option>
+          <option value="BOD">BOD</option>
+          <option value="HOD">HOD</option>
+        </select>
+        <input className="adm-input adm-narrow" placeholder="Title (Bapak / Ibu)" aria-label="Title" value={title} onChange={(e) => setTitle(e.target.value)} disabled={!tier} />
+        <input className="adm-input adm-narrow" type="number" min={0} max={999} placeholder="Order" aria-label="Protocol order" value={order} onChange={(e) => setOrder(e.target.value)} disabled={!tier} />
+        <input className="adm-input" placeholder="Say it as (optional)" aria-label="Pronunciation" value={phonetic} onChange={(e) => setPhonetic(e.target.value)} disabled={!tier} />
+        <button className="btn" onClick={save}>Save VIP</button>
+      </span>
+      {msg && <p className={`adm-msg ${msg.ok ? 'adm-msg--ok' : 'adm-msg--error'}`}>{msg.text}</p>}
+    </div>
+  );
+}
+
 export function GuestEditor({ guest, onClose, onSaved }: { guest: AdminGuest; onClose: () => void; onSaved: () => void }) {
   const [name, setName] = useState(guest.full_name);
   const [outlet, setOutlet] = useState(guest.outlet);
@@ -111,6 +149,7 @@ export function GuestEditor({ guest, onClose, onSaved }: { guest: AdminGuest; on
       <label className="adm-row"><input type="checkbox" checked={active} onChange={(e) => setActive(e.target.checked)} /> Active (inactive employees are not eligible at the desks)</label>
       <DrinkControl guest={guest} onSaved={onSaved} />
       <SizeControl guest={guest} onSaved={onSaved} />
+      <VipControl guest={guest} onSaved={onSaved} />
       {msg && <p className="adm-msg adm-msg--error">{msg}</p>}
       <div className="adm-row">
         <button className="btn btn--gold" onClick={save} disabled={busy}>Save</button>

@@ -9,7 +9,7 @@ const schema = z.union([
   z.object({ round_id: z.string().uuid(), outcome: z.literal('confirm_all') }),
 ]);
 
-export const POST = stationPost(['draw', 'prizes'], schema, async ({ actor, body }) => {
+export const POST = stationPost(['draw', 'prizes', 'mc'], schema, async ({ actor, body }) => {
   const r =
     'draw_id' in body
       ? await rpc<{ status: string }>('resolve_draw', {

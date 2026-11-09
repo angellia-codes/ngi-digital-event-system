@@ -1,7 +1,7 @@
 import Papa from 'papaparse';
 import { csvSafe } from './csv';
 
-type Kind = 'text' | 'time' | 'bool';
+type Kind = 'text' | 'time' | 'bool' | 'int';
 type Col = { key: string; header: string; kind?: Kind };
 type Report = { sql: string; file: string; cols: Col[] };
 
@@ -78,6 +78,16 @@ export const REPORTS = {
       { key: 'void_reason', header: 'Void reason' },
     ],
   },
+  rundown: {
+    sql: 'rundown', file: 'nourishfest-rundown.csv',
+    cols: [
+      { key: 'segment', header: 'Segment' }, { key: 'kind', header: 'Kind' },
+      { key: 'planned_start', header: 'Planned start', kind: 'time' }, { key: 'planned_min', header: 'Planned min' },
+      { key: 'actual_start', header: 'Actual start', kind: 'time' }, { key: 'actual_end', header: 'Actual end', kind: 'time' },
+      { key: 'actual_min', header: 'Actual min', kind: 'int' }, { key: 'drift_min', header: 'Start drift min', kind: 'int' },
+      { key: 'started_by', header: 'Started by' }, { key: 'reason', header: 'Correction reason' },
+    ],
+  },
   audit: {
     sql: 'audit', file: 'nourishfest-audit.csv',
     cols: [
@@ -102,6 +112,7 @@ function cell(value: unknown, kind: Kind = 'text'): string {
   if (value === null || value === undefined) return '';
   if (kind === 'time') return witaStamp(String(value));
   if (kind === 'bool') return value ? 'yes' : 'no';
+  if (kind === 'int') return Number.isFinite(Number(value)) ? String(Math.trunc(Number(value))) : ''; // '-3' is a number, not a formula
   return csvSafe(String(value));
 }
 

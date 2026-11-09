@@ -41,3 +41,6 @@
 .btn-confirm:disabled, .btn-noshow:disabled { opacity: .4; }
 .winner--compact .btn-confirm, .winner--compact .btn-noshow { font-size: 18px; }
 .btn-confirm--wide { width: 100%; }
+
+.op__script { padding: 10px 14px; border: 2px dashed var(--nf-gold); border-radius: 12px; color: var(--nf-text); font-size: 16px; line-height: 1.35; white-space: pre-wrap; }
+.op__script b { display: block; font-family: var(--nf-font-label); font-weight: 600; font-size: 12px; letter-spacing: .16em; color: var(--nf-gold); }

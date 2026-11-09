@@ -1,5 +1,6 @@
 import { DRAW_EN, DRAW_ID } from './draw-strings';
 import { INVITE_EN, INVITE_ID } from './invite-strings';
+import { MC_EN, MC_ID } from './mc-strings';
 
 export type Lang = 'id' | 'en';
 
@@ -161,6 +162,7 @@ const id = {
   'hub.admin_sub': 'Tamu, hadiah & laporan',
   ...DRAW_ID,
   ...INVITE_ID,
+  ...MC_ID,
 } as const;
 
 export type StringKey = keyof typeof id;
@@ -323,6 +325,7 @@ const en: Record<StringKey, string> = {
   'hub.admin_sub': 'Guests, prizes & reports',
   ...DRAW_EN,
   ...INVITE_EN,
+  ...MC_EN,
 };
 
 export const STRINGS: Record<Lang, Record<StringKey, string>> = { id, en };

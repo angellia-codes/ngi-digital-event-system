@@ -12,6 +12,8 @@ export type PrizeRow = {
   admin_voids: number;
   remaining: number;
   has_draws: boolean;
+  /** Optional line the MC reads for this prize (sponsor mention). */
+  mc_script?: string | null;
 };
 
 export const firstOpenPrize = (prizes: PrizeRow[]): string | null => prizes.find((p) => p.remaining > 0)?.id ?? null;
