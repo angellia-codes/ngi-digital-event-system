@@ -5,10 +5,11 @@ import { api } from '@/lib/client';
 import type { PrizeRow } from '@/lib/prizes';
 import { useLoad } from '@/lib/use-load';
 
-type Draft = { name: string; tier: string; quantity: string; sort_order: string; draw_as_batch: boolean };
-const EMPTY: Draft = { name: '', tier: '', quantity: '1', sort_order: '', draw_as_batch: false };
+type Draft = { name: string; tier: string; quantity: string; sort_order: string; draw_as_batch: boolean; mc_script: string };
+const EMPTY: Draft = { name: '', tier: '', quantity: '1', sort_order: '', draw_as_batch: false, mc_script: '' };
 const toDraft = (p: PrizeRow): Draft => ({
   name: p.name, tier: p.tier ?? '', quantity: String(p.quantity), sort_order: String(p.sort_order), draw_as_batch: p.draw_as_batch,
+  mc_script: p.mc_script ?? '',
 });
 
 function Fields({ d, set, batchLocked }: { d: Draft; set: (d: Draft) => void; batchLocked?: boolean }) {
@@ -22,6 +23,8 @@ function Fields({ d, set, batchLocked }: { d: Draft; set: (d: Draft) => void; ba
         <input type="checkbox" checked={d.draw_as_batch} disabled={batchLocked} onChange={(e) => set({ ...d, draw_as_batch: e.target.checked })} />
         Draw all at once
       </label>
+      <input className="adm-input" placeholder="MC line (optional, e.g. sponsor)" aria-label="MC line" maxLength={500} value={d.mc_script}
+        onChange={(e) => set({ ...d, mc_script: e.target.value })} />
     </>
   );
 }
@@ -44,8 +47,19 @@ export function PrizeManager() {
       draw_as_batch: d.draw_as_batch,
       ...(d.sort_order.trim() !== '' ? { sort_order: Number(d.sort_order) } : {}),
     };
-    const r = await api('/api/admin/prizes', body);
-    if (r.status === 'OK') { setMsg({ ok: true, text: id ? 'Saved.' : 'Prize added.' }); reload(); return true; }
+    const r = await api<{ id?: string }>('/api/admin/prizes', body);
+    if (r.status === 'OK') {
+      // The MC line is saved separately (admin_set_prize_script); only when it changed.
+      const prizeId = id ?? r.data?.id;
+      const before = id ? (data?.prizes.find((p) => p.id === id)?.mc_script ?? '') : '';
+      if (prizeId && d.mc_script.trim() !== before) {
+        const s = await api(`/api/admin/prizes/${prizeId}/script`, { mc_script: d.mc_script.trim() || null });
+        if (s.status !== 'OK') { setMsg({ ok: false, text: 'Prize saved, but the MC line could not be saved. Try again.' }); reload(); return false; }
+      }
+      setMsg({ ok: true, text: id ? 'Saved.' : 'Prize added.' });
+      reload();
+      return true;
+    }
     setMsg({ ok: false, text: describePrize(r.status) });
     return false;
   }
@@ -95,7 +109,7 @@ export function PrizeManager() {
               return (
                 <tr key={p.id}>
                   <td>{p.sort_order}</td>
-                  <td><b>{p.name}</b>{p.tier ? <> <span className="adm-badge adm-badge--gold">{p.tier}</span></> : null}</td>
+                  <td><b>{p.name}</b>{p.tier ? <> <span className="adm-badge adm-badge--gold">{p.tier}</span></> : null}{p.mc_script ? <div className="adm-muted">MC: {p.mc_script}</div> : null}</td>
                   <td>{p.quantity}</td>
                   <td>{p.draw_as_batch ? 'all at once' : 'one by one'}</td>
                   <td>{p.confirmed}</td>
