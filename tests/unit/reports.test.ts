@@ -72,4 +72,14 @@ describe('buildReportCsv', () => {
     ]);
     expect(parse(csv).data[0].Details).toBe('{"reason":"wrong person"}');
   });
+  it('writes rundown drift as a plain number, early starts included', () => {
+    const csv = buildReportCsv('rundown', [
+      { segment: 'Opening', kind: 'normal', planned_start: '2026-12-08T09:00:00Z', planned_min: 10,
+        actual_start: '2026-12-08T08:57:00Z', actual_end: '2026-12-08T09:09:00Z', actual_min: 12, drift_min: -3, started_by: 'mc', reason: null },
+    ]);
+    const row = parse(csv).data[0];
+    expect(row['Start drift min']).toBe('-3');
+    expect(row['Actual start']).toBe('2026-12-08 16:57:00');
+    expect(row['Correction reason']).toBe('');
+  });
 });
