@@ -13,6 +13,7 @@ const HOME: Record<string, string | undefined> = {
   prizes: '/station/prizes',
   bar: '/station/bar',
   mc: '/station/mc',
+  screen: '/station/screen',
   admin: '/admin',
 };
 
