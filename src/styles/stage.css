@@ -87,3 +87,14 @@ html:has(.stage), body:has(.stage) { overflow: hidden; background: #000; }
 @keyframes nf-out { to { opacity: 0; } }
 @keyframes nf-fade { from { opacity: 0; } to { opacity: 1; } }
 
+
+/* Videotron screens (spec 2026-11-13). Videos fill the real screen (not the 1280 × 720 board) and keep their ratio. */
+.scr-stage { position: absolute; inset: 0; background: #000; }
+.scr-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; opacity: 0; }
+.scr-video--front { opacity: 1; }
+.stage__fit { position: relative; }
+.closing__main { margin: 18px 0 0; max-width: 1160px; font-family: var(--nf-font-heading); font-size: 72px; line-height: 1.02; text-transform: uppercase; color: var(--nf-text); text-shadow: 5px 5px 0 var(--nf-pink); }
+.closing__sub { margin: 0; font-family: var(--nf-font-label); font-weight: 600; font-size: 30px; letter-spacing: .12em; color: var(--nf-gold); }
+.stage__cache { align-self: center; padding: 6px 12px; border-radius: 10px; background: rgba(0,0,0,.75); color: var(--nf-green); font-family: var(--nf-font-label); font-weight: 600; letter-spacing: .08em; }
+.stage__cache--bad { color: var(--nf-pink); }
+.stage--safe .closing__main { text-shadow: none; -webkit-text-stroke: 2px #000; paint-order: stroke fill; }

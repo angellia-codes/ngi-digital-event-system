@@ -1,4 +1,5 @@
 import type { Lang } from './i18n/strings';
+import { parseScreen, type LiveScreen } from './screens';
 
 export type StagePhase = 'idle' | 'intro' | 'rolling' | 'revealed' | 'void';
 export type StageSlot = {
@@ -12,7 +13,8 @@ export type StageSlot = {
 export type StagePrize = { id: string; name: string; tier: string | null; quantity: number };
 export type StagePayload = { round_id?: string | null; batch?: boolean; prize?: StagePrize; slots?: StageSlot[] };
 export type StageOptions = { safe_mode: boolean; reduce_effects: boolean; language: Lang };
-export type StageRow = { rev: number; phase: StagePhase; payload: StagePayload; options: StageOptions };
+/** `screen` / `screen_rev` (spec 2026-11-13): what the videotron shows. The draw board is the `draw` screen. */
+export type StageRow = { rev: number; phase: StagePhase; payload: StagePayload; options: StageOptions; screen: LiveScreen; screen_rev: number };
 
 export type SlotKind = 'rolling' | 'landed' | 'revealed' | 'void';
 export type SlotView = { slot: number; number: number; kind: SlotKind; name?: string; outlet?: string; department?: string };
@@ -35,6 +37,8 @@ export function parseRow(raw: unknown): StageRow | null {
     phase: r.phase as StagePhase,
     payload,
     options: { ...DEFAULT_OPTIONS, ...o, language: o.language === 'id' ? 'id' : 'en' },
+    screen: parseScreen(r.screen),
+    screen_rev: Number.isFinite(Number(r.screen_rev)) ? Number(r.screen_rev) : 0,
   };
 }
 

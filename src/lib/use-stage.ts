@@ -15,12 +15,15 @@ const RECONCILE_MS = 30_000; // slow safety net even while Realtime says it is f
  * Keeps one `StageRow` up to date. Three sources feed the same `apply()`: the first fetch, Realtime, and polling.
  * `apply()` keeps a row only if its `rev` is higher, so late or duplicate deliveries change nothing.
  */
-export function useStage(cfg: StageConfig) {
+export function useStage(cfg: StageConfig, beatBody?: () => unknown) {
   const [row, setRow] = useState<StageRow | null>(null);
   const [delays, setDelays] = useState<Record<number, number>>({});
   const [now, setNow] = useState(() => Date.now());
   const [realtimeUp, setRealtimeUp] = useState(false);
   const [signedOut, setSignedOut] = useState(false);
+  const [offset, setOffset] = useState(0); // server clock minus this laptop's clock, from every poll
+  const body = useRef(beatBody);
+  body.current = beatBody;
   const current = useRef<StageRow | null>(null);
   const starts = useRef(new Map<string, number>());
   const sawFirst = useRef(false);
@@ -41,6 +44,8 @@ export function useStage(cfg: StageConfig) {
   const poll = useCallback(async () => {
     const r = await api<unknown>('/api/stage/state');
     if (r.http === 401) { setSignedOut(true); return; }
+    const now = (r.data as { server_now?: unknown } | null)?.server_now;
+    if (typeof now === 'string' && Number.isFinite(Date.parse(now))) setOffset(Date.parse(now) - Date.now());
     const parsed = r.ok ? parseRow(r.data) : null;
     if (parsed) apply(parsed);
   }, [apply]);
@@ -75,10 +80,10 @@ export function useStage(cfg: StageConfig) {
     return () => { clearTimeout(start); if (interval) clearInterval(interval); };
   }, [realtimeUp, poll]);
 
-  // Heartbeat: tells the operator's phone this display is alive.
+  // Heartbeat: tells the operator's phone this display is alive, with the video cache report (spec 2026-11-13).
   useEffect(() => {
     const beat = async () => {
-      const r = await api('/api/stage/heartbeat', {});
+      const r = await api('/api/stage/heartbeat', { cache: body.current?.() });
       if (r.http === 401) setSignedOut(true);
     };
     beat();
@@ -106,5 +111,5 @@ export function useStage(cfg: StageConfig) {
     return () => clearInterval(id);
   }, [rolling]);
 
-  return { row, delays, starts: starts.current, now, link: realtimeUp ? ('live' as const) : ('polling' as const), signedOut };
+  return { row, delays, starts: starts.current, now, offset, link: realtimeUp ? ('live' as const) : ('polling' as const), signedOut };
 }
