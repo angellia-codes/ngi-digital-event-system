@@ -21,7 +21,6 @@ export const ROLE_NAME: Record<Role, string> = {
   admin: 'Admin console',
   bar: 'Bar',
   mc: 'MC cue card',
-  screen: 'Screen control (videotron)',
 };
 
 /** Four random digits from the browser or Node crypto source. */

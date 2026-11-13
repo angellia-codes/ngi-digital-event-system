@@ -10,7 +10,6 @@ const LINKS = [
   { href: '/admin/beverages', label: 'Beverages' },
   { href: '/admin/prizes', label: 'Prizes' },
   { href: '/admin/rundown', label: 'Rundown' },
-  { href: '/admin/screens', label: 'Screens' },
   { href: '/admin/draws', label: 'Draws' },
   { href: '/admin/reports', label: 'Reports' },
   { href: '/admin/audit', label: 'Audit' },

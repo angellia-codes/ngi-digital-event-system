@@ -5,7 +5,7 @@ import { parseCookies } from './api';
 
 export const STATION_COOKIE = 'nf_station';
 export const DEVICE_COOKIE = 'nf_device';
-export const ROLES = ['checkin', 'merchandise', 'draw', 'prizes', 'admin', 'bar', 'mc', 'screen'] as const;
+export const ROLES = ['checkin', 'merchandise', 'draw', 'prizes', 'admin', 'bar', 'mc'] as const;
 export type Role = (typeof ROLES)[number];
 export type StationSession = { role: Role; label: string; v: number };
 

@@ -88,13 +88,6 @@ export const REPORTS = {
       { key: 'started_by', header: 'Started by' }, { key: 'reason', header: 'Correction reason' },
     ],
   },
-  screens: {
-    sql: 'screens', file: 'nourishfest-screens.csv',
-    cols: [
-      { key: 'at', header: 'Time', kind: 'time' }, { key: 'screen', header: 'Screen' }, { key: 'from', header: 'Previous screen' },
-      { key: 'how', header: 'How' }, { key: 'by', header: 'By' },
-    ],
-  },
   audit: {
     sql: 'audit', file: 'nourishfest-audit.csv',
     cols: [

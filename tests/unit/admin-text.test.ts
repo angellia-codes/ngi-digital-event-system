@@ -28,6 +28,6 @@ describe('randomPin', () => {
 
 describe('ROLE_NAME', () => {
   it('names every role', () => {
-    expect(Object.keys(ROLE_NAME).sort()).toEqual(['admin', 'bar', 'checkin', 'draw', 'mc', 'merchandise', 'prizes', 'screen']);
+    expect(Object.keys(ROLE_NAME).sort()).toEqual(['admin', 'bar', 'checkin', 'draw', 'mc', 'merchandise', 'prizes']);
   });
 });

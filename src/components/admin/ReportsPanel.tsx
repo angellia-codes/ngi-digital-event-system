@@ -8,7 +8,6 @@ const REPORTS: { href: string; title: string; text: string }[] = [
   { href: '/api/admin/reports/merch-size-pending', title: 'T-shirt size pending', text: 'Guests with no size yet, with phone, for the reminder through the Fonnte sheet.' },
   { href: '/api/admin/reports/draws', title: 'Draw history', text: 'Every draw: prize, slot, winner, outcome, who resolved it, void reasons.' },
   { href: '/api/admin/reports/rundown', title: 'Rundown', text: 'Every segment: planned vs actual start and end, drift, who moved the show on, correction reasons.' },
-  { href: '/api/admin/reports/screens', title: 'Screens', text: 'Every videotron switch: time, screen, previous screen, manual / draw takeover / end of video, by whom.' },
   { href: '/api/admin/reports/audit', title: 'Audit log', text: 'Every recorded action, oldest first.' },
   { href: '/api/admin/invitations.csv', title: 'Invitation links', text: 'Personal pass link per employee, for the WhatsApp broadcast.' },
 ];
