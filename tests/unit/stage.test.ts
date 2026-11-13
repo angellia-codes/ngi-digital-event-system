@@ -3,11 +3,10 @@ import {
   DEFAULT_OPTIONS, REVEAL_STEP_MS, ROLL_MS, acceptRow, bannerText, noteRolls, parseRow, revealDelays, slotViews,
   type StageRow, type StageSlot,
 } from '@/lib/stage';
-import { DEFAULT_SCREEN } from '@/lib/screens';
 
 const prize = { id: 'p1', name: 'Smart TV', tier: 'Hadiah Utama', quantity: 3 };
 const row = (rev: number, slots: StageSlot[], over: Partial<StageRow> = {}): StageRow => ({
-  rev, phase: 'rolling', options: DEFAULT_OPTIONS, screen: { ...DEFAULT_SCREEN, key: 'draw' }, screen_rev: 1, payload: { round_id: 'r1', batch: false, prize, slots }, ...over,
+  rev, phase: 'rolling', options: DEFAULT_OPTIONS, payload: { round_id: 'r1', batch: false, prize, slots }, ...over,
 });
 const rolling = (slot: number, number: number): StageSlot => ({ slot, number, state: 'rolling' });
 const revealed = (slot: number, number: number, name: string): StageSlot =>
@@ -16,12 +15,7 @@ const revealed = (slot: number, number: number, name: string): StageSlot =>
 describe('parseRow', () => {
   it('accepts the database shape and fills default options', () => {
     const r = parseRow({ rev: 4, phase: 'idle', payload: {}, options: {} });
-    expect(r).toEqual({ rev: 4, phase: 'idle', payload: {}, options: DEFAULT_OPTIONS, screen: DEFAULT_SCREEN, screen_rev: 0 });
-  });
-  it('reads the live screen', () => {
-    const r = parseRow({ rev: 9, phase: 'idle', screen: { key: 'welcome', started_at: 't', by: 'screen', auto: false }, screen_rev: '5' });
-    expect(r?.screen.key).toBe('welcome');
-    expect(r?.screen_rev).toBe(5);
+    expect(r).toEqual({ rev: 4, phase: 'idle', payload: {}, options: DEFAULT_OPTIONS });
   });
   it('accepts a Realtime row with extra columns and a string revision', () => {
     const r = parseRow({ event_id: 'e', rev: '7', phase: 'rolling', payload: { slots: [] }, options: { safe_mode: true, language: 'en' }, updated_at: 'x' });

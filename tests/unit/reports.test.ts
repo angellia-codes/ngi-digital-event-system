@@ -10,7 +10,7 @@ describe('witaStamp', () => {
 });
 
 describe('isReportName', () => {
-  it.each(['guests', 'check-ins', 'merchandise', 'beverages', 'beverage-pending', 'merch-sizes', 'merch-size-pending', 'draws', 'rundown', 'screens', 'audit'])('knows %s', (n) => expect(isReportName(n)).toBe(true));
+  it.each(['guests', 'check-ins', 'merchandise', 'beverages', 'beverage-pending', 'merch-sizes', 'merch-size-pending', 'draws', 'audit'])('knows %s', (n) => expect(isReportName(n)).toBe(true));
   it.each(['rsvp-pending', 'invitations', '../etc', 'toString', '__proto__', ''])('rejects %s', (n) => expect(isReportName(n)).toBe(false));
 });
 

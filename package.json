@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "test:unit": "vitest run tests/unit",
-    "db:push": "node --env-file=.env.local -e \"process.exitCode = require('child_process').spawnSync(process.execPath, ['node_modules/supabase/dist/supabase.js', 'db', 'push', '--db-url', process.env.DATABASE_URL], { stdio: 'inherit' }).status\""
+    "db:push": "supabase db push --db-url \"$DATABASE_URL\""
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.3",
