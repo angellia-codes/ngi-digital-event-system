@@ -1,4 +1,5 @@
 /** MC cue card: types for `mc_state`, `mc_vip`, `mc_pax` (SQL) and the pure logic the MC screen runs on them. */
+import type { ScreenKey } from './screens';
 
 export type SegmentPrize = {
   id: string; name: string; tier: string | null; quantity: number; mc_script: string | null;
@@ -7,6 +8,8 @@ export type SegmentPrize = {
 export type Segment = {
   id: string; sort_order: number; title: string; planned_start: string; duration_min: number;
   pic: string | null; script: string | null; kind: 'normal' | 'door_prize';
+  /** The screen the Screen Control panel offers as "Up next" while this segment runs (spec 2026-11-13). */
+  suggested_screen?: ScreenKey | null;
   started_at: string | null; ended_at: string | null; prizes: SegmentPrize[];
 };
 export type McPhase = 'not_started' | 'running' | 'ended';

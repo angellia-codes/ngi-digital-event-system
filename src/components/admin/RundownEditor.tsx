@@ -4,6 +4,8 @@ import { describeRundown, parseTime } from '@/lib/admin-mc-text';
 import { api } from '@/lib/client';
 import { segmentStatus, type McState, type Segment } from '@/lib/mc';
 import { prizeLabel, type PrizeRow } from '@/lib/prizes';
+import { SCREENS, screenLabel, type ScreenKey } from '@/lib/screens';
+import { STRINGS } from '@/lib/i18n/strings';
 import { formatTimeWita } from '@/lib/time';
 import { useLoad } from '@/lib/use-load';
 
@@ -101,6 +103,12 @@ export function RundownEditor() {
     reload();
   }
 
+  async function setScreen(id: string, screen: ScreenKey | null) {
+    const r = await api(`/api/admin/rundown/${id}/screen`, { screen });
+    setMsg(r.status === 'OK' ? { ok: true, text: 'Suggested screen saved.' } : { ok: false, text: describeRundown(r.status) });
+    reload();
+  }
+
   async function setCurrent() {
     if (!jump) return;
     const r = await api('/api/admin/rundown/set-current', { segment_id: jump.id, reason: jump.reason });
@@ -123,14 +131,14 @@ export function RundownEditor() {
 
       <div className="adm-table-wrap">
         <table className="adm-table">
-          <thead><tr><th>Order</th><th>Time</th><th>Segment</th><th>Min</th><th>PIC</th><th>Prizes</th><th>Status</th><th /></tr></thead>
+          <thead><tr><th>Order</th><th>Time</th><th>Segment</th><th>Min</th><th>PIC</th><th>Prizes</th><th>Screen</th><th>Status</th><th /></tr></thead>
           <tbody>
             {segments.map((s) => {
               const status = segmentStatus(s, state?.current_segment_id ?? null);
               if (editing?.id === s.id) {
                 return (
                   <tr key={s.id}>
-                    <td colSpan={8}>
+                    <td colSpan={9}>
                       <Fields d={editing.draft} set={(draft) => setEditing({ id: s.id, draft })} prizes={prizes} takenBy={takenBy(s.id)} />
                       <span className="adm-row">
                         <button className="btn btn--gold" onClick={async () => { if (await save(s.id, editing.draft)) setEditing(null); }}>Save</button>
@@ -148,6 +156,13 @@ export function RundownEditor() {
                   <td>{s.duration_min}</td>
                   <td>{s.pic ?? ''}</td>
                   <td>{s.prizes.map((p) => p.name).join(', ')}</td>
+                  <td>
+                    <select className="adm-select" aria-label={`Suggested screen for ${s.title}`} value={s.suggested_screen ?? ''}
+                      onChange={(e) => setScreen(s.id, (e.target.value || null) as ScreenKey | null)}>
+                      <option value="">—</option>
+                      {SCREENS.map((x) => <option key={x.key} value={x.key}>{STRINGS.en[screenLabel(x.key)]}</option>)}
+                    </select>
+                  </td>
                   <td>
                     {status === 'current' ? <span className="adm-badge adm-badge--green">current</span>
                       : status === 'done' && s.started_at && s.ended_at ? `${formatTimeWita(s.started_at)}–${formatTimeWita(s.ended_at)}` : ''}
@@ -177,7 +192,7 @@ export function RundownEditor() {
                 </tr>
               );
             })}
-            {!loading && segments.length === 0 && <tr><td colSpan={8} className="adm-muted">No segments yet. Add the first one above.</td></tr>}
+            {!loading && segments.length === 0 && <tr><td colSpan={9} className="adm-muted">No segments yet. Add the first one above.</td></tr>}
           </tbody>
         </table>
       </div>
