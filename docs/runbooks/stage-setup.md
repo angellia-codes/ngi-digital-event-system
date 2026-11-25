@@ -37,3 +37,27 @@ Used at Rehearsal 2 (at the venue) and on 8 December. About 15 minutes.
 - Reloading the page is harmless: it rebuilds the screen from the database. A winner already confirmed stays on screen.
 - If the stage lags, the MC phone is unaffected. The MC can read the number and name from the phone.
 - If Realtime is blocked on the network, the page polls every 3 seconds on its own; the delay is a few seconds, not a failure.
+
+## Stage videos (background loops)
+
+Four silent loops can play on the stage display: Welcome, Synthwave Sunset, Retro TV and Neon City. They are controlled from **Admin → Stage videos** only.
+
+**Once, before Rehearsal 1:** upload the four MP4s in the Supabase dashboard → Storage → bucket `stage-videos`, with exactly these names:
+
+| Loop | File name |
+| :---- | :---- |
+| Welcome | `nf26-welcome.mp4` |
+| Synthwave Sunset | `nf26-synthwave-sunset.mp4` |
+| Retro TV | `nf26-retro-tv.mp4` |
+| Neon City | `nf26-neoncity.mp4` |
+
+Each file must be under 50 MB. To replace a file, upload under the same name, then on the projector laptop click **Videos 4/4 ready** (bottom-left; move the mouse) to download them again.
+
+**On the day:**
+
+1. Open the stage link at least 10 minutes early on the event connection (hotspot or cable). The laptop downloads all four loops in the background. Move the mouse: the button bottom-left must say **Videos 4/4 ready** before doors open. After that the loops play from the laptop itself, even if the internet drops.
+2. Admin → Stage videos → **▶ Play** on a loop. It appears within a second or two and repeats until you stop it. Tap another loop's Play to switch straight to it.
+3. **■ Stop video** returns the screen to the draw board.
+4. When the MC taps SHOW PRIZE, the draw takes the screen automatically. Play is refused while a number is waiting for the MC's confirmation.
+
+A loop always fills as much of the screen as it can without cropping. Loops made for the LED wall (1520 × 640) fill the wall edge to edge; on a 16:9 projector they show with black bars above and below.
