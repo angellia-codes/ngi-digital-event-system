@@ -25,7 +25,12 @@ export function StageClient(cfg: StageConfig) {
   const { row, delays, starts, now, signedOut } = useStage(cfg);
   const scale = useFit();
   const videos = useStageVideos(cfg.url);
-  const playing = row?.phase === 'video' ? stageVideo(row.payload.video)?.key : undefined;
+  const playing = row?.phase === 'video' ? stageVideo(row.payload.video) : undefined;
+  const startedAt = row?.payload.started_at ?? null;
+  // The Play that was already on when this page loaded (a reload mid-video) catches up; a Play seen live starts at 0.
+  const atLoad = useRef<{ started: number | null } | null>(null);
+  if (row && atLoad.current === null) atLoad.current = { started: row.phase === 'video' ? startedAt : null };
+  const resumeFrom = startedAt !== null && atLoad.current?.started === startedAt ? startedAt : null;
   const sound = useMemo(() => createSound(), []);
   const [soundOn, setSoundOn] = useState(false);
   const [active, setActive] = useState(false);
@@ -77,7 +82,16 @@ export function StageClient(cfg: StageConfig) {
       <div className="stage__fit" style={{ transform: `scale(${scale})` }}>
         {row ? <StageView row={row} views={views} delays={delays} /> : <div className="stage__boot" />}
       </div>
-      {playing && <StageVideo videoKey={playing} source={videos.source} />}
+      {playing && (
+        <StageVideo
+          key={`${playing.key}-${startedAt ?? ''}`}
+          videoKey={playing.key}
+          source={videos.source}
+          once={playing.once}
+          soundOn={soundOn}
+          resumeFrom={resumeFrom}
+        />
+      )}
       <div className="stage__controls">
         {!safe && (
           <button type="button" className="stage__btn" onClick={enableSound} disabled={soundOn}>

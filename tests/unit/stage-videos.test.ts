@@ -4,12 +4,13 @@ import { parseRow } from '@/lib/stage';
 import { STAGE_VIDEOS, STAGE_VIDEO_KEYS, stageVideo, stageVideoUrl } from '@/lib/stage-videos';
 
 describe('stage videos', () => {
-  it('lists the four loops with unique keys and files', () => {
-    expect(STAGE_VIDEO_KEYS).toEqual(['welcome', 'synthwave_sunset', 'retro_tv', 'neon_city']);
-    expect(new Set(STAGE_VIDEOS.map((v) => v.file)).size).toBe(4);
+  it('lists the four loops and the opening film with unique keys and files', () => {
+    expect(STAGE_VIDEO_KEYS).toEqual(['welcome', 'synthwave_sunset', 'retro_tv', 'neon_city', 'opening']);
+    expect(new Set(STAGE_VIDEOS.map((v) => v.file)).size).toBe(5);
+    expect(STAGE_VIDEOS.filter((v) => v.once).map((v) => v.key)).toEqual(['opening']);
   });
   it('matches the keys the database accepts', () => {
-    const sql = readFileSync('supabase/migrations/20261115000020_stage_video.sql', 'utf8');
+    const sql = readFileSync('supabase/migrations/20261115000021_stage_opening_film.sql', 'utf8');
     const list = sql.match(/p_key not in \(([^)]*)\)/)?.[1] ?? '';
     expect(list.split(',').map((s) => s.trim().replace(/'/g, ''))).toEqual(STAGE_VIDEO_KEYS);
   });

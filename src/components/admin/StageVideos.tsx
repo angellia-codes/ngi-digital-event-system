@@ -38,7 +38,7 @@ export function StageVideos() {
 
   const playing = data?.stage.phase === 'video' ? stageVideo(data.stage.payload?.video) : undefined;
   const link = heartbeatState(data?.heartbeat_age);
-  const onScreen = !data ? 'Loading…' : playing ? `${playing.label} (loop)` : PHASE_TEXT[data.stage.phase] ?? data.stage.phase;
+  const onScreen = !data ? 'Loading…' : playing ? `${playing.label} (${playing.once ? 'plays once, then the draw board' : 'loop'})` : PHASE_TEXT[data.stage.phase] ?? data.stage.phase;
 
   return (
     <>
@@ -63,8 +63,9 @@ export function StageVideos() {
             <div key={v.key} className={`adm-card adm-video${live ? ' adm-video--live' : ''}`}>
               <p className="adm-video__name">{v.label}</p>
               <p className="adm-muted adm-video__file">{v.file}</p>
+              {v.once && <p className="adm-muted adm-video__file">Plays once with sound (press S on the stage laptop first), then the draw board.</p>}
               <button className="btn btn--gold" disabled={busy || live} onClick={() => send(v.key)}>
-                {live ? 'Playing now' : '▶ Play'}
+                {live ? (v.once ? 'Started' : 'Playing now') : v.once ? '▶ Play once' : '▶ Play'}
               </button>
             </div>
           );

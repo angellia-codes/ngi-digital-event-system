@@ -10,7 +10,7 @@ export type StageSlot = {
   department?: string;
 };
 export type StagePrize = { id: string; name: string; tier: string | null; quantity: number };
-export type StagePayload = { round_id?: string | null; batch?: boolean; prize?: StagePrize; slots?: StageSlot[]; video?: string };
+export type StagePayload = { round_id?: string | null; batch?: boolean; prize?: StagePrize; slots?: StageSlot[]; video?: string; started_at?: number };
 export type StageOptions = { safe_mode: boolean; reduce_effects: boolean; language: Lang };
 export type StageRow = { rev: number; phase: StagePhase; payload: StagePayload; options: StageOptions };
 
