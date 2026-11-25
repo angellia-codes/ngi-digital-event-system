@@ -1,11 +1,14 @@
 'use client';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { StageVideo } from '@/components/stage/StageVideo';
 import { StageView } from '@/components/stage/StageView';
 import { translate } from '@/lib/i18n/strings';
 import { slotViews } from '@/lib/stage';
+import { stageVideo } from '@/lib/stage-videos';
 import { fitScale } from '@/lib/stage-fit';
 import { createSound } from '@/lib/stage-sound';
 import { useStage, type StageConfig } from '@/lib/use-stage';
+import { useStageVideos } from '@/lib/use-stage-videos';
 
 function useFit(): number {
   const [scale, setScale] = useState(1);
@@ -21,6 +24,8 @@ function useFit(): number {
 export function StageClient(cfg: StageConfig) {
   const { row, delays, starts, now, signedOut } = useStage(cfg);
   const scale = useFit();
+  const videos = useStageVideos(cfg.url);
+  const playing = row?.phase === 'video' ? stageVideo(row.payload.video)?.key : undefined;
   const sound = useMemo(() => createSound(), []);
   const [soundOn, setSoundOn] = useState(false);
   const [active, setActive] = useState(false);
@@ -72,6 +77,7 @@ export function StageClient(cfg: StageConfig) {
       <div className="stage__fit" style={{ transform: `scale(${scale})` }}>
         {row ? <StageView row={row} views={views} delays={delays} /> : <div className="stage__boot" />}
       </div>
+      {playing && <StageVideo videoKey={playing} source={videos.source} />}
       <div className="stage__controls">
         {!safe && (
           <button type="button" className="stage__btn" onClick={enableSound} disabled={soundOn}>
@@ -79,6 +85,9 @@ export function StageClient(cfg: StageConfig) {
           </button>
         )}
         <button type="button" className="stage__btn" onClick={fullscreen}>{translate(lang, 'stage.fullscreen')}</button>
+        <button type="button" className="stage__btn" onClick={videos.refresh} title={translate(lang, 'stage.videos_reload')}>
+          {translate(lang, 'stage.videos', { ready: videos.ready, total: videos.total })}
+        </button>
       </div>
       {signedOut && <div className="stage__notice" role="alert">{translate(lang, 'stage.signed_out')}</div>}
     </div>

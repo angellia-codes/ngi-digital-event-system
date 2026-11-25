@@ -11,6 +11,7 @@ const LINKS = [
   { href: '/admin/prizes', label: 'Prizes' },
   { href: '/admin/rundown', label: 'Rundown' },
   { href: '/admin/draws', label: 'Draws' },
+  { href: '/admin/stage-videos', label: 'Stage videos' },
   { href: '/admin/reports', label: 'Reports' },
   { href: '/admin/audit', label: 'Audit' },
   { href: '/admin/settings', label: 'Settings' },

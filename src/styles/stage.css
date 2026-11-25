@@ -71,8 +71,14 @@ html:has(.stage), body:has(.stage) { overflow: hidden; background: #000; }
 .stage--reduce .tile--revealed .tile__front { animation: none; opacity: 0; }
 .stage--reduce .tile--revealed .tile__back, .stage--reduce .reveal, .stage--reduce .void { animation: nf-fade .25s linear both; animation-delay: 0ms; }
 
+/* A loop fills the whole window, outside the 16:9 board: edge to edge on the 1520 × 640 LED wall, letterboxed on 16:9. */
+.stage__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; }
+
 .stage__controls { position: absolute; left: 16px; bottom: 16px; display: flex; gap: 10px; opacity: 0; transition: opacity .2s; }
-.stage--active .stage__controls { opacity: 1; }
+.stage--active /* A loop fills the whole window, outside the 16:9 board: edge to edge on the 1520 × 640 LED wall, letterboxed on 16:9. */
+.stage__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; }
+
+.stage__controls { opacity: 1; }
 .stage__btn { min-height: 44px; padding: 0 16px; border-radius: 10px; border: 2px solid var(--nf-gold); background: rgba(0,0,0,.75); color: var(--nf-gold); font-family: var(--nf-font-label); font-weight: 600; letter-spacing: .1em; }
 .stage__notice { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 40px; text-align: center; background: rgba(0,0,0,.92); color: var(--nf-pink); font-family: var(--nf-font-heading); font-size: 40px; }
 

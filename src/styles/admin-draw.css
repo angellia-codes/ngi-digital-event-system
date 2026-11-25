@@ -12,3 +12,14 @@
 .adm-link:hover { border-color: var(--nf-gold); }
 .adm-link b { display: block; font-family: var(--nf-font-heading); font-weight: 400; font-size: 18px; text-transform: uppercase; color: var(--nf-gold); }
 .adm-link span { color: var(--nf-text-soft); font-size: 13px; }
+
+/* Stage videos */
+.adm-video-now { font-size: 18px; }
+.adm-video-now b { color: var(--nf-gold); }
+.adm-video-stop { min-height: 48px; padding: 0 22px; }
+.adm-video-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); margin-bottom: 16px; }
+.adm-video { display: flex; flex-direction: column; gap: 6px; margin-bottom: 0; }
+.adm-video .btn { min-height: 48px; margin-top: auto; }
+.adm-video--live { border-color: var(--nf-green); box-shadow: 0 0 0 2px var(--nf-green) inset; }
+.adm-video__name { margin: 0; font-family: var(--nf-font-heading); font-size: 20px; text-transform: uppercase; color: var(--nf-text); }
+.adm-video__file { margin: 0; font-size: 12px; overflow-wrap: anywhere; }

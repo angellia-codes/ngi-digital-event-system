@@ -1,6 +1,6 @@
 import type { Lang } from './i18n/strings';
 
-export type StagePhase = 'idle' | 'intro' | 'rolling' | 'revealed' | 'void';
+export type StagePhase = 'idle' | 'intro' | 'rolling' | 'revealed' | 'void' | 'video';
 export type StageSlot = {
   slot: number;
   number: number;
@@ -10,7 +10,7 @@ export type StageSlot = {
   department?: string;
 };
 export type StagePrize = { id: string; name: string; tier: string | null; quantity: number };
-export type StagePayload = { round_id?: string | null; batch?: boolean; prize?: StagePrize; slots?: StageSlot[] };
+export type StagePayload = { round_id?: string | null; batch?: boolean; prize?: StagePrize; slots?: StageSlot[]; video?: string };
 export type StageOptions = { safe_mode: boolean; reduce_effects: boolean; language: Lang };
 export type StageRow = { rev: number; phase: StagePhase; payload: StagePayload; options: StageOptions };
 
@@ -20,7 +20,7 @@ export type SlotView = { slot: number; number: number; kind: SlotKind; name?: st
 export const ROLL_MS = 5000; // cosmetic; the outcome is already saved before the roll starts
 export const REVEAL_STEP_MS = 1700; // one winner every 1.5–2 seconds when a batch is confirmed together
 export const DEFAULT_OPTIONS: StageOptions = { safe_mode: false, reduce_effects: false, language: 'en' };
-const PHASES: readonly string[] = ['idle', 'intro', 'rolling', 'revealed', 'void'];
+const PHASES: readonly string[] = ['idle', 'intro', 'rolling', 'revealed', 'void', 'video'];
 
 /** Normalises a row from `/api/stage/state` or from Realtime. Returns null if it is not a stage row. */
 export function parseRow(raw: unknown): StageRow | null {
