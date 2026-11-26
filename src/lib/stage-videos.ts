@@ -1,6 +1,6 @@
 /**
  * The background loops the admin can put on the stage display. The keys must match `set_stage_video` in
- * `supabase/migrations/20261115000020_stage_video.sql`. The files live in the public Supabase Storage bucket
+ * `supabase/migrations/20261126000021_stage_video_more.sql` (the latest definition). The files live in the public Supabase Storage bucket
  * `stage-videos` under exactly these names (silent H.264 MP4s, no audio track).
  */
 export const STAGE_VIDEO_BUCKET = 'stage-videos';
@@ -10,6 +10,8 @@ export const STAGE_VIDEOS = [
   { key: 'synthwave_sunset', label: 'Synthwave Sunset', file: 'nf26-synthwave-sunset.mp4' },
   { key: 'retro_tv', label: 'Retro TV', file: 'nf26-retro-tv.mp4' },
   { key: 'neon_city', label: 'Neon City', file: 'nf26-neoncity.mp4' },
+  { key: 'sunset', label: 'Sunset', file: 'nf26-sunset.mp4' },
+  { key: 'candid_cam', label: 'Candid Cam', file: 'nf26-candid-cam.mp4' },
 ] as const;
 
 export type StageVideoKey = (typeof STAGE_VIDEOS)[number]['key'];

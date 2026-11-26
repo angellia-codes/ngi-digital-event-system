@@ -1,6 +1,6 @@
 -- pgTAP: stage videos (set_stage_video). Run with `supabase test db`.
 begin;
-select plan(18);
+select plan(22);
 
 insert into public.events (id, name, event_date, mode, doors_at)
 values ('00000000-0000-0000-0000-0000000000ee', 'T', '2026-12-08', 'rehearsal', now() + interval '30 days');
@@ -20,6 +20,12 @@ select is((select payload from public.stage_state where event_id = '00000000-000
 select is(public.set_stage_video('00000000-0000-0000-0000-0000000000ee', 'retro_tv', 'admin') ->> 'status', 'OK', 'switch straight to another loop');
 select is((select payload ->> 'video' from public.stage_state where event_id = '00000000-0000-0000-0000-0000000000ee'), 'retro_tv', 'new loop on screen');
 select is((select count(*)::int from public.audit_log where event_id = '00000000-0000-0000-0000-0000000000ee' and action = 'stage_video'), 2, 'each play is audited');
+
+-- the two loops added on 26 Nov
+select is(public.set_stage_video('00000000-0000-0000-0000-0000000000ee', 'sunset', 'admin') ->> 'status', 'OK', 'play sunset');
+select is((select payload ->> 'video' from public.stage_state where event_id = '00000000-0000-0000-0000-0000000000ee'), 'sunset', 'sunset on screen');
+select is(public.set_stage_video('00000000-0000-0000-0000-0000000000ee', 'candid_cam', 'admin') ->> 'status', 'OK', 'play candid cam');
+select is((select payload ->> 'video' from public.stage_state where event_id = '00000000-0000-0000-0000-0000000000ee'), 'candid_cam', 'candid cam on screen');
 
 -- stop
 select is(public.set_stage_video('00000000-0000-0000-0000-0000000000ee', null, 'admin') ->> 'status', 'OK', 'stop');

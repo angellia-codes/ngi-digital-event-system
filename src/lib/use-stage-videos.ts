@@ -24,7 +24,7 @@ async function ensureCached(url: string): Promise<boolean> {
 }
 
 /**
- * Keeps the four loops on the stage laptop, so a video plays from the laptop itself and a slow or dropped
+ * Keeps the stage loops on the stage laptop, so a video plays from the laptop itself and a slow or dropped
  * connection at the venue cannot interrupt it. Downloads start when the stage page opens; failures retry every minute.
  * `source(key)` returns a local object URL when the file is cached, otherwise the network URL (still playable online).
  */
@@ -57,7 +57,7 @@ export function useStageVideos(supabaseUrl: string) {
     return () => clearInterval(id);
   }, [fill]);
 
-  /** Forget the stored copies and download all four again. */
+  /** Forget the stored copies and download them all again. */
   const refresh = useCallback(async () => {
     try { if (typeof caches !== 'undefined') await caches.delete(CACHE); } catch { /* ignore */ }
     setStatus(Object.fromEntries(STAGE_VIDEOS.map((v) => [v.key, 'loading' as VideoStatus])));
